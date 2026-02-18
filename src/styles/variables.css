@@ -1,0 +1,16 @@
+:root {
+  /* Renkler */
+  --color-bg-main: #24175a; /* Koyu mor arka plan */
+  --color-accent-pink: #ff4062; /* Gider rengi */
+  --color-accent-yellow: #ffb627; /* Gelir rengi */
+  --color-white: #ffffff;
+  --color-white-60: rgba(255, 255, 255, 0.6); /* Yarı saydam metinler */
+  --color-glass-bg: rgba(255, 255, 255, 0.1); /* Glassmorphism arka planı */
+  
+  /* Gölgeler ve Blur */
+  --blur-glass: blur(25px);
+  --shadow-main: 0px 4px 60px rgba(0, 0, 0, 0.25);
+
+  /* Yazı Tipleri */
+  --font-main: 'Poppins', sans-serif;
+}
