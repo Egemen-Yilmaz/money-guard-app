@@ -13,4 +13,9 @@
 
   /* Yazı Tipleri */
   --font-main: 'Poppins', sans-serif;
+
+  /* Font Ağırlıkları */
+  --weight-regular: 400;
+  --weight-semi-bold: 600;
+  --weight-bold: 700;
 }

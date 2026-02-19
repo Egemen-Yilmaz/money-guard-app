@@ -6,6 +6,10 @@ import Loader from './components/Loader/Loader';
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
+const HomeTab = lazy(() => import('./pages/HomeTab'));
+const StatisticsTab = lazy(() => import('./pages/StatisticsTab'));
+const CurrencyTab = lazy(() => import('./pages/CurrencyTab'));
+
 
 function App() {
   return (

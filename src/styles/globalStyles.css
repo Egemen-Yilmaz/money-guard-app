@@ -1,10 +1,18 @@
 body {
   margin: 0;
   font-family: var(--font-main);
+  font-weight: var(--weight-regular);
   background-color: var(--color-bg-main);
   background-image: linear-gradient(135deg, #24175a 0%, #1e065e 100%);
   color: var(--color-white);
   min-height: 100vh;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--weight-bold);
 }
 
 /* Glassmorphism Kart Yapısı */
