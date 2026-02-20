@@ -1,0 +1,76 @@
+.dashboardPage {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: url("../../assets/gradient-mobile.webp") no-repeat center/cover;
+}
+
+.header {
+  height: 70px;
+  background: var(--color-accent);
+  color: white;
+}
+
+.headerContent {
+  text-align: center;
+  padding-top: 20px;
+  font-size: 1.5rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 16px;
+}
+
+.sidebar {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.mainArea {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .dashboardPage {
+    background: url("../../assets/gradient-tablet.webp") no-repeat center/cover;
+  }
+  .container {
+    flex-direction: row;
+    padding: 24px;
+    gap: 24px;
+  }
+  .sidebar {
+    width: 280px;
+    margin-bottom: 0;
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+  }
+  .mainArea {
+    flex: 1;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1280px) {
+  .dashboardPage {
+    background: url("../../assets/gradient-desktop.webp") no-repeat center/cover;
+  }
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    gap: 32px;
+  }
+  .sidebar {
+    width: 360px;
+  }
+}

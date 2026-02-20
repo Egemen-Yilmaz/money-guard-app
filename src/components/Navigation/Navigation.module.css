@@ -1,0 +1,71 @@
+.navContainer {
+  margin: 24px 0;
+}
+
+.navList {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navItem {
+  display: flex;
+}
+
+.navButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.2s;
+}
+
+.navIcon {
+  width: 44px;
+  height: 44px;
+}
+
+.navText {
+  display: none;
+}
+
+.active .navIcon,
+.active .navText {
+  color: white;
+}
+
+.mobileOnly {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .navList {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .navIcon {
+    width: 24px;
+    height: 24px;
+    margin-right: 16px;
+  }
+  .navText {
+    display: inline;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+  }
+  .mobileOnly {
+    display: none;
+  }
+  .navButton:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 8px 15px;
+  }
+}

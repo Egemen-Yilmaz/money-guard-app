@@ -10,12 +10,15 @@ const DashboardPage = () => {
     <div className={css.dashboardPage}>
       <Header />
       <div className={css.container}>
+        {/* Sidebar: mobil üstte, tablet+ solda */}
         <aside className={css.leftSidebar}>
           <Navigation />
         </aside>
-        <main>
+
+        {/* Ana içerik */}
+        <main className={css.main}>
           <Balance />
-          <Outlet />
+          <Outlet /> {/* HomeTab, StatisticsTab, CurrencyTab buraya gelir */}
         </main>
       </div>
     </div>
