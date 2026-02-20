@@ -1,0 +1,39 @@
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-color, #f7f9fc);
+}
+
+.card {
+  text-align: center;
+  padding: 2.5rem 3rem;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 8px 24px rgba(23, 23, 23, 0.08);
+}
+
+.title {
+  font-size: 4rem;
+  margin: 0;
+  color: var(--primary-color, #333);
+}
+
+.message {
+  margin: 1rem 0 1.5rem;
+  color: var(--muted-color, #666);
+}
+
+.button {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent-color, #4f46e5);
+  color: white;
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: 0.95;
+}
