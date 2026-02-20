@@ -5,13 +5,13 @@ import PrivateRoute from './components/Routes/PrivateRoute';
 import PublicRoute from './components/Routes/PublicRoute';
 
 // Sayfaların Lazy Load ile yüklenmesi (Performans için)
-const LoginPage = lazy(() => import('./pages/LoginPage'));
-const RegisterPage = lazy(() => import('./pages/RegisterPage'));
-const DashboardPage = lazy(() => import('./pages/DashboardPage'));
-const HomeTab = lazy(() => import('./pages/HomeTab'));
-const StatisticsTab = lazy(() => import('./pages/StatisticsTab'));
-const CurrencyTab = lazy(() => import('./pages/CurrencyTab'));
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage'));
+const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
+const DashboardPage = lazy(() => import('./pages/DashboardPage/DashboardPage'));
+const HomeTab = lazy(() => import('./pages/HomeTab/HomeTab'));
+const StatisticsTab = lazy(() => import('./pages/StatisticsTab/StatisticsTab'));
+const CurrencyTab = lazy(() => import('./pages/CurrencyTab/CurrencyTab'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
 
 
 function App() {
