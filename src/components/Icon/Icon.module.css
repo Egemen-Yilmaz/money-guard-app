@@ -1,0 +1,9 @@
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  fill: currentColor; /* allow color via CSS color */
+}
+
+.icon use {
+  pointer-events: none;
+}

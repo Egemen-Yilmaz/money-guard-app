@@ -1,15 +1,9 @@
-import React from 'react';
+import sprite from "../assets/icons/symbol-defs.svg";
 
-const Navigation = () => {
+export default function TestIcon() {
   return (
-    <nav>
-      <ul>
-        <li>Home</li>
-        <li>Statistics</li>
-        <li>Currency</li>
-      </ul>
-    </nav>
+    <svg width="240" height="240">
+      <use href={`${sprite}plus`} />
+    </svg>
   );
-};
-
-export default Navigation;
+}

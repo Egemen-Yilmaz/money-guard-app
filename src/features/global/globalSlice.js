@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   isLoading: false,
+  error: null,
 };
 
 const globalSlice = createSlice({
@@ -14,8 +15,14 @@ const globalSlice = createSlice({
     clearLoading(state) {
       state.isLoading = false;
     },
+    setError(state, action) {
+      state.error = action.payload;
+    },
+    clearError(state) {
+      state.error = null;
+    },
   },
 });
 
-export const { setLoading, clearLoading } = globalSlice.actions;
+export const { setLoading, clearLoading, setError, clearError } = globalSlice.actions;
 export default globalSlice.reducer;
