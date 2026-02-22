@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser } from '../features/auth/authOperations';
+import { logout } from '../../features/auth/authOperations';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { toastError } from '../../utils/toast';
 import styles from './Header.module.css';
 
 // Logo görselini buraya kendi projenin yapısına göre import etmelisin
@@ -18,9 +18,9 @@ export default function Header() {
 
   const handleLogout = async () => {
     try {
-      await dispatch(logoutUser()).unwrap();
+  await dispatch(logout()).unwrap();
     } catch (error) {
-      toast.error(`Çıkış yapılırken bir hata oluştu: ${error}`);
+      toastError(`Çıkış yapılırken bir hata oluştu: ${error}`);
     } finally {
       localStorage.clear();
       setOpen(false);
