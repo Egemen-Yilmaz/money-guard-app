@@ -3,8 +3,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom'; // Link eklendi
-import { toast } from 'react-toastify'; // Bildirimler için eklendi
-import { registerUser } from './authOperations';
+import { toastError, toastSuccess } from '../../utils/toast'; // Bildirimler için eklendi
+import { register as registerAction } from './authOperations';
 import styles from './RegisterForm.module.css';
 
 // 1. Doğrulama Şeması (Yup)
@@ -50,18 +50,18 @@ export default function RegisterForm() {
   // 4. Form Gönderimi (Güncellendi)
   const onSubmit = async (data) => {
     try {
-      const { confirmPassword, ...submitData } = data;
+  const { confirmPassword: _confirmPassword, ...submitData } = data;
       
       // await ve unwrap() ile işlemin bitmesini bekliyoruz
-      await dispatch(registerUser(submitData)).unwrap();
+  await dispatch(registerAction(submitData)).unwrap();
       
-      // İşlem başarılıysa bildirim göster ve yönlendir
-      toast.success('Kayıt başarılı! Yönlendiriliyorsunuz...');
+  // İşlem başarılıysa bildirim göster ve yönlendir
+  toastSuccess('Kayıt başarılı! Yönlendiriliyorsunuz...');
       navigate('/home'); 
       
     } catch (error) {
       // Backend bir hata döndürdüyse (örneğin e-posta kullanımda)
-      toast.error(error || 'Kayıt işlemi başarısız oldu.');
+      toastError(error || 'Kayıt işlemi başarısız oldu.');
     }
   };
 

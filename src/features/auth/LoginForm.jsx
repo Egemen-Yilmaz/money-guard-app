@@ -3,8 +3,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { loginUser } from './authOperations';
+import { toastError, toastSuccess } from '../../utils/toast';
+import { login } from './authOperations';
 import styles from './LoginForm.module.css';
 
 // 1. Doğrulama Şeması (Yup)
@@ -35,17 +35,17 @@ export default function LoginForm() {
   const onSubmit = async (data) => {
     try {
       // Backend'e istek atılır. unwrap() ile dönen sonucu veya hatayı anında yakalarız
-      await dispatch(loginUser(data)).unwrap();
+  await dispatch(login(data)).unwrap();
       
-      // İstek başarılıysa:
-      toast.success('Başarıyla giriş yapıldı!');
+  // İstek başarılıysa:
+  toastSuccess('Başarıyla giriş yapıldı!');
       
       // Kullanıcıyı özel DashboardPage (veya altındaki home) sayfasına yönlendir
       navigate('/home'); 
       
     } catch (error) {
       // Backend bir hata döndürdüyse (örneğin "Şifre yanlış"):
-      toast.error(error || 'Giriş yapılamadı. Lütfen bilgilerinizi kontrol edin.');
+  toastError(error || 'Giriş yapılamadı. Lütfen bilgilerinizi kontrol edin.');
     }
   };
 
