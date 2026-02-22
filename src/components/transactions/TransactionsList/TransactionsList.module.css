@@ -1,0 +1,118 @@
+/* Table Container */
+.tableContainer {
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+/* Table */
+.table {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: var(--font-family-base);
+  border-collapse: collapse;
+  text-align: left;
+  color: var(--font-color-white);
+  margin-top: 69px;
+}
+
+/* Wrapper for overlay */
+.tableWrapper {
+  position: relative;
+}
+
+/* Loading overlay */
+.tableOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(1px);
+  z-index: 5;
+  border-radius: 16px;
+}
+
+/* Loading text */
+.loadingText {
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* Header row (mor arka plan) */
+.theadRow {
+  background-color: #523b7e99;
+}
+
+/* Header cells */
+.th {
+  font-weight: 600;
+  font-size: 16px;
+  padding: 12px 24px;
+  color: var(--font-color-white);
+  text-align: center;
+}
+
+.thCenter {
+  text-align: center;
+  padding: 32px;
+}
+
+/* Empty state */
+.emptyState {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--color-text-secondary);
+  font-size: 1.3rem;
+  background: white;
+  border-radius: 16px;
+}
+
+/* Responsive: Mobile card view */
+@media (max-width: 768px) {
+  .table {
+    max-width: 100%;
+    font-size: 14px;
+  }
+
+  .theadRow {
+    display: none;
+  }
+
+  .table tbody tr {
+    display: block;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    width: 100%;
+  }
+
+  .table td {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 12px 0;
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .table td:before {
+    content: attr(data-label);
+    font-weight: 500;
+    color: #999;
+    margin-right: 10px;
+    font-size: 14px;
+  }
+
+  .table td:last-child {
+    border-bottom: none;
+  }
+}

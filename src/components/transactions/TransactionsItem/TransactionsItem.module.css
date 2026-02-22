@@ -1,0 +1,76 @@
+.row {
+  border-bottom: 1px solid var(--font-grey-light);
+}
+
+.td {
+  padding: 10px 24px;
+  font-size: 14px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 24px;
+  gap: 10px;
+}
+
+.editBtn,
+.deleteBtn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.editBtn {
+  background: #4caf50;
+  color: white;
+}
+.deleteBtn {
+  background: #f44336;
+  color: white;
+}
+
+.expense .td {
+  color: var(--red);
+}
+.income .td {
+  color: var(--yellow);
+}
+
+/* Mobile card view */
+@media (max-width: 768px) {
+  .row {
+    display: block;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .td {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border: none;
+    text-align: left;
+  }
+
+  .td:before {
+    content: attr(data-label);
+    font-weight: 500;
+    color: #999;
+    margin-right: 10px;
+    font-size: 14px;
+  }
+
+  .actions {
+    justify-content: space-between;
+    padding: 15px 0 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
