@@ -43,7 +43,7 @@
   font-weight: 600;
 }
 
-/* Header row (mor arka plan) */
+/* Header row (purple background) */
 .theadRow {
   background-color: #523b7e99;
 }
@@ -60,6 +60,11 @@
 .thCenter {
   text-align: center;
   padding: 32px;
+}
+
+/* Sort icon */
+.sortIcon {
+  margin-left: 6px;
 }
 
 /* Empty state */

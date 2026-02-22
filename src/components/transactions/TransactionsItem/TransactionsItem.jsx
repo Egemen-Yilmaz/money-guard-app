@@ -1,10 +1,19 @@
-// src/components/TransactionsItem/TransactionsItem.jsx
 import React from "react";
 import css from "./TransactionsItem.module.css";
 
 const TransactionsItem = ({ transaction }) => {
   const { date, type, category, comment, amount } = transaction;
   const isExpense = amount < 0 || type === "expense";
+
+  const handleEdit = () => {
+    // TODO: Open edit modal
+    console.log("Edit clicked for transaction:", transaction.id);
+  };
+
+  const handleDelete = () => {
+    // TODO: Dispatch delete thunk
+    console.log("Delete clicked for transaction:", transaction.id);
+  };
 
   return (
     <tr className={`${css.row} ${isExpense ? css.expense : css.income}`}>
@@ -27,8 +36,12 @@ const TransactionsItem = ({ transaction }) => {
         })}
       </td>
       <td className={`${css.td} ${css.actions}`}>
-        <button className={css.editBtn}>Edit</button>
-        <button className={css.deleteBtn}>Delete</button>
+        <button className={css.editBtn} onClick={handleEdit}>
+          Edit
+        </button>
+        <button className={css.deleteBtn} onClick={handleDelete}>
+          Delete
+        </button>
       </td>
     </tr>
   );

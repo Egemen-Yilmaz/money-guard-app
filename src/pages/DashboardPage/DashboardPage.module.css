@@ -38,6 +38,27 @@
   padding: 20px;
 }
 
+.fabButton {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 36px;
+  border: none;
+  color: white;
+  background: var(--color-accent); /* veya gradient */
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  transition: transform 0.2s;
+}
+
+.fabButton:hover {
+  transform: scale(1.1);
+}
+
 /* Tablet */
 @media (min-width: 768px) {
   .dashboardPage {
