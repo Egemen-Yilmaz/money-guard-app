@@ -30,7 +30,7 @@ const Navigation = () => {
             }
           >
             <Icon
-              id="icon-statistics"
+              id="icon-icon-statistics"
               name="statistics"
               className={css.navIcon}
             />
@@ -46,7 +46,11 @@ const Navigation = () => {
               isActive ? css.active : css.navButton
             }
           >
-            <Icon id="icon-currency" name="currency" className={css.navIcon} />
+            <Icon
+              id="icon-icon-currency"
+              name="currency"
+              className={css.navIcon}
+            />
             {/* Mobil için sadece ikon, metin yok */}
           </NavLink>
         </li>
