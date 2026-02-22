@@ -1,0 +1,134 @@
+.header {
+  background-color: #2c1b4d; /* Görseldeki koyu mor arka plan */
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Sol Taraf: Logo ve İsim */
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoIcon {
+  width: 28px;
+  height: auto;
+}
+
+.logoText {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* Sağ Taraf: Kullanıcı ve Çıkış */
+.userSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.userName {
+  color: rgba(255, 255, 255, 0.6); /* Görseldeki soluk beyaz/gri renk */
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.exitButton {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.6); /* İkon rengi isimle aynı */
+  transition: color 0.3s ease;
+}
+
+.exitButton:hover {
+  color: #ffffff;
+}
+
+/* Görselde mobil ekranda "Exit" yazısı yok, sadece ikon var. 
+   Bu sınıfı span için kullanıp tablette yazıyı gösterebiliriz. */
+.exitText {
+  display: none; /* Mobilde gizle */
+  font-size: 16px;
+}
+
+/* --- MODAL STİLLERİ --- */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.modalContent {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  width: 90%;
+  max-width: 320px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modalText {
+  margin-bottom: 24px;
+  font-size: 16px;
+  color: #333333;
+}
+
+.modalActions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.confirmBtn {
+  padding: 10px 24px;
+  background: #ff6b6b; /* Çıkış işlemi için vurgulu renk */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.cancelBtn {
+  padding: 10px 24px;
+  background: transparent;
+  color: #2c1b4d;
+  border: 1px solid #2c1b4d;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* --- TABLET VE DESKTOP RESPONSIVE (768px ve üzeri) --- */
+@media screen and (min-width: 768px) {
+  .header {
+    padding: 20px 32px;
+  }
+  
+  /* Tablet ve üstü ekranlarda Exit ikonunun yanına yazıyı da ekleyebiliriz */
+  .exitText {
+    display: inline; 
+  }
+}

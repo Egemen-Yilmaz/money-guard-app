@@ -1,12 +1,100 @@
-import React from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { loginUser } from './authOperations';
+import styles from './LoginForm.module.css';
 
-const LoginForm = () => (
-  <form>
-    <h2>Login</h2>
-    <input name="email" placeholder="Email" />
-    <input name="password" type="password" placeholder="Password" />
-    <button type="submit">Login</button>
-  </form>
-);
+// 1. Doğrulama Şeması (Yup)
+const schema = yup.object({
+  email: yup
+    .string()
+    .email('Lütfen geçerli bir e-posta adresi giriniz')
+    .required('E-posta alanı zorunludur'),
+  password: yup
+    .string()
+    .min(6, 'Şifre en az 6 karakter olmalıdır')
+    .max(12, 'Şifre en fazla 12 karakter olmalıdır')
+    .required('Şifre alanı zorunludur'),
+});
 
-export default LoginForm;
+export default function LoginForm() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // 2. React Hook Form Kurulumu
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({ resolver: yupResolver(schema) });
+
+  // 3. Form Gönderimi (Submit)
+  const onSubmit = async (data) => {
+    try {
+      // Backend'e istek atılır. unwrap() ile dönen sonucu veya hatayı anında yakalarız
+      await dispatch(loginUser(data)).unwrap();
+      
+      // İstek başarılıysa:
+      toast.success('Başarıyla giriş yapıldı!');
+      
+      // Kullanıcıyı özel DashboardPage (veya altındaki home) sayfasına yönlendir
+      navigate('/home'); 
+      
+    } catch (error) {
+      // Backend bir hata döndürdüyse (örneğin "Şifre yanlış"):
+      toast.error(error || 'Giriş yapılamadı. Lütfen bilgilerinizi kontrol edin.');
+    }
+  };
+
+  return (
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <h2 className={styles.logo}>Money Guard</h2>
+
+      {/* Email Alanı */}
+      <div className={styles.inputWrapper}>
+        <span className={styles.icon}>✉️</span>
+        <input 
+          className={styles.input} 
+          placeholder="E-mail" 
+          {...register('email')} 
+        />
+      </div>
+      {/* Yup'tan gelen Email hatası varsa göster (Geçersizse istek atılmaz) */}
+      {errors.email && <p className={styles.errorText}>{errors.email.message}</p>}
+
+      {/* Şifre Alanı */}
+      <div className={styles.inputWrapper}>
+        <span className={styles.icon}>🔒</span>
+        <input 
+          type="password" 
+          className={styles.input} 
+          placeholder="Password" 
+          {...register('password')} 
+        />
+      </div>
+      {/* Yup'tan gelen Password hatası varsa göster */}
+      {errors.password && <p className={styles.errorText}>{errors.password.message}</p>}
+
+      {/* Butonlar */}
+      <button 
+        type="submit" 
+        className={styles.buttonPrimary} 
+        disabled={isSubmitting} // İstek atılırken butona tekrar tıklanmasını engeller
+      >
+        {isSubmitting ? 'GİRİŞ YAPILIYOR...' : 'LOG IN'}
+      </button>
+      
+      {/* Kayıt Ol Sayfasına Yönlendirme - Link bileşeni kullanıldı */}
+      <Link 
+        to="/register" 
+        className={styles.buttonSecondary} 
+        style={{ textAlign: 'center', textDecoration: 'none', display: 'block', boxSizing: 'border-box' }}
+      >
+        REGISTER
+      </Link>
+    </form>
+  );
+}

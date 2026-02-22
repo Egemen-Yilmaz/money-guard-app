@@ -1,0 +1,79 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.logo {
+  text-align: center;
+  color: white;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+/* INPUT WRAPPER (ikon için) */
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.4);
+  padding: 10px 0;
+  gap: 10px;
+}
+
+.icon {
+  color: rgba(255,255,255,0.6);
+  font-size: 16px;
+}
+
+/* INPUT */
+.input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 14px;
+}
+
+.input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+/* BUTTONS */
+.buttonPrimary {
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 30px;
+  border: none;
+  color: white;
+  font-weight: 600;
+  background: linear-gradient(90deg, #ffb347, #c471ed);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.buttonPrimary:hover {
+  transform: scale(1.03);
+}
+
+.buttonSecondary {
+  padding: 14px;
+  border-radius: 30px;
+  border: none;
+  background: #e0e0e0;
+  color: #333;
+  cursor: pointer;
+}
+
+/* PROGRESS BAR */
+.progress {
+  height: 4px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 4px;
+}
+
+.progressBar {
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(90deg, orange, yellow);
+}

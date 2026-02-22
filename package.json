@@ -26,7 +26,9 @@
     "react-loader-spinner": "^8.0.2",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.13.0",
+    "react-toastify": "^11.0.5",
     "redux-persist": "^6.0.0",
+    "toast": "^0.5.4",
     "yup": "^1.7.1"
   },
   "devDependencies": {
