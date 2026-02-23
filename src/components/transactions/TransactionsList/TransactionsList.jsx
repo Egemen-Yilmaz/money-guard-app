@@ -15,11 +15,11 @@ const TransactionsList = () => {
 
   const dispatch = useDispatch();
 
-  const {
-    items = [],
-    isLoading = false,
-    error = null,
-  } = useSelector((state) => state.transactions || {});
+  const items = useSelector((state) => state.transactions?.items);
+  const isLoading = useSelector((state) => state.transactions?.isLoading ?? false);
+  const error = useSelector((state) => state.transactions?.error ?? null);
+
+  const itemsList = items ?? [];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -37,13 +37,13 @@ const TransactionsList = () => {
     );
   }
 
-  if (items.length === 0) {
+  if (itemsList.length === 0) {
     return <NoTransactions />;
   }
 
   // Filter out future transactions (include today)
   const now = new Date();
-  const filteredTransactions = items.filter((transaction) => {
+  const filteredTransactions = itemsList.filter((transaction) => {
     const transDate = new Date(transaction.transactionDate || transaction.date);
     return transDate.getTime() <= now.getTime();
   });

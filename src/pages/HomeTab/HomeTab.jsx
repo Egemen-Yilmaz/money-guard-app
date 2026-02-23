@@ -8,11 +8,11 @@ import css from "./HomeTab.module.css";
 const HomeTab = () => {
   const dispatch = useDispatch();
 
-  const {
-    transactions = [],
-    isLoading = false,
-    error = null,
-  } = useSelector((state) => state.finance || {});
+  const transactions = useSelector((state) => state.finance?.transactions);
+  const isLoading = useSelector((state) => state.finance?.isLoading ?? false);
+  const error = useSelector((state) => state.finance?.error ?? null);
+
+  const transactionsList = transactions ?? [];
 
   useEffect(() => {
     dispatch(fetchTransactions());
@@ -24,7 +24,9 @@ const HomeTab = () => {
 
       {error && <div className={css.error}>Error: {error}</div>}
 
-      {!isLoading && !error && <TransactionsList transactions={transactions} />}
+      {!isLoading && !error && (
+        <TransactionsList transactions={transactionsList} />
+      )}
     </div>
   );
 };

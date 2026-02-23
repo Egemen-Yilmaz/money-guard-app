@@ -1,35 +1,27 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom"; // Bunu ekliyoruz
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor } from "./redux/store";
-import App from "./App";
-import "./styles/globalStyles.css";
-import "modern-normalize/modern-normalize.css";
-import { instance } from "./api/axiosConfig";
-import {
-  setLoading,
-  clearLoading,
-  setError,
-} from "./features/global/globalSlice";
-import { refreshCurrentUser, logout } from "./features/auth/authOperations";
-import { toastError } from "./utils/toast";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom'; // Use BrowserRouter for normal path-based routing
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './redux/store';
+import App from './App';
+import './styles/globalStyles.css';
+import 'modern-normalize/modern-normalize.css';
+import { instance } from './api/axiosConfig';
+import { setLoading, clearLoading, setError } from './features/global/globalSlice';
+import { refreshCurrentUser, logout } from './features/auth/authOperations';
+import { toastError } from './utils/toast';
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate
-        loading={null}
-        persistor={persistor}
-        onBeforeLift={() => store.dispatch(refreshCurrentUser())}
-      >
+      <PersistGate loading={null} persistor={persistor} onBeforeLift={() => store.dispatch(refreshCurrentUser())}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
       </PersistGate>
     </Provider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
 
 // Axios interceptors to toggle global loading state
@@ -42,7 +34,7 @@ instance.interceptors.request.use(
   (error) => {
     store.dispatch(clearLoading());
     return Promise.reject(error);
-  },
+  }
 );
 
 instance.interceptors.response.use(
@@ -53,8 +45,7 @@ instance.interceptors.response.use(
   (error) => {
     store.dispatch(clearLoading());
     // set global error for UI
-    const message =
-      error?.response?.data?.message || error.message || "Network error";
+    const message = error?.response?.data?.message || error.message || 'Network error';
     store.dispatch(setError(message));
     toastError(message);
 
@@ -66,5 +57,5 @@ instance.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  },
+  }
 );

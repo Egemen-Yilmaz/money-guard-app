@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleModal } from "../../features/transactions/transactionsSlice";
+import { toggleModal } from "../../../features/transactions/transactionsSlice";
 import css from "./NoTransactions.module.css";
 
 const NoTransactions = () => {
