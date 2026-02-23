@@ -1,24 +1,21 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { lazy, Suspense } from 'react';
-import Loader from './components/Loader/Loader';
-import PrivateRoute from './components/Routes/PrivateRoute';
-import PublicRoute from './components/Routes/PublicRoute';
+import { Routes, Route, Navigate } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import Loader from "./components/Loader/Loader";
+import PrivateRoute from "./components/Routes/PrivateRoute";
+import PublicRoute from "./components/Routes/PublicRoute";
 
-// Sayfaların Lazy Load ile yüklenmesi (Performans için)
-const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage'));
-const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
-const DashboardPage = lazy(() => import('./pages/DashboardPage/DashboardPage'));
-const HomeTab = lazy(() => import('./pages/HomeTab/HomeTab'));
-const StatisticsTab = lazy(() => import('./pages/StatisticsTab/StatisticsTab'));
-const CurrencyTab = lazy(() => import('./pages/CurrencyTab/CurrencyTab'));
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
-
+// Lazy imports
+const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
+const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
+const DashboardPage = lazy(() => import("./pages/DashboardPage/DashboardPage"));
+const HomeTab = lazy(() => import("./pages/HomeTab/HomeTab"));
+const StatisticsTab = lazy(() => import("./pages/StatisticsTab/StatisticsTab"));
+const CurrencyTab = lazy(() => import("./pages/CurrencyTab/CurrencyTab"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
 function App() {
   return (
-    <>
-      <Loader />
-      <Suspense fallback={<Loader />}>
+    <Suspense fallback={<Loader />}>
       <Routes>
         <Route
           path="/login"
@@ -38,7 +35,6 @@ function App() {
           }
         />
 
-        {/* Dashboard altındaki sayfalar (Home, Statistics vb.) */}
         <Route
           path="/"
           element={
@@ -47,18 +43,15 @@ function App() {
             </PrivateRoute>
           }
         >
-          <Route index element={<Navigate to="/home" />} />
+          <Route index element={<Navigate to="home" replace />} />
           <Route path="home" element={<HomeTab />} />
           <Route path="statistics" element={<StatisticsTab />} />
-
-          {/* Sadece Mobil için */}
           <Route path="currency" element={<CurrencyTab />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      </Suspense>
-    </>
+    </Suspense>
   );
 }
 

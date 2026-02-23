@@ -1,5 +1,13 @@
-import React from 'react';
+import React from "react";
+import Chart from "../components/Chart/Chart";
 
-const StatisticsTab = () => <div>Statistics tab content</div>;
+const StatisticsTab = () => {
+  return (
+    <div>
+      <h1>Statistics</h1>
+      <Chart />
+    </div>
+  );
+};
 
 export default StatisticsTab;
