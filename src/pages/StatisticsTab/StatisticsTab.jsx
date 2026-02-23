@@ -1,11 +1,22 @@
-import React from "react";
-import Chart from "../components/Chart/Chart";
+import Chart from "../../components/Chart/Chart";
+import StatisticsDashboard from "../../components/StatisticsDashboard/StatisticsDashboard";
+import StatisticsTable from "../../components/StatisticsTable/StatisticsTable";
+import css from "./StatisticsTab.module.css";
 
 const StatisticsTab = () => {
   return (
     <div>
-      <h1>Statistics</h1>
-      <Chart />
+      <div className={css.container}>
+        <div className={css.area}>
+          <div>
+            <Chart />
+          </div>
+          <div>
+            <StatisticsDashboard />
+            <StatisticsTable />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
