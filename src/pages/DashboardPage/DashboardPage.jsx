@@ -1,11 +1,11 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleModal } from "../../features/transactions/transactionsSlice"; // slice'ın adını projene göre düzelt
+import { toggleModal } from "../../features/transactions/transactionsSlice";
 import Header from "../../components/Header/Header";
 import Navigation from "../../components/Navigation/Navigation";
 import Balance from "../../components/Balance/Balance";
-import ModalAddTransaction from "../../components/transactions/ModalAddTransaction/ModalAddTransaction"; // Kutluhan'ın modalı
+import ModalAddTransaction from "../../components/transactions/ModalAddTransaction/ModalAddTransaction";
 import css from "./DashboardPage.module.css";
 
 const DashboardPage = () => {
@@ -15,7 +15,7 @@ const DashboardPage = () => {
   );
 
   const handleOpenModal = () => {
-    dispatch(toggleModal(true));
+    dispatch(toggleModal()); // toggleModal() ile çağır (true/false otomatik döner)
   };
 
   return (
@@ -29,12 +29,16 @@ const DashboardPage = () => {
 
         <main className={css.main}>
           <Balance />
-          <Outlet /> {/* HomeTab, StatisticsTab vs. buraya gelir */}
+          <Outlet /> {/* HomeTab buraya render olur */}
         </main>
       </div>
 
       {/* Sağ alt + butonu */}
-      <button onClick={handleOpenModal} className={css.fabButton}>
+      <button
+        onClick={handleOpenModal}
+        className={css.fabButton}
+        aria-label="Add new transaction"
+      >
         +
       </button>
 

@@ -1,0 +1,19 @@
+.homeTab {
+  padding: 20px;
+}
+
+.loading {
+  text-align: center;
+  padding: 60px 20px;
+  font-size: 1.3rem;
+  color: #666;
+}
+
+.error {
+  text-align: center;
+  padding: 60px 20px;
+  font-size: 1.3rem;
+  color: #f44336;
+  background: #ffebee;
+  border-radius: 12px;
+}

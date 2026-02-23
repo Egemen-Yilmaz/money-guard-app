@@ -1,21 +1,21 @@
+// src/components/transactions/TransactionsList.jsx
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import TransactionsItem from "../TransactionsItem/TransactionsItem";
+import NoTransactions from "../NoTransactions/NoTransactions";
 import css from "./TransactionsList.module.css";
 
 const TransactionsList = () => {
-  const [sortOrder, setSortOrder] = useState("desc"); // Default: newest first
+  const [sortOrder, setSortOrder] = useState("desc"); // "desc" = newest first
 
   const {
-    transactionsList = [],
+    items = [],
     isLoading = false,
     error = null,
-  } = useSelector(
-    (state) => state.finance || {}, // finance slice
-  );
+  } = useSelector((state) => state.transactions || {});
 
   if (error) {
-    return <div className={css.error}>Error: {error}</div>;
+    return <div className={css.error}>Error loading transactions: {error}</div>;
   }
 
   if (isLoading) {
@@ -28,22 +28,18 @@ const TransactionsList = () => {
     );
   }
 
-  if (transactionsList.length === 0) {
-    return (
-      <div className={css.emptyState}>
-        <p>No transactions yet</p>
-      </div>
-    );
+  if (items.length === 0) {
+    return <NoTransactions />;
   }
 
-  // Filter future dates (bugünü dahil et)
+  // Filter out future transactions (include today)
   const now = new Date();
-  const filteredTransactions = transactionsList.filter((tx) => {
-    const txDate = new Date(tx.transactionDate || tx.date);
-    return txDate.getTime() <= now.getTime();
+  const filteredTransactions = items.filter((transaction) => {
+    const transDate = new Date(transaction.transactionDate || transaction.date);
+    return transDate.getTime() <= now.getTime();
   });
 
-  // Sort by date
+  // Sort transactions by date
   const sortedTransactions = [...filteredTransactions].sort((a, b) => {
     const dateA = new Date(a.transactionDate || a.date);
     const dateB = new Date(b.transactionDate || b.date);
@@ -78,8 +74,11 @@ const TransactionsList = () => {
             </tr>
           </thead>
           <tbody>
-            {sortedTransactions.map((tx) => (
-              <TransactionsItem key={tx.id} transaction={tx} />
+            {sortedTransactions.map((transaction) => (
+              <TransactionsItem
+                key={transaction.id}
+                transaction={transaction}
+              />
             ))}
           </tbody>
         </table>

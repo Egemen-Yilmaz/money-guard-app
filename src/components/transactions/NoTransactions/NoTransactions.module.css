@@ -1,0 +1,99 @@
+.noTransactionsContainer {
+  background: linear-gradient(
+    45deg,
+    rgba(45, 10, 85, 1) 0%,
+    rgb(43, 26, 94) 100%
+  );
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 340px; /* mobile default */
+  padding: 80px 20px;
+  color: var(--font-color-white);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.inactive {
+  pointer-events: none;
+}
+
+.inner {
+  max-width: 640px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Başlık ve alt başlık */
+.title {
+  font-family: var(--font-family-base);
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.2em;
+  margin: 0 0 10px 0;
+  color: var(--font-color-white);
+}
+
+.subtitle {
+  font-family: var(--font-family-base);
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2em;
+  color: var(--font-color-white-60);
+  margin: 0 0 40px 0;
+}
+
+.addButton {
+  margin: 0 auto;
+}
+
+/* --- TABLET (>=768px) --- */
+@media (min-width: 768px) {
+  .noTransactionsContainer {
+    margin-top: 25px;
+    min-height: 480px; /* Yüksekliği artırıldı */
+    min-width: 760px;
+    padding: 100px 40px;
+    border-radius: 14px;
+  }
+  .inner {
+    max-width: 720px; /* daha geniş kart */
+  }
+  .title {
+    font-size: 32px; /* daha büyük başlık */
+  }
+  .subtitle {
+    font-size: 20px;
+  }
+  .addButton {
+    width: 320px; /* global 300px + biraz geniş */
+    height: 55px;
+    font-size: 20px;
+  }
+}
+
+/* --- DESKTOP (>=1280px) --- */
+@media (min-width: 1280px) {
+  .noTransactionsContainer {
+    min-height: 700px; /* Daha büyük sağ panel alanı */
+    min-width: 760px;
+    padding: 120px 60px;
+    border-radius: 16px;
+  }
+  .inner {
+    max-width: 880px; /* Kart genişliği artırıldı */
+  }
+  .title {
+    font-size: 36px; /* büyük başlık */
+  }
+  .subtitle {
+    font-size: 22px;
+  }
+  .addButton {
+    width: 340px;
+    height: 60px;
+    font-size: 20px;
+  }
+}

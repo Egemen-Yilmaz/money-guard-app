@@ -46,7 +46,7 @@ function App() {
               </PrivateRoute>
             }
           >
-            <Route index element={<Navigate to="home" replace />} />
+            <Route index element={<HomeTab />} />
             <Route path="home" element={<HomeTab />} />
             <Route path="statistics" element={<StatisticsTab />} />
 
