@@ -19,6 +19,9 @@ function App() {
       <Loader />
       <Suspense fallback={<Loader />}>
         <Routes>
+          {/* Convenience redirects so users can open / or /home directly */}
+          <Route path="/" element={<Navigate to="/dashboard/home" replace />} />
+          <Route path="/home" element={<Navigate to="/dashboard/home" replace />} />
           <Route
             path="/login"
             element={
