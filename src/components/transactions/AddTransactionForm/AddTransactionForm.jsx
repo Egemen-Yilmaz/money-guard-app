@@ -5,7 +5,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { addTransaction } from '../../../redux/transactions/operations';
+import { FiCalendar } from 'react-icons/fi';
+import CustomSelect from '../CustomSelect/CustomSelect';
+import { addTransaction, fetchTransactions } from '../../../redux/transactions/operations';
+import { refreshCurrentUser } from '../../../features/auth/authOperations';
+import { toastError, toastSuccess } from '../../../utils/toast';
 import styles from './AddTransactionForm.module.css';
 
 const schema = yup.object().shape({
@@ -67,12 +71,17 @@ const AddTransactionForm = ({ onClose }) => {
             // Backend'in beklediği formata uygun olarak tarihi ISO formatına çeviriyoruz
             const payload = { ...data, date: data.date.toISOString() };
             await dispatch(addTransaction(payload)).unwrap();
+
+            toastSuccess('Transaction added successfully!');
+            dispatch(fetchTransactions());
+            dispatch(refreshCurrentUser());
+
             // Başarılıysa -> modalı kapat ve listeyi yenile
             onClose();
         } catch (error) {
             // Backend hatası varsa -> toast bildirimini göster
             console.error('Failed to add transaction:', error);
-            alert('Error adding transaction'); // Gerçek bir toast bildirimi eklenecek
+            toastError(error?.message || 'Error adding transaction');
         }
     };
 
@@ -94,12 +103,18 @@ const AddTransactionForm = ({ onClose }) => {
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
                 {isExpense && (
                     <div className={styles.field}>
-                        <select {...register('category')} className={styles.input} defaultValue="">
-                            <option value="" disabled hidden>Select a category</option>
-                            {DEFAULT_CATEGORIES.map((cat) => (
-                                <option key={cat} value={cat}>{cat}</option>
-                            ))}
-                        </select>
+                        <Controller
+                            control={control}
+                            name="category"
+                            render={({ field }) => (
+                                <CustomSelect
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    options={DEFAULT_CATEGORIES}
+                                    placeholder="Select a category"
+                                />
+                            )}
+                        />
                         {errors.category && <span className={styles.error}>{errors.category.message}</span>}
                     </div>
                 )}
@@ -115,12 +130,15 @@ const AddTransactionForm = ({ onClose }) => {
                             control={control}
                             name="date"
                             render={({ field }) => (
-                                <DatePicker
-                                    selected={field.value}
-                                    onChange={(date) => field.onChange(date)}
-                                    dateFormat="dd.MM.yyyy"
-                                    className={`${styles.input} ${styles.dateInput}`}
-                                />
+                                <div className={styles.dateWrapper}>
+                                    <DatePicker
+                                        selected={field.value}
+                                        onChange={(date) => field.onChange(date)}
+                                        dateFormat="dd.MM.yyyy"
+                                        className={`${styles.input} ${styles.dateInput}`}
+                                    />
+                                    <FiCalendar className={styles.calendarIcon} />
+                                </div>
                             )}
                         />
                         {errors.date && <span className={styles.error}>{errors.date.message}</span>}

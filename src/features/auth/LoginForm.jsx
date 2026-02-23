@@ -35,7 +35,7 @@ export default function LoginForm() {
   const onSubmit = async (data) => {
     try {
       // Backend'e istek atılır. unwrap() ile dönen sonucu veya hatayı anında yakalarız
-  await dispatch(login(data)).unwrap();
+  await dispatch(login(data));
       
   // İstek başarılıysa:
   toastSuccess('Başarıyla giriş yapıldı!');

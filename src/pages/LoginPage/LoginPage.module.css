@@ -1,0 +1,46 @@
+/* 📱 1. MOBİL TASARIM (Varsayılan Düzen) */
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  
+  /* Kayıt sayfasındaki aynı koyu mor gradyan arka plan */
+  background: linear-gradient(135deg, #2e1a47 0%, #4a2c6d 100%);
+}
+
+.card {
+  width: 90%;
+  max-width: 450px;
+  border-radius: 16px;
+  padding: 40px 32px;
+  
+  /* Şeffaf Kart Arka Planı (Buzlu Cam Efekti) */
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  color: #ffffff; 
+}
+
+/* 💊 2. TABLET TASARIM (768px ve üzeri) */
+@media screen and (min-width: 768px) {
+  .wrapper {
+    padding: 40px;
+  }
+  .card {
+    max-width: 500px;
+  }
+}
+
+/* 💻 3. MASAÜSTÜ TASARIM (1280px ve üzeri) */
+@media screen and (min-width: 1280px) {
+  .wrapper {
+    padding: 60px;
+  }
+  .card {
+    max-width: 550px;
+  }
+}

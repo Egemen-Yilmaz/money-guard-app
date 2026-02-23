@@ -18,11 +18,10 @@ export default function Header() {
 
   const handleLogout = async () => {
     try {
-  await dispatch(logout()).unwrap();
+  await dispatch(logout());
     } catch (error) {
       toastError(`Çıkış yapılırken bir hata oluştu: ${error}`);
     } finally {
-      localStorage.clear();
       setOpen(false);
       navigate('/login');
     }

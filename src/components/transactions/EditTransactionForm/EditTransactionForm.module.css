@@ -21,7 +21,7 @@
 }
 
 .activeLabelIncome {
-    color: #24cca7;
+    color: #FFC727;
     font-weight: 700;
 }
 
@@ -99,6 +99,21 @@
     left: 10px;
     color: #ff6596;
     font-size: 12px;
+}
+
+.dateWrapper {
+    position: relative;
+    width: 100%;
+}
+
+.calendarIcon {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #4A56E2;
+    font-size: 24px;
+    pointer-events: none;
 }
 
 .actions {

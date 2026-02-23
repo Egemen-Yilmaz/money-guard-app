@@ -5,7 +5,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { updateTransaction } from '../../../redux/transactions/operations';
+import { FiCalendar } from 'react-icons/fi';
+import { updateTransaction, fetchTransactions } from '../../../redux/transactions/operations';
+import { refreshCurrentUser } from '../../../features/auth/authOperations';
+import { toastError, toastSuccess } from '../../../utils/toast';
 import styles from './EditTransactionForm.module.css';
 
 const schema = yup.object().shape({
@@ -46,10 +49,15 @@ const EditTransactionForm = ({ transaction, onClose }) => {
                 date: data.date.toISOString(),
             };
             await dispatch(updateTransaction(payload)).unwrap();
+
+            toastSuccess('Transaction updated successfully!');
+            dispatch(fetchTransactions());
+            dispatch(refreshCurrentUser());
+
             onClose(); // Liste Redux update'i gelince otomatik güncellenecek
         } catch (error) {
             console.error('Failed to update transaction:', error);
-            alert('Error updating transaction'); // Gerçek bir toast bildirimi eklenecek
+            toastError(error?.message || 'Error updating transaction');
         }
     };
 
@@ -77,12 +85,15 @@ const EditTransactionForm = ({ transaction, onClose }) => {
                             control={control}
                             name="date"
                             render={({ field }) => (
-                                <DatePicker
-                                    selected={field.value}
-                                    onChange={(date) => field.onChange(date)}
-                                    dateFormat="dd.MM.yyyy"
-                                    className={`${styles.input} ${styles.dateInput}`}
-                                />
+                                <div className={styles.dateWrapper}>
+                                    <DatePicker
+                                        selected={field.value}
+                                        onChange={(date) => field.onChange(date)}
+                                        dateFormat="dd.MM.yyyy"
+                                        className={`${styles.input} ${styles.dateInput}`}
+                                    />
+                                    <FiCalendar className={styles.calendarIcon} />
+                                </div>
                             )}
                         />
                         {errors.date && <span className={styles.error}>{errors.date.message}</span>}

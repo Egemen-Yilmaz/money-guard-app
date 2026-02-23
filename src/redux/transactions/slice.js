@@ -4,6 +4,7 @@ import {
     addTransaction,
     updateTransaction,
     fetchTransactionCategories,
+    deleteTransaction,
 } from './operations';
 
 const initialState = {
@@ -56,6 +57,13 @@ const transactionsSlice = createSlice({
                 }
             })
             .addCase(updateTransaction.rejected, handleRejected)
+            .addCase(deleteTransaction.pending, handlePending)
+            .addCase(deleteTransaction.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.items = state.items.filter(item => item.id !== action.payload);
+                state.error = null;
+            })
+            .addCase(deleteTransaction.rejected, handleRejected)
             // Kategorileri getir
             .addCase(fetchTransactionCategories.pending, handlePending)
             .addCase(fetchTransactionCategories.fulfilled, (state, action) => {
