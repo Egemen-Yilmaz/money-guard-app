@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteTransaction, fetchTransactions } from '../../redux/transactions/operations';
 import { refreshCurrentUser } from '../auth/authOperations';
 import { toastSuccess, toastError } from '../../utils/toast';
+import ButtonAddTransactions from '../../components/transactions/ButtonAddTransactions/ButtonAddTransactions';
+import ModalAddTransaction from '../../components/transactions/ModalAddTransaction/ModalAddTransaction';
 
 const TransactionsList = ({ items = [] }) => {
   const dispatch = useDispatch();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleDelete = async (id) => {
     try {
@@ -37,6 +40,8 @@ const TransactionsList = ({ items = [] }) => {
           </li>
         ))}
       </ul>
+      <ButtonAddTransactions onClick={() => setIsModalOpen(true)} />
+      <ModalAddTransaction isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };
