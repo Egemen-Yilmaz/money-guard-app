@@ -35,19 +35,37 @@ export default function RegisterForm() {
   } = useForm({ resolver: yupResolver(schema) });
 
   // Şifre alanını izliyoruz (Kütüphaneye prop olarak geçmek için)
+  // eslint-disable-next-line react-hooks/incompatible-library
   const passwordValue = watch('password', '');
 
   const onSubmit = async (data) => {
     try {
-      const { confirmPassword: _confirmPassword, ...submitData } = data;
-      
-      await dispatch(registerAction(submitData));
-      
+      // The backend expects `username` (not `name`). Map `name` -> `username`.
+      const { confirmPassword: _confirmPassword, name, ...rest } = data;
+      const payload = { username: name, ...rest };
+
+      await dispatch(registerAction(payload));
+
       toastSuccess('Kayıt başarılı! Yönlendiriliyorsunuz...');
-      navigate('/home'); 
+      navigate('/home');
       
     } catch (error) {
-      toastError(error || 'Kayıt işlemi başarısız oldu.');
+      // Try to surface server validation errors (often in error.response.data)
+      const serverMessage =
+        error?.response?.data?.message ||
+        error?.response?.data?.errors ||
+        error?.message ||
+        'Kayıt işlemi başarısız oldu.';
+
+      // If serverMessage is an array or object, convert to readable string
+      const messageText =
+        typeof serverMessage === 'string'
+          ? serverMessage
+          : Array.isArray(serverMessage)
+          ? serverMessage.join(', ')
+          : JSON.stringify(serverMessage);
+
+      toastError(messageText);
     }
   };
 
