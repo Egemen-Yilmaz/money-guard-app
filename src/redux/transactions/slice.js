@@ -34,53 +34,11 @@ const handleRejected = (state, action) => {
 };
 
 const transactionsSlice = createSlice({
-    name: 'transactions',
-    initialState,
-    reducers: {},
-    extraReducers: (builder) => {
-        builder
-            // İşlemleri getir
-            .addCase(fetchTransactions.pending, handlePending)
-            .addCase(fetchTransactions.fulfilled, (state, action) => {
-                state.isLoading = false;
-                state.error = null;
-                state.items = action.payload;
-            })
-            .addCase(fetchTransactions.rejected, handleRejected)
-            // İşlem ekle
-            .addCase(addTransaction.pending, handlePending)
-            .addCase(addTransaction.fulfilled, (state, action) => {
-                state.isLoading = false;
-                state.error = null;
-                state.items.push(action.payload);
-            })
-            .addCase(addTransaction.rejected, handleRejected)
-            // İşlem güncelle
-            .addCase(updateTransaction.pending, handlePending)
-            .addCase(updateTransaction.fulfilled, (state, action) => {
-                state.isLoading = false;
-                state.error = null;
-                const index = state.items.findIndex((item) => item.id === action.payload.id);
-                if (index !== -1) {
-                    state.items[index] = action.payload;
-                }
-            })
-            .addCase(updateTransaction.rejected, handleRejected)
-            .addCase(deleteTransaction.pending, handlePending)
-            .addCase(deleteTransaction.fulfilled, (state, action) => {
-                state.isLoading = false;
-                state.items = state.items.filter(item => item.id !== action.payload);
-                state.error = null;
-            })
-            .addCase(deleteTransaction.rejected, handleRejected)
-            // Kategorileri getir
-            .addCase(fetchTransactionCategories.pending, handlePending)
-            .addCase(fetchTransactionCategories.fulfilled, (state, action) => {
-                state.isLoading = false;
-                state.error = null;
-                state.categories = action.payload;
-            })
-            .addCase(fetchTransactionCategories.rejected, handleRejected);
+  name: 'transactions',
+  initialState,
+  reducers: {
+    changeDate(state, action) {
+      state.date = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -106,14 +64,20 @@ const transactionsSlice = createSlice({
       .addCase(updateTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const index = state.items.findIndex(
-          (item) => item.id === action.payload.id,
-        );
+        const index = state.items.findIndex((item) => item.id === action.payload.id);
         if (index !== -1) {
           state.items[index] = action.payload;
         }
       })
       .addCase(updateTransaction.rejected, handleRejected)
+      // İşlem sil
+      .addCase(deleteTransaction.pending, handlePending)
+      .addCase(deleteTransaction.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items = state.items.filter((item) => item.id !== action.payload);
+        state.error = null;
+      })
+      .addCase(deleteTransaction.rejected, handleRejected)
       // Kategorileri getir
       .addCase(fetchTransactionCategories.pending, handlePending)
       .addCase(fetchTransactionCategories.fulfilled, (state, action) => {
