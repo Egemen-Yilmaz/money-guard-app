@@ -29,8 +29,8 @@
   min-height: calc(100vh - 80px);
 }
 
-/* Hide currency panel on mobile */
-.currencyPanel { 
+/* Hide currency on mobile */
+.currencySection { 
   display: none; 
 }
 
@@ -48,9 +48,12 @@
   gap: 0;
 }
 
-/* Hide currency inside sidebar on mobile */
-.leftSidebar .currencyInSidebar { 
-  display: none; 
+.navSection {
+  width: 100%;
+}
+
+.balanceSection {
+  width: 100%;
 }
 
 /* main (transactions area) */
@@ -88,45 +91,67 @@
   opacity: 0.95; 
 }
 
-/* Tablet: side-by-side layout */
+/* Tablet: 2-column top row (Nav+Balance | Currency), Transactions full-width bottom */
 @media (min-width: 768px) {
   .container {
     display: grid;
-    grid-template-columns: 395px 1fr;
-    grid-template-rows: auto 1fr;
-    grid-template-areas:
-      "leftcol main"
-      "leftcol main";
-    gap: 24px;
-    padding: 24px;
+    grid-template-columns: minmax(200px, 1fr) minmax(180px, 1fr);
+    grid-template-rows: auto auto;
+    grid-template-areas: 
+      "leftcol currencySection"
+      "main main";
+    gap: clamp(16px, 4vw, 24px);
+    padding: clamp(16px, 3vw, 32px);
     align-items: start;
     max-width: none;
+    min-height: calc(100vh - 80px);
+    overflow-x: hidden;
   }
 
   .leftSidebar { 
     grid-area: leftcol; 
     width: 100%;
-    max-width: 395px;
+    max-width: none;
     background: rgba(255,255,255,0.02);
     border-radius: 12px;
-    padding: 16px;
-    position: sticky;
-    top: 96px;
-    height: fit-content;
+    padding: clamp(12px, 3vw, 20px);
+    position: static;
+    height: auto;
     align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 2vw, 16px);
+    min-width: 0;
   }
 
-  .currencyPanel { 
-    display: none; 
+  .navSection {
+    width: 100%;
+    min-width: 0;
   }
 
-  .leftSidebar .currencyInSidebar { 
-    display: none; 
+  .balanceSection {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .currencySection { 
+    grid-area: currencySection;
+    display: block;
+    width: 100%;
+    background: rgba(255,255,255,0.02);
+    border-radius: 12px;
+    padding: clamp(12px, 3vw, 20px);
+    position: static;
+    height: auto;
+    min-width: 0;
   }
 
   .main { 
     grid-area: main;
-    padding: 12px 0; 
+    padding: 0; 
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
   }
 
   .fabButton {
@@ -134,49 +159,84 @@
     right: 40px;
     width: 56px;
     height: 56px;
+    font-size: 28px;
   }
 }
 
-/* Desktop: 35% / 65% split */
+/* Desktop: Left sidebar (Nav / Balance / Currency) | Right main (Transactions) */
 @media (min-width: 1280px) {
   .container {
     display: grid;
-    grid-template-columns: 35% 65%;
-    grid-template-areas: "leftcol main";
+    grid-template-columns: minmax(280px, 30%) 1fr;
     grid-template-rows: 1fr;
-    max-width: var(--container-width);
-    margin: 0 auto;
-    gap: 40px;
-    padding: 0 56px;
+    grid-template-areas: 
+      "leftcol main";
+    gap: clamp(40px, 5vw, 64px);
+    padding: clamp(24px, 4vw, 48px);
+    align-items: start;
     min-height: calc(100vh - 80px);
+    overflow-x: hidden;
   }
 
-  .leftSidebar {
-    grid-area: leftcol;
+  .leftSidebar { 
+    grid-area: leftcol; 
     width: 100%;
     max-width: none;
-    position: sticky;
-    top: 96px;
-    align-self: start;
-    border-right: 1px solid rgba(255,255,255,0.04);
     background: transparent;
-    padding: 24px;
     border-radius: 0;
-    align-items: flex-start;
+    padding: 0;
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 3vw, 28px);
+    min-width: 0;
   }
 
-  .leftSidebar .currencyInSidebar { 
-    display: none; 
+  .navSection {
+    width: 100%;
+    background: rgba(255,255,255,0.02);
+    border-radius: 12px;
+    padding: clamp(16px, 2vw, 24px);
+    min-width: 0;
   }
 
-  .main {
+  .balanceSection {
+    width: 100%;
+    background: rgba(255,255,255,0.02);
+    border-radius: 12px;
+    padding: clamp(16px, 2vw, 24px);
+    min-width: 0;
+  }
+
+  /* On desktop: currency section moves inside sidebar visually */
+  .currencySection { 
+    display: block;
+    width: 100%;
+    background: rgba(255,255,255,0.02);
+    border-radius: 12px;
+    padding: clamp(16px, 2vw, 24px);
+    position: static;
+    height: auto;
+    min-width: 0;
+    grid-area: unset;
+  }
+
+  .main { 
     grid-area: main;
-    padding: 40px 56px;
+    padding: 0; 
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .fabButton {
-    bottom: 40px;
-    right: 80px;
+    bottom: 64px;
+    right: 64px;
     width: 64px;
     height: 64px;
     font-size: 32px;

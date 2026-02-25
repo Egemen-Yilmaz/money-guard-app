@@ -1,40 +1,56 @@
-/* Currency table displayed at the bottom of the sidebar on desktop */
+/* Currency table wrapper */
 .currencyWrapper {
   width: 100%;
-  margin-top: 20px;
+  margin-top: clamp(12px, 2vw, 20px);
 }
 
 .currencyTable {
   width: 100%;
   background: rgba(255,255,255,0.04);
   border-radius: 12px;
-  padding: 12px 16px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
-  font-size: 14px;
+  padding: clamp(10px, 2vw, 16px) clamp(10px, 3vw, 16px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  font-size: clamp(12px, 2vw, 14px);
 }
 
 .currencyHeader {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 8px;
+  gap: clamp(6px, 1vw, 8px);
   color: rgba(255,255,255,0.7);
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: clamp(6px, 1vw, 8px);
+  text-align: left;
 }
 
 .currencyRow {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 8px;
-  padding: 6px 0;
+  gap: clamp(6px, 1vw, 8px);
+  padding: clamp(4px, 1vw, 6px) 0;
   border-top: 1px dashed rgba(255,255,255,0.03);
 }
 
-@media (min-width: 1280px) {
-  .currencyTable { position: sticky; bottom: 24px; }
+/* Tablet: show currency as separate card in top-right */
+@media (min-width: 768px) {
+  .currencyWrapper {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .currencyTable { 
+    position: static;
+    margin-top: 0;
+    background: rgba(255,255,255,0.02);
+    padding: clamp(12px, 2vw, 16px);
+  }
 }
 
-@media (min-width: 768px) {
-  /* Tablet: show currency below balance within sidebar (no sticky) */
-  .currencyTable { position: static; margin-top: 12px; }
+/* Desktop: show currency in sidebar */
+@media (min-width: 1280px) {
+  .currencyTable { 
+    position: static;
+    margin-top: clamp(16px, 2vw, 20px);
+    background: rgba(255,255,255,0.04);
+  }
 }

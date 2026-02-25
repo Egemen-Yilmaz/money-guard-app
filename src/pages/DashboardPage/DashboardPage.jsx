@@ -24,18 +24,22 @@ const DashboardPage = () => {
       <Header />
 
       <div className={css.container}>
-        {/* Left column: Navigation (top) and Balance (below) */}
+        {/* Top Row: Navigation + Balance (Left) | Currency (Right on tablet only) */}
         <aside className={css.leftSidebar}>
-          <Navigation />
-          <Balance />
+          <div className={css.navSection}>
+            <Navigation />
+          </div>
+          <div className={css.balanceSection}>
+            <Balance />
+          </div>
         </aside>
 
-        {/* Right column on tablet: Currency - hidden on mobile */}
-        <div className={css.currencyPanel}>
+        {/* Currency Panel - shows on right (tablet) or inside sidebar (desktop) */}
+        <div className={css.currencySection}>
           <CurrencyTab />
         </div>
 
-        {/* Transactions / main content: spans full-width below the top row on tablet */}
+        {/* Transactions / main content */}
         <main className={css.main}>
           <Outlet /> {/* HomeTab buraya render olur */}
         </main>

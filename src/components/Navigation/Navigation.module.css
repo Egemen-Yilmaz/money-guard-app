@@ -2,6 +2,7 @@
 .navContainer { 
   margin: 0;
   width: 100%;
+  overflow-x: hidden;
 }
 
 .navList {
@@ -9,10 +10,11 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: clamp(20px, 6vw, 30px);
   list-style: none;
   padding: 0;
   margin: 0;
+  flex-wrap: wrap;
 }
 
 .navItem { 
@@ -23,7 +25,7 @@
 .navButton {
   background: none;
   border: none;
-  padding: 8px 12px;
+  padding: clamp(6px, 2vw, 8px) clamp(8px, 2vw, 12px);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -45,8 +47,8 @@
 }
 
 .navIcon .icon { 
-  width: 28px; 
-  height: 28px; 
+  width: clamp(24px, 6vw, 28px); 
+  height: clamp(24px, 6vw, 28px); 
   display: block; 
 }
 
@@ -66,20 +68,20 @@
 @media (min-width: 768px) {
   .navList { 
     flex-direction: column; 
-    gap: 12px; 
+    gap: clamp(8px, 2vw, 12px); 
     align-items: flex-start;
     justify-content: flex-start;
   }
 
   .navIcon .icon { 
-    width: 24px; 
-    height: 24px; 
-    margin-right: 12px; 
+    width: clamp(20px, 3vw, 24px); 
+    height: clamp(20px, 3vw, 24px); 
+    margin-right: clamp(8px, 2vw, 12px); 
   }
 
   .navText { 
     display: inline; 
-    font-size: 16px; 
+    font-size: clamp(14px, 2vw, 16px); 
     font-weight: 600; 
     color: white; 
   }
@@ -90,7 +92,7 @@
 
   .navButton { 
     justify-content: flex-start;
-    padding: 10px 16px;
+    padding: clamp(8px, 1.5vw, 10px) clamp(12px, 2vw, 16px);
     width: auto;
   }
 
@@ -109,11 +111,11 @@
   .navButton { 
     width: 100%; 
     justify-content: flex-start; 
-    padding: 12px 16px; 
+    padding: clamp(10px, 1.5vw, 12px) clamp(12px, 2vw, 16px); 
   }
 
   .navIcon { 
-    margin-right: 12px; 
+    margin-right: clamp(10px, 1.5vw, 12px); 
     display: inline-flex; 
     align-items: center; 
   }

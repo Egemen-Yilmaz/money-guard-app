@@ -43,29 +43,41 @@
 .controlsRow { padding: 8px; }
 
 @media (min-width: 768px) {
-  .theadRow { display: table-row; }
-  .th { display: table-cell; }
-  .td { display: table-cell; border: 1px solid rgba(255,255,255,0.04); padding: 12px; }
-  .table { background: rgba(255,255,255,0.03); }
-
-  /* Tablet: switch to compact table grid for rows */
-  .table-header {
-    display: grid;
-    grid-template-columns: 110px 60px 140px 1fr 120px 100px;
-    gap: 16px;
-    padding: 8px 16px;
-    font-weight: 600;
-    color: rgba(255,255,255,0.85);
-    align-items: center;
+  .theadRow { 
+    display: table-row; 
   }
 
-  .table-row {
-    display: grid;
-    grid-template-columns: 110px 60px 140px 1fr 120px 100px;
-    gap: 16px;
-    padding: 12px 16px;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    align-items: center;
+  .th { 
+    display: table-cell;
+    padding: 12px 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.03);
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .td { 
+    display: table-cell;
+    border: none;
+    padding: 0;
+    vertical-align: middle;
+  }
+
+  .table { 
+    background: transparent;
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .tableWrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -73,33 +85,50 @@
   .table { background: rgba(255,255,255,0.04); }
 }
 
-/* Desktop-specific table header and row grid per design spec */
+/* Desktop-specific - RESPONSIVE */
 @media (min-width: 1280px) {
-  .transactions-table { width: 100%; border-radius: 16px; overflow: hidden; margin-top: 40px; }
+  .table { 
+    background: transparent; 
+    width: 100%;
+    table-layout: fixed;
+  }
 
-  .table-header {
-    display: grid;
-    grid-template-columns: 120px 80px 160px 1fr 140px 120px;
-    align-items: center;
-    padding: 0 32px;
-    height: 64px;
-    background: rgba(255,255,255,0.08);
-    color: var(--color-text-primary);
+  .theadRow {
+    background: rgba(255,255,255,0.04);
+    height: 60px;
+  }
+
+  .th {
+    padding: 12px 16px;
+    font-size: 14px;
     font-weight: 600;
+    text-align: left;
+    color: rgba(255,255,255,0.85);
+    border-right: 1px solid rgba(255,255,255,0.02);
+  }
+
+  .th:last-child {
+    border-right: none;
+  }
+
+  .td {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0;
   }
 
   .table-row {
-    display: grid;
-    grid-template-columns: 120px 80px 160px 1fr 140px 120px;
-    align-items: center;
-    padding: 0 32px;
-    height: 72px;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    transition: background 0.12s;
+    height: auto;
+    min-height: 56px;
   }
 
-  .table-row:hover { background: rgba(255,255,255,0.02); }
+  .amount-income { 
+    color: var(--color-accent-teal); 
+    font-weight: 600; 
+  }
 
-  .amount-income { color: var(--color-income); font-weight: 600; }
-  .amount-expense { color: var(--color-expense); font-weight: 600; }
+  .amount-expense { 
+    color: var(--color-accent-coral); 
+    font-weight: 600; 
+  }
 }

@@ -94,60 +94,125 @@
   font-size: 13px;
 }
 
-/* Tablet & Desktop: table row layout */
+/* Tablet & Desktop: table row layout - RESPONSIVE */
 @media (min-width: 768px) {
   .tr {
     display: grid;
-    grid-template-columns: 110px 60px 140px 1fr 120px 100px;
-    gap: 12px;
-    padding: 12px;
+    grid-template-columns: minmax(80px, 0.8fr) minmax(60px, 0.6fr) minmax(120px, 1.2fr) minmax(100px, 2fr) minmax(80px, 0.8fr) minmax(60px, 0.6fr);
+    gap: 8px;
+    padding: 12px 8px;
     align-items: center;
     background: transparent;
-    margin: 0 0 8px 0;
-    border-radius: 8px;
+    margin: 0;
+    border-radius: 0;
     border-left: none;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .tr:hover {
+    background: rgba(255,255,255,0.02);
   }
 
   .td { 
     display: block; 
-    padding: 0; 
-    font-size: 14px;
+    padding: 0 4px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
   }
 
   .mobileLabel { 
     display: none; 
   }
 
+  .date {
+    font-size: 13px;
+  }
+
+  .type {
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+
+  .comment {
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+
+  .sum {
+    text-align: right;
+    justify-content: flex-end;
+    flex: 0;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
   .actions { 
-    margin-top: 0; 
+    margin-top: 0;
     justify-content: center;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .iconButton {
+    padding: 2px 4px;
+    cursor: pointer;
+    transition: color 0.2s;
+    font-size: 12px;
+  }
+
+  .iconButton:hover {
+    color: white;
   }
 }
 
-/* Desktop */
+/* Desktop - RESPONSIVE */
 @media (min-width: 1280px) {
   .tr {
     display: grid;
-    grid-template-columns: 120px 80px 160px 1fr 140px 120px;
+    grid-template-columns: minmax(100px, 0.8fr) minmax(70px, 0.6fr) minmax(140px, 1.2fr) minmax(150px, 2fr) minmax(100px, 0.8fr) minmax(80px, 0.6fr);
+    gap: 16px;
+    padding: 16px 24px;
     align-items: center;
-    padding: 0 32px;
-    height: 72px;
     border-bottom: 1px solid rgba(255,255,255,0.04);
     background: transparent;
+    height: auto;
+    min-height: 60px;
   }
 
   .td { 
-    padding: 16px 0; 
+    padding: 0;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
   }
 
   .comment { 
     overflow: hidden; 
     text-overflow: ellipsis; 
-    white-space: nowrap; 
+    white-space: nowrap;
+    min-width: 0;
   }
 
   .actions { 
-    justify-content: center; 
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .iconButton {
+    padding: 4px 8px;
+    font-size: 13px;
   }
 }

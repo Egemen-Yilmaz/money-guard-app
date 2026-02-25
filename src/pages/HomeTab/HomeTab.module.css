@@ -1,15 +1,28 @@
-.homeTab { padding: 20px; }
+.homeTab { 
+  padding: clamp(12px, 3vw, 20px);
+  width: 100%;
+  overflow-x: hidden;
+}
 
-.loading { text-align: center; padding: 60px 20px; font-size: 1.3rem; color: var(--color-text-secondary); }
+.loading { 
+  text-align: center; 
+  padding: clamp(40px, 8vw, 60px) clamp(12px, 3vw, 20px); 
+  font-size: 1.3rem; 
+  color: rgba(255, 255, 255, 0.7); 
+}
 
 .error {
   text-align: center;
-  padding: 24px 20px;
+  padding: clamp(16px, 3vw, 24px);
   font-size: 1rem;
-  color: var(--color-text-primary);
+  color: var(--color-white);
   background: rgba(255, 77, 109, 0.08);
   border-radius: 12px;
 }
 
 /* Main transactions table wrapper spacing */
-.transactions-section { margin-top: 40px; }
+.transactions-section { 
+  margin-top: clamp(20px, 5vw, 40px); 
+  width: 100%;
+  overflow-x: hidden;
+}
