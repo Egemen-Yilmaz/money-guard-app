@@ -1,134 +1,131 @@
-/* Mobile-first: Transactions render as stacked cards using table markup
-   Rows (tr) and cells (td) are styled as block cards; on wider screens
-   they switch back to table layout. */
+/* ======================================================
+   CONTAINER
+   ====================================================== */
+
+.container {
+  width: 100%;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+/* ======================================================
+   TABLE WRAPPER
+   ====================================================== */
+
+.tableWrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Overlay loader */
+.tableOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(2px);
+  z-index: 5;
+}
+
+/* ======================================================
+   TABLE - MOBILE FIRST
+   ====================================================== */
 
 .table {
   width: 100%;
   border-collapse: collapse;
+  font-family: var(--font-family-base);
+  color: var(--font-color-white);
 }
 
-/* Ensure table columns don't force horizontal overflow; make comments wrap */
-.table { table-layout: fixed; }
-.th, .td { overflow-wrap: anywhere; word-break: break-word; }
-.td .comment { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-/* header style when table layout active */
+/* Mobilde başlık gizli */
 .theadRow {
-  display: none; /* hide header on small screens */
-  background-color: rgba(82,59,126,0.6);
-  color: white;
+  display: none;
 }
 
-.th {
-  color: white;
-  padding: 12px;
-  text-align: center;
+/* ======================================================
+   SORT BUTTON
+   ====================================================== */
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
 }
 
-.td {
-  display: block;
-  padding: 0; /* inner cell padding handled by TransactionsItem styles */
+.sortButton {
+  background: transparent;
   border: none;
+  color: var(--font-color-white);
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: opacity 0.2s;
 }
 
-/* Table wrapper for desktop visuals */
-.tableWrapper {
-  width: 100%;
+.sortButton:hover {
+  opacity: 0.7;
 }
 
-/* On mobile, ensure the transactions area stacks and cards take full width */
-.transactions-table { width: 100%; }
+/* ======================================================
+   LOADING / ERROR
+   ====================================================== */
 
-/* Controls row */
-.controlsRow { padding: 8px; }
+.loading,
+.error {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 16px;
+}
+
+.error {
+  color: var(--red);
+}
+
+/* ======================================================
+   DESKTOP STYLES
+   ====================================================== */
 
 @media (min-width: 768px) {
-  .theadRow { 
-    display: table-row; 
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
-  .th { 
-    display: table-cell;
-    padding: 12px 8px;
-    font-size: 13px;
-    font-weight: 600;
-    color: rgba(255,255,255,0.85);
-    background: rgba(255,255,255,0.03);
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .td { 
-    display: table-cell;
-    border: none;
-    padding: 0;
-    vertical-align: middle;
-  }
-
-  .table { 
-    background: transparent;
-    table-layout: fixed;
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  .tableWrapper {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-}
-
-@media (min-width: 1280px) {
-  .table { background: rgba(255,255,255,0.04); }
-}
-
-/* Desktop-specific - RESPONSIVE */
-@media (min-width: 1280px) {
-  .table { 
-    background: transparent; 
-    width: 100%;
-    table-layout: fixed;
+  .table {
+    margin-top: 69px;
   }
 
   .theadRow {
-    background: rgba(255,255,255,0.04);
-    height: 60px;
+    display: table-row;
+    background-color: #523b7e99;
   }
 
   .th {
-    padding: 12px 16px;
-    font-size: 14px;
     font-weight: 600;
+    font-size: 16px;
+    padding: 12px 24px;
+    text-align: center;
+    color: var(--font-color-white);
+  }
+
+  .th:first-child {
     text-align: left;
-    color: rgba(255,255,255,0.85);
-    border-right: 1px solid rgba(255,255,255,0.02);
   }
 
-  .th:last-child {
-    border-right: none;
+  .controls {
+    margin-bottom: 0;
+    margin-top: 40px;
   }
+}
+.amount-income {
+  color: var(--color-accent-teal);
+  font-weight: 600;
+}
 
-  .td {
-    display: table-cell;
-    vertical-align: middle;
-    padding: 0;
-  }
-
-  .table-row {
-    height: auto;
-    min-height: 56px;
-  }
-
-  .amount-income { 
-    color: var(--color-accent-teal); 
-    font-weight: 600; 
-  }
-
-  .amount-expense { 
-    color: var(--color-accent-coral); 
-    font-weight: 600; 
-  }
+.amount-expense {
+  color: var(--color-accent-coral);
+  font-weight: 600;
 }

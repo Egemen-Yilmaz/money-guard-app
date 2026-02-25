@@ -56,6 +56,14 @@
   cursor: pointer;
 }
 
+.addButton:hover,
+.addButton:focus {
+  transform: scale(1.05);
+  background-size: 200%;
+  background-position: right center;
+  transition: all 1s ease 0s;
+}
+
 /* --- TABLET (>=768px) --- */
 @media (min-width: 768px) {
   .noTransactionsContainer {

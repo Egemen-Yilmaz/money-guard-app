@@ -1,5 +1,5 @@
 // src/features/transactions/transactionsSlice.js
-import { createSlice, createAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   items: [],
@@ -12,7 +12,6 @@ const transactionsSlice = createSlice({
   name: "transactions",
   initialState,
   reducers: {
-    // loading/error state'leri için örnek reducer'lar (daha sonra genişletebilirsin)
     setLoading(state, action) {
       state.loading = action.payload;
     },
@@ -25,16 +24,19 @@ const transactionsSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
-    // Modal toggle reducer'ı
     toggleModal(state) {
       state.isModalOpen = !state.isModalOpen;
+    },
+    reset(state) {
+      state.items = [];
+      state.loading = false;
+      state.error = null;
+      state.isModalOpen = false;
     },
   },
 });
 
-// Ek action export'ları (createAction ile)
-export const toggleModal = createAction("transactions/toggleModal");
-
-export const { setLoading, setError, setTransactions } =
+export const { setLoading, setError, setTransactions, toggleModal, reset } =
   transactionsSlice.actions;
+
 export default transactionsSlice.reducer;

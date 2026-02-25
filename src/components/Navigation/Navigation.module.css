@@ -1,5 +1,5 @@
 /* Mobile: horizontal centered icons */
-.navContainer { 
+.navContainer {
   margin: 0;
   width: 100%;
   overflow-x: hidden;
@@ -17,7 +17,7 @@
   flex-wrap: wrap;
 }
 
-.navItem { 
+.navItem {
   display: flex;
   align-items: center;
 }
@@ -35,92 +35,92 @@
   border-radius: 12px;
 }
 
-.navButton:hover { 
+.navButton:hover {
   color: white;
   transform: scale(1.05);
 }
 
-.navIcon { 
+.navIcon {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.navIcon .icon { 
-  width: clamp(24px, 6vw, 28px); 
-  height: clamp(24px, 6vw, 28px); 
-  display: block; 
+.navIcon .icon {
+  width: clamp(24px, 6vw, 28px);
+  height: clamp(24px, 6vw, 28px);
+  display: block;
 }
 
-.navText { 
-  display: none; 
+.navText {
+  display: none;
 }
 
-.navButton.active { 
+.navButton.active {
   color: white;
 }
 
-.mobileOnly { 
-  display: block; 
+.mobileOnly {
+  display: block;
 }
 
 /* Tablet: vertical with labels */
 @media (min-width: 768px) {
-  .navList { 
-    flex-direction: column; 
-    gap: clamp(8px, 2vw, 12px); 
+  .navList {
+    flex-direction: column;
+    gap: clamp(8px, 2vw, 12px);
     align-items: flex-start;
     justify-content: flex-start;
   }
 
-  .navIcon .icon { 
-    width: clamp(20px, 3vw, 24px); 
-    height: clamp(20px, 3vw, 24px); 
-    margin-right: clamp(8px, 2vw, 12px); 
+  .navIcon .icon {
+    width: clamp(20px, 3vw, 24px);
+    height: clamp(20px, 3vw, 24px);
+    margin-right: clamp(8px, 2vw, 12px);
   }
 
-  .navText { 
-    display: inline; 
-    font-size: clamp(14px, 2vw, 16px); 
-    font-weight: 600; 
-    color: white; 
+  .navText {
+    display: inline;
+    font-size: clamp(14px, 2vw, 16px);
+    font-weight: 600;
+    color: white;
   }
 
-  .mobileOnly { 
-    display: none; 
+  .mobileOnly {
+    display: none;
   }
 
-  .navButton { 
+  .navButton {
     justify-content: flex-start;
     padding: clamp(8px, 1.5vw, 10px) clamp(12px, 2vw, 16px);
     width: auto;
   }
 
-  .navButton:hover { 
-    background: rgba(255,255,255,0.06); 
+  .navButton:hover {
+    background: rgba(255, 255, 255, 0.06);
   }
 }
 
 /* Desktop: vertical with full width layout */
 @media (min-width: 1280px) {
-  .navList { 
-    align-items: flex-start; 
+  .navList {
+    align-items: flex-start;
     padding-left: 0;
   }
 
-  .navButton { 
-    width: 100%; 
-    justify-content: flex-start; 
-    padding: clamp(10px, 1.5vw, 12px) clamp(12px, 2vw, 16px); 
+  .navButton {
+    width: 100%;
+    justify-content: flex-start;
+    padding: clamp(10px, 1.5vw, 12px) clamp(12px, 2vw, 16px);
   }
 
-  .navIcon { 
-    margin-right: clamp(10px, 1.5vw, 12px); 
-    display: inline-flex; 
-    align-items: center; 
+  .navIcon {
+    margin-right: clamp(10px, 1.5vw, 12px);
+    display: inline-flex;
+    align-items: center;
   }
 
-  .navText { 
-    display: inline-block; 
+  .navText {
+    display: inline-block;
   }
 }
