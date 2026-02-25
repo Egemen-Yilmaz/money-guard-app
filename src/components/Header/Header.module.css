@@ -32,7 +32,7 @@
 .userSection {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
 }
 
 .userName {
@@ -69,66 +69,123 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  
+  /* Görseldeki gibi koyu mor degrade */
+  background: linear-gradient(135deg, #3a235c 0%, #5b3a85 100%);
+  
+  /* İçeriği tam ortala */
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
-  backdrop-filter: blur(2px);
+  padding: 20px;
+  z-index: 1000; /* En üstte görünsün */
+
+  /* Hafif bir bulanıklık efekti (isteğe bağlı, görselde var gibi) */
+  backdrop-filter: blur(5px);
 }
 
-.modalContent {
-  background: #ffffff;
-  padding: 30px;
-  border-radius: 12px;
+/* "Are you sure..." metni */
+.modalTitle {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 500;
   text-align: center;
-  width: 90%;
-  max-width: 320px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  margin-bottom: 40px; /* Butonlarla arasına mesafe */
+  max-width: 300px; /* Metnin çok yayılmasını önle */
+  line-height: 1.4;
 }
 
-.modalText {
-  margin-bottom: 24px;
-  font-size: 16px;
-  color: #333333;
-}
-
+/* Butonları kapsayan kutu */
 .modalActions {
   display: flex;
-  gap: 12px;
-  justify-content: center;
+  flex-direction: column; /* Butonları alt alta sırala */
+  gap: 16px; /* Butonlar arası boşluk */
+  width: 100%;
+  max-width: 300px; /* Butonların genişliğini sınırla */
 }
 
-.confirmBtn {
-  padding: 10px 24px;
-  background: #ff6b6b; /* Çıkış işlemi için vurgulu renk */
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
+/* Ortak buton stilleri */
+.confirmBtn,
 .cancelBtn {
-  padding: 10px 24px;
-  background: transparent;
-  color: #2c1b4d;
-  border: 1px solid #2c1b4d;
-  border-radius: 6px;
-  cursor: pointer;
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px; /* Yuvarlatılmış köşeler */
+  font-size: 16px;
   font-weight: 600;
+  text-transform: uppercase; /* Yazıları BÜYÜK HARF yap */
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Belirgin gölge */
 }
 
-/* --- TABLET VE DESKTOP RESPONSIVE (768px ve üzeri) --- */
-@media screen and (min-width: 768px) {
-  .header {
-    padding: 20px 32px;
+/* Butonlara tıklama efekti */
+.confirmBtn:active,
+.cancelBtn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* LOGOUT Butonu (Turuncu-Mor Degrade) */
+.confirmBtn {
+  /* Görseldeki gibi turuncudan mora geçiş */
+  background: linear-gradient(90deg, #e0c35c 0%, #a55eea 100%);
+  color: #ffffff;
+}
+
+/* CANCEL Butonu (Beyaz) */
+.cancelBtn {
+  background-color: #ffffff;
+  color: #5b3a85; /* Koyu mor yazı rengi */
+}
+
+/* 📱 Mobil Uyumluluk (Gerekirse ince ayar) */
+@media (max-width: 480px) {
+  .modalTitle {
+    font-size: 20px;
+  }
+  .modalActions {
+    max-width: 260px;
   }
   
-  /* Tablet ve üstü ekranlarda Exit ikonunun yanına yazıyı da ekleyebiliriz */
+}
+/* ------------------------------------------------ */
+/* 💊 TABLET VE 💻 MASAÜSTÜ (768px ve üzeri) */
+/* ------------------------------------------------ */
+@media screen and (min-width: 768px) {
+  .header {
+    padding: 20px 40px; /* Padding artırıldı */
+  }
+
+  .logoText {
+    font-size: 24px; /* Logo büyüdü */
+  }
+
+  .userSection {
+    gap: 0; /* Gap'i sıfırlayıp margin ile yöneteceğiz */
+  }
+
+  .exitButton {
+    /* İkon ve Yazı arasındaki boşluk */
+    gap: 8px; 
+    
+    /* İsim ile buton arasındaki dikey çizgi (|) */
+    border-left: 1px solid #bdbdbd; 
+    
+    /* Çizginin etrafındaki boşluklar */
+    padding-left: 12px; 
+    margin-left: 12px;
+    height: 30px; /* Çizginin yüksekliği */
+  }
+
+  /* "Exit" yazısını GÖRÜNÜR yap */
   .exitText {
-    display: inline; 
+    display: inline-block;
+    font-size: 18px;
+    color: #bdbdbd;
+    font-weight: 400;
   }
 }
