@@ -1,0 +1,73 @@
+/* Mobile-first card layout for transaction items */
+.tr {
+  display: block;
+  background: rgba(255,255,255,0.03);
+  margin: 12px 0;
+  border-radius: 12px;
+  padding: 12px 14px 14px 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* colored stripe on left indicating type */
+.tr::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: var(--color-accent-coral);
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.income::before { background: var(--color-accent-teal); }
+.expense::before { background: var(--color-accent-coral); }
+
+.td {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+}
+
+.mobileLabel {
+  display: inline-block;
+  min-width: 70px;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.date { font-size: 14px; }
+.type { font-weight: 600; }
+.comment { color: var(--color-muted); font-size: 13px; }
+.sum { font-weight: 700; font-variant-numeric: tabular-nums; }
+
+.typeIncome { color: var(--color-accent-teal); }
+.typeExpense { color: var(--color-accent-coral); }
+
+.actions { display: flex; gap: 8px; margin-top: 10px; }
+.iconButton { background: transparent; border: none; color: var(--color-muted); }
+.deleteButton { background: rgba(255,255,255,0.06); border-radius: 8px; padding: 6px 10px; }
+
+/* Tablet & Desktop: show as table row */
+@media (min-width: 768px) {
+  .tr {
+    display: table-row;
+    background: transparent;
+    margin: 0;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .tr::before { display: none; }
+
+  .td { display: table-cell; padding: 12px; vertical-align: middle; }
+  .mobileLabel { display: none; }
+  .actions { margin-top: 0; justify-content: center; }
+}
+
+@media (min-width: 1280px) {
+  .td { padding: 16px; }
+}

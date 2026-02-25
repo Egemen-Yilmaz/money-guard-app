@@ -1,5 +1,16 @@
+/* Mobile-first: Transactions render as stacked cards using table markup
+   Rows (tr) and cells (td) are styled as block cards; on wider screens
+   they switch back to table layout. */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* header style when table layout active */
 .theadRow {
-  background-color: #523b7e99;
+  display: none; /* hide header on small screens */
+  background-color: rgba(82,59,126,0.6);
   color: white;
 }
 
@@ -9,14 +20,27 @@
   text-align: center;
 }
 
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
+.td {
+  display: block;
+  padding: 0; /* inner cell padding handled by TransactionsItem styles */
+  border: none;
 }
 
-.td {
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: center;
+/* Table wrapper for desktop visuals */
+.tableWrapper {
+  width: 100%;
+}
+
+/* Controls row */
+.controlsRow { padding: 8px; }
+
+@media (min-width: 768px) {
+  .theadRow { display: table-row; }
+  .th { display: table-cell; }
+  .td { display: table-cell; border: 1px solid rgba(255,255,255,0.04); padding: 12px; }
+  .table { background: rgba(255,255,255,0.03); }
+}
+
+@media (min-width: 1280px) {
+  .table { background: rgba(255,255,255,0.04); }
 }
