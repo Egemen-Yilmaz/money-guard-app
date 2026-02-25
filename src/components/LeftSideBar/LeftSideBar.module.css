@@ -1,0 +1,5 @@
+/* ------------------- Genel ------------------- */
+.leftSideBar {
+  display: flex;
+  flex-direction: column;
+}

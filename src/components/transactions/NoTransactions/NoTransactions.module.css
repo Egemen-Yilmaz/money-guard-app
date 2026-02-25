@@ -46,7 +46,14 @@
 }
 
 .addButton {
-  margin: 0 auto;
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 30px;
+  border: none;
+  color: white;
+  font-weight: 600;
+  background: linear-gradient(90deg, #ffb347, #c471ed);
+  cursor: pointer;
 }
 
 /* --- TABLET (>=768px) --- */
