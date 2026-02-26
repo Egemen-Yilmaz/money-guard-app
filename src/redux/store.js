@@ -12,7 +12,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import { authReducer } from "../features/auth/authSlice";
 import globalReducer from "../features/global/globalSlice";
-import transactionsReducer from "../features/transactions/transactionsSlice";
+import transactionsReducer from "./transactions/slice";
 import statisticsReducer from "../features/statistics/statisticsSlice";
 
 const authPersistConfig = {
