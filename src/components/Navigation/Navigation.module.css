@@ -10,7 +10,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: clamp(20px, 6vw, 30px);
+  gap: 24px; /* Sabit boşluk, artık değişmiyor */
   list-style: none;
   padding: 0;
   margin: 0;
@@ -25,7 +25,7 @@
 .navButton {
   background: none;
   border: none;
-  padding: clamp(6px, 2vw, 8px) clamp(8px, 2vw, 12px);
+  padding: 6px 12px; /* Sabit padding */
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -36,7 +36,7 @@
 }
 
 .navButton:hover {
-  color: white;
+  color: rgb(255, 255, 255);
   transform: scale(1.05);
 }
 
@@ -44,11 +44,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 8px; /* Sabit ikon-yazı boşluğu */
 }
 
 .navIcon .icon {
-  width: clamp(24px, 6vw, 28px);
-  height: clamp(24px, 6vw, 28px);
+  width: 44px; /* Sabit boyut */
+  height: 44px;
   display: block;
 }
 
@@ -57,7 +58,8 @@
 }
 
 .navButton.active {
-  color: white;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
 }
 
 .mobileOnly {
@@ -68,20 +70,14 @@
 @media (min-width: 768px) {
   .navList {
     flex-direction: column;
-    gap: clamp(8px, 2vw, 12px);
+    gap: 4px;
     align-items: flex-start;
     justify-content: flex-start;
   }
 
-  .navIcon .icon {
-    width: clamp(20px, 3vw, 24px);
-    height: clamp(20px, 3vw, 24px);
-    margin-right: clamp(8px, 2vw, 12px);
-  }
-
   .navText {
     display: inline;
-    font-size: clamp(14px, 2vw, 16px);
+    font-size: 16px;
     font-weight: 600;
     color: white;
   }
@@ -92,7 +88,7 @@
 
   .navButton {
     justify-content: flex-start;
-    padding: clamp(8px, 1.5vw, 10px) clamp(12px, 2vw, 16px);
+    padding: 8px 16px; /* Sabit padding */
     width: auto;
   }
 
@@ -111,13 +107,11 @@
   .navButton {
     width: 100%;
     justify-content: flex-start;
-    padding: clamp(10px, 1.5vw, 12px) clamp(12px, 2vw, 16px);
+    padding: 10px 16px; /* Sabit padding */
   }
 
   .navIcon {
-    margin-right: clamp(10px, 1.5vw, 12px);
-    display: inline-flex;
-    align-items: center;
+    margin-right: 8px; /* Sabit ikon-yazı boşluğu */
   }
 
   .navText {
