@@ -1,4 +1,14 @@
-/* Mobile: horizontal centered icons */
+/* ─────────────────────────────────────────────
+   Mobile-first navigation (horizontal bottom bar)
+   ───────────────────────────────────────────── */
+.navButton {
+  text-decoration: none;
+}
+
+.navButton a {
+  text-decoration: none;
+}
+
 .navContainer {
   margin: 0;
   width: 100%;
@@ -10,7 +20,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 24px; /* Sabit boşluk, artık değişmiyor */
+  gap: 24px;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -25,7 +35,7 @@
 .navButton {
   background: none;
   border: none;
-  padding: 6px 12px; /* Sabit padding */
+  padding: 6px 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -35,20 +45,25 @@
   border-radius: 12px;
 }
 
-.navButton:hover {
-  color: rgb(255, 255, 255);
-  transform: scale(1.05);
+.navButton.active {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.navButton.active .navIcon {
+  filter: drop-shadow(0 0 8px rgba(255, 199, 39, 0.6));
+  opacity: 1;
 }
 
 .navIcon {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 8px; /* Sabit ikon-yazı boşluğu */
+  margin-right: 8px;
 }
 
 .navIcon .icon {
-  width: 44px; /* Sabit boyut */
+  width: 44px;
   height: 44px;
   display: block;
 }
@@ -57,22 +72,37 @@
   display: none;
 }
 
-.navButton.active {
-  text-decoration: none;
-  color: rgb(255, 255, 255);
+.navIcon,
+.navIcon svg,
+.navIcon :where(svg) {
+  width: 44px;
+  height: 44px;
 }
 
-.mobileOnly {
+.navIcon svg {
   display: block;
+  flex-shrink: 0;
 }
-
-/* Tablet: vertical with labels */
+/* ───────────────────────────────
+   Tablet & up → vertical + labels
+   ─────────────────────────────── */
 @media (min-width: 768px) {
   .navList {
     flex-direction: column;
     gap: 4px;
-    align-items: flex-start;
+    align-items: stretch;
     justify-content: flex-start;
+  }
+
+  .navButton {
+    justify-content: flex-start;
+    padding: 8px 16px;
+    width: auto;
+    border-radius: 8px;
+  }
+
+  .navButton:hover {
+    background: rgba(255, 255, 255, 0.06);
   }
 
   .navText {
@@ -86,30 +116,26 @@
     display: none;
   }
 
-  .navButton {
-    justify-content: flex-start;
-    padding: 8px 16px; /* Sabit padding */
-    width: auto;
-  }
-
-  .navButton:hover {
-    background: rgba(255, 255, 255, 0.06);
+  .navIcon,
+  .navIcon svg,
+  .navIcon :where(svg) {
+    width: 24px;
+    height: 24px;
   }
 }
 
-/* Desktop: vertical with full width layout */
+/* ───────────────────────────────
+   Desktop (wide) → daha geniş padding, farklı ikon boyutu
+   ─────────────────────────────── */
 @media (min-width: 1280px) {
   .navList {
-    align-items: flex-start;
-    padding-left: 0;
     gap: clamp(12px, 2vw, 16px);
+    padding-left: 0;
   }
 
   .navButton {
     width: 100%;
-    justify-content: flex-start;
     padding: clamp(12px, 1.5vw, 16px) clamp(16px, 2vw, 20px);
-    border-radius: 8px;
     transition: all 0.2s ease;
   }
 
@@ -118,20 +144,12 @@
   }
 
   .navButton.active {
-    color: #FFFFFF;
-    font-weight: 700;
     background: rgba(255, 255, 255, 0.05);
-  }
-
-  .navButton.active .navIcon {
-    filter: drop-shadow(0 0 8px rgba(255, 199, 39, 0.6));
-    opacity: 1;
+    font-weight: 700;
   }
 
   .navIcon {
     margin-right: clamp(12px, 1.5vw, 16px);
-    display: inline-flex;
-    align-items: center;
     opacity: 0.7;
     transition: all 0.2s ease;
   }
@@ -142,10 +160,8 @@
   }
 
   .navText {
-    display: inline-block;
     font-size: clamp(16px, 2vw, 18px);
     font-weight: 400;
-    transition: font-weight 0.2s ease;
   }
 
   .navButton.active .navText {
