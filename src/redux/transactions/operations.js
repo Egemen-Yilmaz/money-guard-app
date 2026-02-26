@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { instance } from "../../api/axiosConfig";
-import axios from "axios";
 
 export const fetchTransactions = createAsyncThunk(
   "transactions/fetchAll",
@@ -57,8 +56,8 @@ export const transactionsSummary = createAsyncThunk(
   "transactions/transactionsSummary",
   async (date, thunkApi) => {
     try {
-      const response = await axios.get(
-        `/api/transactions-summary?month=${date.month}&year=${date.year}`,
+      const response = await instance.get(
+        `transactions-summary?month=${date.month}&year=${date.year}`,
       );
       return response.data;
     } catch (error) {
@@ -68,7 +67,7 @@ export const transactionsSummary = createAsyncThunk(
 );
 
 export const deleteTransaction = createAsyncThunk(
-  'transactions/deleteTransaction',
+  "transactions/deleteTransaction",
   async (id, thunkAPI) => {
     try {
       await instance.delete(`/transactions/${id}`);
@@ -76,5 +75,5 @@ export const deleteTransaction = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );
