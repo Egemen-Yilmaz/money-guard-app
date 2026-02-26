@@ -5,6 +5,7 @@ import {
   updateTransaction,
   fetchTransactionCategories,
   deleteTransaction,
+  transactionsSummary,
 } from './operations';
 
 const initialState = {
