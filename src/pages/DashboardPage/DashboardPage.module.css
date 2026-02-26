@@ -126,9 +126,17 @@
     flex-direction: column;
     gap: clamp(16px, 2.5vw, 24px);
     min-width: 0;
-    align-self: start;
+    position: relative;
   }
-
+  .leftSidebar::after {
+    content: "";
+    position: absolute;
+    top: 16px; /* yukarıdan boşluk */
+    bottom: 6px; /* aşağıdan boşluk */
+    right: -25px; /* sağdan 2-3px içeride */
+    width: 1px; /* çizgi kalınlığı */
+    background: rgba(255, 255, 255, 0.15);
+  }
   .navSection {
     width: 100%;
     min-width: 0;
@@ -184,16 +192,18 @@
   }
 
   .leftSidebar {
-    grid-area: leftcol;
+    display: grid;
+    grid-template-rows: auto auto auto; /* nav / balance / currency */
+    grid-row-gap: clamp(16px, 2vw, 24px); /* makul boşluk */
     width: 100%;
-    max-width: none;
+    padding: 0;
     background: transparent;
     border-radius: 0;
     padding: 0;
     padding-right: clamp(20px, 3vw, 32px);
     border-right: 1px solid rgba(255, 255, 255, 0.2);
     position: sticky;
-    top: 100px;
+    top: 0; /* sticky navbar üstten başlasın */
     height: fit-content;
     display: flex;
     flex-direction: column;

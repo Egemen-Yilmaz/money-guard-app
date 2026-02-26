@@ -12,7 +12,7 @@ const Navigation = () => {
           <NavLink
             to="/home"
             className={({ isActive }) =>
-              isActive ? css.active : css.navButton
+              `${css.navButton} ${isActive ? css.active : ""}`
             }
             end
           >
@@ -26,7 +26,7 @@ const Navigation = () => {
           <NavLink
             to="/statistics"
             className={({ isActive }) =>
-              isActive ? css.active : css.navButton
+              `${css.navButton} ${isActive ? css.active : ""}`
             }
           >
             <Icon name="icon-icon-statistics" className={css.navIcon} />
@@ -39,7 +39,7 @@ const Navigation = () => {
           <NavLink
             to="/currency"
             className={({ isActive }) =>
-              isActive ? css.active : css.navButton
+              `${css.navButton} ${isActive ? css.active : ""}`
             }
           >
             <Icon name="icon-icon-currency" className={css.navIcon} />

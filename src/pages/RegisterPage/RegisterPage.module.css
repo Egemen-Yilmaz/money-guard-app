@@ -10,8 +10,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 24px 16px;
-  background: var(--color-bg-base);
+  padding: 20px;
+  background-image: 
+    url('/public/images/mobilebackground.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
   overflow: hidden;
 }
 
@@ -321,41 +325,35 @@
 
 /* 💊 2. TABLET TASARIM (768px ve üzeri) */
 @media screen and (min-width: 768px) {
-  .wrapper {
-    padding: 40px;
-    background-image: url('/images/dolartablet.png');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-  
-  .card {
-    width: 480px;
-    padding: 40px 48px;
-  }
-  
-  .bgGlow {
-    filter: blur(60px);
-  }
+  .wrapper { padding: 40px;
+      background-image:
+      url('/public/images/dolartablet.webp'),
+      linear-gradient(45deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%), /* 2. Sol Alt Gradient */
+      linear-gradient(225deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%),
+      url('/public/images/mobilebackground.webp');
+      
+    background-position: center center, center, center, center center;
+    background-size: cover, cover, cover, cover;
+    background-repeat: no-repeat; }
+  .card { max-width: 500px; 
+  padding: 40px 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);}
 }
 
-/* 💻 3. MASAÜSTÜ TASARIM (1200px ve üzeri) */
-@media screen and (min-width: 1200px) {
-  .wrapper {
-    padding: 60px;
-    background-image: url('/images/dolardesktop1.png');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-  
-  .card {
-    width: 533px;
-    min-height: 570px;
-    padding: 40px 62px;
-  }
-  
-  .bgGlow {
-    filter: blur(80px);
-  }
+@media screen and (min-width: 1280px) {
+  .wrapper { padding: 60px;
+  background-image: 
+      url('/public/images/dolardesktop1.webp'), /* 1. Sol Para */
+      url('/public/images/dolardestop2.webp'), /* 2. Sağ Para */
+      linear-gradient(45deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%), /* 3. Sol Alt Gradient */
+      linear-gradient(225deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%), /* 4. Sağ Üst Gradient */
+      url('/public/images/mobilebackground.jpg'); /* 5. Ana Resim */
+    
+    background-position: left center, right center, center, center, center center;
+    background-size: contain, contain, cover, cover, cover;
+    background-repeat: no-repeat; }
+  .card { max-width: 550px; }
 }

@@ -1,6 +1,6 @@
 /* ======================================================
    CONTAINER
-   ====================================================== */
+====================================================== */
 
 .container {
   width: 100%;
@@ -10,11 +10,13 @@
 
 /* ======================================================
    TABLE WRAPPER
-   ====================================================== */
+====================================================== */
 
 .tableWrapper {
   position: relative;
   width: 100%;
+  overflow-x: auto; /* taşma güvenliği */
+  border-radius: 12px;
 }
 
 /* Overlay loader */
@@ -24,14 +26,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(2px);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(3px);
   z-index: 5;
+  border-radius: 12px;
 }
 
 /* ======================================================
    TABLE - MOBILE FIRST
-   ====================================================== */
+====================================================== */
 
 .table {
   width: 100%;
@@ -40,14 +43,22 @@
   color: var(--font-color-white);
 }
 
-/* Mobilde başlık gizli */
+/* Mobile'da header gizli */
 .theadRow {
   display: none;
 }
 
+.th {
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 16px;
+  text-align: left;
+  color: var(--font-color-white);
+}
+
 /* ======================================================
    SORT BUTTON
-   ====================================================== */
+====================================================== */
 
 .controls {
   display: flex;
@@ -62,7 +73,7 @@
   font-size: 14px;
   cursor: pointer;
   font-weight: 500;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s ease;
 }
 
 .sortButton:hover {
@@ -71,7 +82,7 @@
 
 /* ======================================================
    LOADING / ERROR
-   ====================================================== */
+====================================================== */
 
 .loading,
 .error {
@@ -86,33 +97,80 @@
 
 /* ======================================================
    DESKTOP STYLES
-   ====================================================== */
+====================================================== */
 
 @media (min-width: 768px) {
   .container {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
   }
 
   .table {
-    margin-top: 69px;
+    width: 100%;
+    table-layout: fixed; /* hizalama garantisi */
   }
 
   .theadRow {
     display: table-row;
-    background-color: #523b7e99;
+    background-color: rgba(82, 59, 126, 0.6);
+    backdrop-filter: blur(6px);
+    position: sticky;
+    top: 0;
+    z-index: 2;
   }
 
   .th {
     font-weight: 600;
-    font-size: 16px;
-    padding: 12px 24px;
+    font-size: 15px;
+    padding: 14px 20px;
     text-align: center;
-    color: var(--font-color-white);
+    white-space: nowrap;
   }
 
   .th:first-child {
-    text-align: left;
+    text-align: center;
+  }
+
+  /* Kolon genişlikleri - body ile hizalı */
+  .th:nth-child(1),
+  .td:nth-child(1) {
+    width: 15%;
+    text-align: center;
+  } /* Date */
+
+  .th:nth-child(2),
+  .td:nth-child(2) {
+    width: 8%;
+    text-align: center;
+  } /* Type */
+
+  .th:nth-child(3),
+  .td:nth-child(3) {
+    width: 17%;
+    text-align: center;
+  } /* Category */
+
+  .th:nth-child(4),
+  .td:nth-child(4) {
+    width: 18%;
+    text-align: center;
+  } /* Comment */
+
+  .th:nth-child(5),
+  .td:nth-child(5) {
+    width: 22%;
+    text-align: center;
+  } /* Amount */
+
+  .th:nth-child(6),
+  .td:nth-child(6) {
+    width: 20%;
+    text-align: center;
+  } /* Actions */
+
+  .th,
+  .td {
+    font-size: 14px;
   }
 
   .controls {
@@ -120,6 +178,11 @@
     margin-top: 40px;
   }
 }
+
+/* ======================================================
+   AMOUNT COLOR STATES
+====================================================== */
+
 .amount-income {
   color: var(--color-accent-teal);
   font-weight: 600;

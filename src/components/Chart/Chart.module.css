@@ -3,7 +3,7 @@
   font-weight: 400;
   font-size: 30px;
   color: white;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .box {
@@ -16,7 +16,7 @@
   font-size: 30px;
   color: white;
   position: absolute;
-  top: 180px;
+  top: 156px;
   left: 50px;
   height: 32px;
   width: 180px;
