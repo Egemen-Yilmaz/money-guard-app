@@ -6,6 +6,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { toastError, toastSuccess } from '../../utils/toast'; 
 import { register as registerAction } from './authOperations';
 import PasswordStrengthBar from 'react-password-strength-bar-with-style-item'; 
+import Icon from '../../components/Icon/Icon';
 import styles from './RegisterForm.module.css';
 
 // Doğrulama Şeması (Yup)
@@ -71,52 +72,55 @@ export default function RegisterForm() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <h2 className={styles.logo}>Money Guard</h2>
+      <div className={styles.logoContainer}>
+  <Icon name="icon-icon-logo" className={styles.logoIcon} />
+  <h2 className={styles.logoText}>Money Guard</h2>
+</div>
 
       {/* Name Alanı */}
       <div className={styles.inputWrapper}>
-        <span className={styles.icon}>👤</span>
-        <input 
-          className={styles.input} 
-          placeholder="Name" 
-          {...register('name')} 
-        />
-      </div>
+  <Icon name="icon-icon-user" className={styles.inputIcon} />
+  <input 
+    className={styles.input} 
+    placeholder="Name" 
+    {...register('name')} 
+  />
+</div>
       {errors.name && <p className={styles.errorText}>{errors.name.message}</p>}
 
       {/* Email Alanı */}
       <div className={styles.inputWrapper}>
-        <span className={styles.icon}>✉️</span>
-        <input 
-          className={styles.input} 
-          placeholder="E-mail" 
-          {...register('email')} 
-        />
-      </div>
+  <Icon name="icon-icon-email" className={styles.inputIcon} />
+  <input 
+    className={styles.input} 
+    placeholder="E-mail" 
+    {...register('email')} 
+  />
+</div>
       {errors.email && <p className={styles.errorText}>{errors.email.message}</p>}
 
       {/* Şifre Alanı */}
       <div className={styles.inputWrapper}>
-        <span className={styles.icon}>🔒</span>
-        <input 
-          type="password" 
-          className={styles.input} 
-          placeholder="Password" 
-          {...register('password')} 
-        />
-      </div>
+  <Icon name="icon-icon-lock" className={styles.inputIcon} />
+  <input 
+    type="password" 
+    className={styles.input} 
+    placeholder="Password" 
+    {...register('password')} 
+  />
+</div>
       {errors.password && <p className={styles.errorText}>{errors.password.message}</p>}
 
       {/* Şifre Tekrar Alanı */}
       <div className={styles.inputWrapper}>
-        <span className={styles.icon}>🔒</span>
-        <input 
-          type="password" 
-          className={styles.input} 
-          placeholder="Confirm password" 
-          {...register('confirmPassword')} 
-        />
-      </div>
+  <Icon name="icon-icon-lock" className={styles.inputIcon} />
+  <input 
+    type="password" 
+    className={styles.input} 
+    placeholder="Confirm password" 
+    {...register('confirmPassword')} 
+  />
+</div>
       {errors.confirmPassword && <p className={styles.errorText}>{errors.confirmPassword.message}</p>}
 
       {/* 2. Kütüphane ile Dinamik Şifre Gücü Çubuğu */}

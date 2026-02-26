@@ -18,6 +18,7 @@
 /* Sol Taraf: Logo ve İsim */
 .logoContainer {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: clamp(6px, 2vw, 10px);
   min-width: 0;
@@ -83,8 +84,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   
   /* Görseldeki gibi koyu mor degrade */
   background: linear-gradient(135deg, #3a235c 0%, #5b3a85 100%);
@@ -95,10 +96,11 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
-  z-index: 1000; /* En üstte görünsün */
+  z-index: 9999; /* En üstte görünsün */
 
   /* Hafif bir bulanıklık efekti (isteğe bağlı, görselde var gibi) */
   backdrop-filter: blur(5px);
+  overflow: hidden;
 }
 
 /* "Are you sure..." metni */
