@@ -2,12 +2,16 @@
 .tr {
   display: block;
   background: var(--color-bg-glass, rgba(255, 255, 255, 0.05));
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   border-radius: 10px;
-  padding: 12px 20px;
+  padding: 14px 16px;
   position: relative;
   overflow: hidden;
   border-left: 5px solid var(--color-accent-coral, #ff868d);
+  max-width: 308px; /* ← ekle */
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .income {
@@ -24,8 +28,11 @@
   align-items: center;
   justify-content: space-between;
   /* space label and value on mobile */
-  padding: 6px 0;
-  font-size: 14px;
+  width: 100%; /* ← ekle */
+  box-sizing: border-box; /* ← ekle */
+  padding: 8px 0;
+  gap: 12px;
+  font-size: 16px;
   color: var(--color-main-text, #fbfbfb);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -56,11 +63,14 @@
 
 .type {
   font-weight: 600;
-  display: inline-block;
 }
 
 .comment {
   font-size: 14px;
+
+  white-space: pre-wrap; /* ← önemli */
+  word-break: break-word; /* ← önemli */
+  hyphens: auto;
 }
 
 .sum {

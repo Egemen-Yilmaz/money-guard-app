@@ -17,6 +17,7 @@
   width: 100%;
   overflow-x: auto; /* taşma güvenliği */
   border-radius: 12px;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Overlay loader */
