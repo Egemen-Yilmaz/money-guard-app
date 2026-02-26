@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { toastError, toastSuccess } from '../../utils/toast'; 
 import { register as registerAction } from './authOperations';
-import ProgressBar from '../../components/ProgressBar/ProgressBar';
+import PasswordStrengthBar from 'react-password-strength-bar';
 import Icon from '../../components/Icon/Icon';
 import styles from './RegisterForm.module.css';
 
@@ -35,10 +35,9 @@ export default function RegisterForm() {
     formState: { errors, isSubmitting },
   } = useForm({ resolver: yupResolver(schema) });
 
-  // Şifre alanlarını izliyoruz (ProgressBar için)
+  // Şifre alanını izliyoruz (PasswordStrengthBar için)
   // eslint-disable-next-line react-hooks/incompatible-library
   const passwordValue = watch('password', '');
-  const confirmPasswordValue = watch('confirmPassword', '');
 
   const onSubmit = async (data) => {
     try {
@@ -124,8 +123,13 @@ export default function RegisterForm() {
 </div>
       {errors.confirmPassword && <p className={styles.errorText}>{errors.confirmPassword.message}</p>}
 
-      {/* ProgressBar: Şifre eşleşme göstergesi */}
-      <ProgressBar password={passwordValue} confirmPassword={confirmPasswordValue} />
+      {/* Password Strength Bar */}
+      <PasswordStrengthBar 
+        password={passwordValue}
+        minLength={6}
+        scoreWords={['Weak', 'Okay', 'Good', 'Strong', 'Very Strong']}
+        shortScoreWord="Too short"
+      />
 
       {/* Register Butonu */}
       <button 

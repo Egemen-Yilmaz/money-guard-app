@@ -41,6 +41,7 @@
   width: 280px;
   border-width: 1px;
   gap: 24px;
+  margin: 0 auto; /* Mobilede ortalama */
 }
 
 .list {
