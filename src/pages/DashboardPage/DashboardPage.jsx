@@ -33,11 +33,16 @@ const DashboardPage = () => {
           <div className={css.balanceSection}>
             <Balance />
           </div>
-          {/* Currency Panel - inside sidebar on desktop, separate on tablet */}
+        </aside>
+
+        {/* Tablet için Currency ayrı bir blokta */}
+        <div className={css.currencyTabletWrapper}>
+          {" "}
+          {/* yeni wrapper class */}
           <div className={css.currencySection}>
             <CurrencyTab />
           </div>
-        </aside>
+        </div>
 
         {/* Transactions / main content */}
         <main className={css.main}>

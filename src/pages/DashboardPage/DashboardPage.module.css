@@ -133,7 +133,7 @@
     position: absolute;
     top: 16px; /* yukarıdan boşluk */
     bottom: 6px; /* aşağıdan boşluk */
-    right: -25px; /* sağdan 2-3px içeride */
+    right: -15px; /* sağdan 2-3px içeride */
     width: 1px; /* çizgi kalınlığı */
     background: rgba(255, 255, 255, 0.15);
   }
@@ -192,16 +192,8 @@
   }
 
   .leftSidebar {
-    display: grid;
-    grid-template-rows: auto auto auto; /* nav / balance / currency */
-    grid-row-gap: clamp(16px, 2vw, 24px); /* makul boşluk */
     width: 100%;
-    padding: 0;
-    background: transparent;
-    border-radius: 0;
-    padding: 0;
-    padding-right: clamp(20px, 3vw, 32px);
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 100%;
     position: sticky;
     top: 0; /* sticky navbar üstten başlasın */
     height: fit-content;
@@ -209,6 +201,17 @@
     flex-direction: column;
     gap: 0;
     min-width: 0;
+  }
+
+  .leftSidebar::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -30px; /* ← çizgiyi sağa itme miktarı (negatif = sola, pozitif = sağa) */
+    width: 1px;
+    background: rgba(255, 255, 255, 0.2); /* istediğin renk / opaklık */
+    z-index: 1;
   }
 
   .navSection {
@@ -235,7 +238,6 @@
     width: 100%;
     background: transparent;
     border-radius: 0;
-    padding: 0;
     position: static;
     height: auto;
     min-width: 0;
