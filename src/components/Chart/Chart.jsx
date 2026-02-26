@@ -9,8 +9,8 @@ import {
 import { Doughnut } from "react-chartjs-2";
 import css from "./Chart.module.css";
 import { useSelector } from "react-redux";
-
 import { colorSelect } from "../../utils/colorSelect";
+import { useEffect } from "react";
 
 ChartJS.register(CategoryScale, LinearScale, ArcElement, Tooltip, Legend);
 
@@ -18,6 +18,11 @@ function Chart() {
   const transactionsSummaryData = useSelector(
     (state) => state.transactions.transactionsSummary,
   );
+
+  const items = useSelector((state) => state.transactions?.items);
+  useEffect(() => {
+    console.log(items);
+  }, []);
 
   const hasData = transactionsSummaryData.expenseSummary < 0;
 

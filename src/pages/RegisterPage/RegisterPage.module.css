@@ -4,52 +4,52 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background-image: 
-    url('/public/images/mobilebackground.png');
+  background: linear-gradient(to bottom, #1a1235 0%, #2e1f5e 100%);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  overflow: hidden;
+  position: relative;
 }
 
 .card {
   width: 90%;
   max-width: 450px;
-  border-radius: 16px; /* Köşeleri biraz daha yuvarlatalım */
-  padding: 40px 32px; /* İç boşluğu artıralım */
+  border-radius: 16px;
+  padding: 40px 32px;
   color: #ffffff; 
+  z-index: 2;
+  position: relative;
 }
 
-/* 💊 2. TABLET VE 💻 3. MASAÜSTÜ TASARIMLARI (Aynı kalabilir) */
+/* 💊 2. TABLET VE 💻 3. MASAÜSTÜ TASARIMLARI */
 @media screen and (min-width: 768px) {
-  .wrapper { padding: 40px;
-      background-image:
-      url('/public/images/dolartablet.png'),
-      linear-gradient(45deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%), /* 2. Sol Alt Gradient */
-      linear-gradient(225deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%),
-      url('/public/images/mobilebackground.png');
-      
-    background-position: center center, center, center, center center;
-    background-size: cover, cover, cover, cover;
-    background-repeat: no-repeat; }
-  .card { max-width: 500px; 
-  padding: 40px 20px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);}
+  .wrapper { 
+    padding: 40px;
+    background: linear-gradient(to bottom, #1a1235 0%, #2e1f5e 100%);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  .card { 
+    max-width: 500px; 
+    padding: 40px 20px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  }
 }
 
 @media screen and (min-width: 1280px) {
-  .wrapper { padding: 60px;
-  background-image: 
-      url('/public/images/dolardesktop1.png'), /* 1. Sol Para */
-      url('/public/images/dolardestop2.png'), /* 2. Sağ Para */
-      linear-gradient(45deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%), /* 3. Sol Alt Gradient */
-      linear-gradient(225deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%), /* 4. Sağ Üst Gradient */
-      url('/public/images/mobilebackground.png'); /* 5. Ana Resim */
-    
-    background-position: left center, right center, center, center, center center;
-    background-size: contain, contain, cover, cover, cover;
-    background-repeat: no-repeat; }
-  .card { max-width: 550px; }
+  .wrapper { 
+    padding: 60px;
+    background: linear-gradient(to bottom, #1a1235 0%, #2e1f5e 100%);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+  .card { 
+    max-width: 550px; 
+  }
 }
