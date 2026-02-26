@@ -7,16 +7,16 @@
   padding: 12px 20px;
   position: relative;
   overflow: hidden;
-  border-left: 5px solid var(--color-accent-coral, #FF868D);
+  border-left: 5px solid var(--color-accent-coral, #ff868d);
 }
 
 .income {
-  border-left-color: var(--color-accent-teal, #FFB627);
+  border-left-color: var(--color-accent-teal, #ffb627);
   /* using yellow-teal fallback for income based on generic money guards */
 }
 
 .expense {
-  border-left-color: var(--color-accent-coral, #FF868D);
+  border-left-color: var(--color-accent-coral, #ff868d);
 }
 
 .td {
@@ -26,7 +26,7 @@
   /* space label and value on mobile */
   padding: 6px 0;
   font-size: 14px;
-  color: var(--color-main-text, #FBFBFB);
+  color: var(--color-main-text, #fbfbfb);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -37,7 +37,7 @@
 .mobileLabel {
   display: inline-block;
   font-weight: 600;
-  color: var(--color-main-text, #FBFBFB);
+  color: var(--color-main-text, #fbfbfb);
   font-size: 14px;
 }
 
@@ -69,19 +69,19 @@
 }
 
 .typeIncome {
-  color: var(--color-accent-teal, #FFB627);
+  color: var(--color-accent-teal, #ffb627);
 }
 
 .sumIncome {
-  color: var(--color-accent-teal, #FFB627);
+  color: var(--color-accent-teal, #ffb627);
 }
 
 .typeExpense {
-  color: var(--color-accent-coral, #FF868D);
+  color: var(--color-accent-coral, #ff868d);
 }
 
 .sumExpense {
-  color: var(--color-accent-coral, #FF868D);
+  color: var(--color-accent-coral, #ff868d);
 }
 
 .actions {
@@ -114,7 +114,7 @@
 }
 
 .deleteButton {
-  background: linear-gradient(135deg, #FFC727 0%, #9E40BA 61%, #7000FF 91%);
+  background: linear-gradient(135deg, #ffc727 0%, #9e40ba 61%, #7000ff 91%);
   color: white;
   border-radius: 20px;
   padding: 6px 16px;
@@ -133,83 +133,50 @@
 /* Tablet & Desktop: table row layout - RESPONSIVE */
 @media (min-width: 768px) {
   .tr {
-    display: grid;
-    /* düzeltme yapılmıştır (kutluhan) kolon yapısı tasarıma göre sabitlendi (tablet) */
-    grid-template-columns: 100px 60px 140px 180px 1fr;
-    padding: 12px 16px;
-    align-items: center;
+    display: table-row;
     background: transparent;
-    margin: 0;
-    border-radius: 0;
-    border-left: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    position: relative;
-    overflow-x: hidden;
-    overflow-y: hidden;
-  }
-
-  .tr:hover {
-    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   }
 
   .td {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    display: table-cell;
+    padding: 14px 20px;
     border-bottom: none;
-    padding: 0;
-    font-size: 14px;
-    color: var(--color-main-text, #FBFBFB);
-    overflow: hidden;
-    text-overflow: ellipsis;
+    vertical-align: middle;
     white-space: nowrap;
-    min-width: 0;
+    text-align: center;
   }
-
+  .td.date,
+  .td.type,
+  .td.category,
+  .td.comment,
+  .td.sum,
+  .td.actionsCell {
+    text-align: center;
+  }
   .mobileLabel {
     display: none;
   }
 
-  .date,
-  .type,
-  .comment {
-    font-weight: 400;
-  }
-
-  /* Desktop sum is bold and strictly right aligned except when next to edit/delete */
-  .sum {
-    font-weight: 700;
-  }
-
-  .comment {
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.7);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    min-width: 0;
-  }
-
-  .sum {
-    justify-content: flex-end;
-    font-size: 13px;
-    font-weight: 700;
-    width: 100%;
-    overflow: visible;
-  }
-
   .sumContent {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    width: 100%;
+    align-items: center;
+  }
+
+  .actionsCell {
+    text-align: center;
   }
 
   .actions {
-    margin-top: 0;
-    justify-content: flex-end;
-    gap: 16px;
-    flex-wrap: nowrap;
+    display: flex;
+    flex-direction: row; /* ALT ALTA */
+    align-items: flex-end;
+  }
+
+  .sum {
+    text-align: right;
+    font-weight: 700;
   }
 }
 

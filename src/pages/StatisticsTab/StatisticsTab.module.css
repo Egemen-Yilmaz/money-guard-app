@@ -36,8 +36,12 @@
 }
 
 .area {
+  display: flex;
+  flex-direction: column;
   width: 280px;
   border-width: 1px;
+  gap: 24px;
+  margin: 0 auto; /* Mobilede ortalama */
 }
 
 .list {
@@ -81,6 +85,8 @@
   }
 
   .area {
+    display: flex;
+    flex-direction: row;
     width: 336px;
   }
 }

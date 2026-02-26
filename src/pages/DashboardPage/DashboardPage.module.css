@@ -222,8 +222,7 @@
     background: rgba(255, 255, 255, 0.02);
     border-radius: 12px;
     padding: clamp(16px, 2vw, 24px);
-    position: relative;
-    top: -390px;
+    position: static;
     height: auto;
     min-width: 0;
     grid-area: unset;

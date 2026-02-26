@@ -9,17 +9,21 @@
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  overflow: hidden;
+  position: relative;
 }
 
 .card {
   width: 90%;
   max-width: 450px;
-  border-radius: 16px; /* Köşeleri biraz daha yuvarlatalım */
-  padding: 40px 32px; /* İç boşluğu artıralım */
+  border-radius: 16px;
+  padding: 40px 32px;
   color: #ffffff; 
+  z-index: 2;
+  position: relative;
 }
 
-/* 💊 2. TABLET VE 💻 3. MASAÜSTÜ TASARIMLARI (Aynı kalabilir) */
+/* 💊 2. TABLET VE 💻 3. MASAÜSTÜ TASARIMLARI */
 @media screen and (min-width: 768px) {
   .wrapper { padding: 40px;
       background-image:

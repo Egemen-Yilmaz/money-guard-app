@@ -5,6 +5,7 @@ import {
   updateTransaction,
   fetchTransactionCategories,
   deleteTransaction,
+  transactionsSummary,
 } from './operations';
 
 const initialState = {
@@ -35,10 +36,10 @@ const handleRejected = (state, action) => {
 };
 
 const transactionsSlice = createSlice({
-  name: 'transactions',
+  name: "transactions",
   initialState,
   reducers: {
-    changeDate(state, action) {
+    changeDate: (state, action) => {
       state.date = action.payload;
     },
     toggleModal(state) {
@@ -68,7 +69,9 @@ const transactionsSlice = createSlice({
       .addCase(updateTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const index = state.items.findIndex((item) => item.id === action.payload.id);
+        const index = state.items.findIndex(
+          (item) => item.id === action.payload.id,
+        );
         if (index !== -1) {
           state.items[index] = action.payload;
         }
@@ -89,7 +92,12 @@ const transactionsSlice = createSlice({
         state.error = null;
         state.categories = action.payload;
       })
-      .addCase(fetchTransactionCategories.rejected, handleRejected);
+      .addCase(fetchTransactionCategories.rejected, handleRejected)
+      .addCase(transactionsSummary.pending, handlePending)
+      .addCase(transactionsSummary.fulfilled, (state, action) => {
+        state.transactionsSummary = action.payload;
+      })
+      .addCase(transactionsSummary.rejected, handleRejected);
   },
 });
 
