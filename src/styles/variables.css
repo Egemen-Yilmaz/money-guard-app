@@ -1,21 +1,30 @@
 :root {
-  /* Renkler */
-  --color-bg-main: #24175a; /* Koyu mor arka plan */
-  --color-accent-pink: #ff4062; /* Gider rengi */
-  --color-accent-yellow: #ffb627; /* Gelir rengi */
-  --color-white: #ffffff;
-  --color-white-60: rgba(255, 255, 255, 0.6); /* Yarı saydam metinler */
-  --color-glass-bg: rgba(255, 255, 255, 0.1); /* Glassmorphism arka planı */
-  
-  /* Gölgeler ve Blur */
-  --blur-glass: blur(25px);
+  /* Colors */
+  --color-main-text: #FFFFFF;
+  --color-accent-green: #34D399;
+  --color-accent-pink: #FF4062;
+  --color-accent-coral: #FF6B81;
+  --color-accent-teal: #2DD4BF;
+  --color-bg-main: #24175A;
+  --color-bg-glass: rgba(82, 59, 126, 0.3);
+  --color-card-bg: rgba(255, 255, 255, 0.08);
+  --color-white: #FFFFFF;
+  --color-white-60: rgba(255, 255, 255, 0.6);
+  --color-muted: rgba(255, 255, 255, 0.7);
+
+  /* Shadows and Blur */
+  --blur-glass: blur(6px);
   --shadow-main: 0px 4px 60px rgba(0, 0, 0, 0.25);
 
-  /* Yazı Tipleri */
+  /* Typography */
   --font-main: 'Poppins', sans-serif;
+  --font-logo: 'Seymour One', 'Poppins', sans-serif;
 
-  /* Font Ağırlıkları */
+  /* Font Weights */
   --weight-regular: 400;
   --weight-semi-bold: 600;
   --weight-bold: 700;
+  
+  /* Layout */
+  --container-width: 1280px;
 }

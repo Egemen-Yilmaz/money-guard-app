@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleModal } from "../../../features/transactions/transactionsSlice";
+import { toggleModal } from "../../../redux/transactions/slice";
 import css from "./NoTransactions.module.css";
 
 const NoTransactions = () => {
@@ -11,9 +11,8 @@ const NoTransactions = () => {
 
   return (
     <section
-      className={`${css.noTransactionsContainer} ${
-        isModalOpen ? css.inactive : ""
-      }`}
+      className={`${css.noTransactionsContainer} ${isModalOpen ? css.inactive : ""
+        }`}
       aria-live="polite"
     >
       <div className={css.inner}>

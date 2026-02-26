@@ -34,34 +34,42 @@ const EditTransactionForm = ({ transaction, onClose }) => {
     } = useForm({
         resolver: yupResolver(schema),
         defaultValues: {
-            amount: transaction?.amount || '',
-            date: transaction?.date ? new Date(transaction.date) : new Date(),
+            amount: transaction?.amount !== undefined ? Math.abs(transaction.amount) : '',
+            date: transaction?.transactionDate ? new Date(transaction.transactionDate) : (transaction?.date ? new Date(transaction.date) : new Date()),
             comment: transaction?.comment || '',
         },
     });
 
     const onSubmit = async (data) => {
         try {
-            // Backend'in beklediği formata uygun olarak tarihi ISO formatına çeviriyoruz
+            const isIncome = transaction?.type && transaction.type.toLowerCase() === 'income';
+
+            // Backend-friendly formatting:
+            const localDateStr = new Date(data.date.getTime() - (data.date.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+
             const payload = {
                 id: transaction.id,
-                ...data,
-                date: data.date.toISOString(),
+                transactionDate: localDateStr,
+                type: isIncome ? 'INCOME' : 'EXPENSE',
+                categoryId: transaction.categoryId || transaction.category?.id || "063f1132-ba5d-42b4-951d-44011ca46262",
+                comment: data.comment,
+                amount: isIncome ? Math.abs(data.amount) : -Math.abs(data.amount)
             };
+
             await dispatch(updateTransaction(payload)).unwrap();
 
             toastSuccess('Transaction updated successfully!');
             dispatch(fetchTransactions());
             dispatch(refreshCurrentUser());
 
-            onClose(); // Liste Redux update'i gelince otomatik güncellenecek
+            onClose();
         } catch (error) {
             console.error('Failed to update transaction:', error);
             toastError(error?.message || 'Error updating transaction');
         }
     };
 
-    const isIncome = transaction?.type === 'income';
+    const isIncome = transaction?.type && transaction.type.toLowerCase() === 'income';
 
     return (
         <div className={styles.container}>

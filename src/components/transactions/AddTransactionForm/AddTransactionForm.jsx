@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -38,6 +38,7 @@ const DEFAULT_CATEGORIES = [
 // Eğer slice yapısı değişirse sadece bu dosyadaki selector'ı güncellemek yeterli.
 const AddTransactionForm = ({ onClose }) => {
     const dispatch = useDispatch();
+    const categories = useSelector((state) => state.transactions?.categories || []);
     const [isExpense, setIsExpense] = useState(true);
 
     const {
@@ -68,8 +69,22 @@ const AddTransactionForm = ({ onClose }) => {
 
     const onSubmit = async (data) => {
         try {
-            // Backend'in beklediği formata uygun olarak tarihi ISO formatına çeviriyoruz
-            const payload = { ...data, date: data.date.toISOString() };
+            // Find the categoryId securely from Redux
+            const selectedCategoryObj = categories.find(c => c.name === data.category);
+            const finalCategoryId = selectedCategoryObj ? selectedCategoryObj.id : "063f1132-ba5d-42b4-951d-44011ca46262"; // Fallback to "Other" or default string if needed
+
+            // Backend mapping fix
+            const isExp = data.type === 'expense';
+            const localDateStr = new Date(data.date.getTime() - (data.date.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+
+            const payload = {
+                transactionDate: localDateStr,
+                type: isExp ? 'EXPENSE' : 'INCOME',
+                categoryId: isExp ? finalCategoryId : "063f1132-ba5d-42b4-951d-44011ca46262", // Default income category "063f..." based on standard money-guard schema
+                comment: data.comment,
+                amount: isExp ? -Math.abs(data.amount) : Math.abs(data.amount)
+            };
+
             await dispatch(addTransaction(payload)).unwrap();
 
             toastSuccess('Transaction added successfully!');
@@ -110,7 +125,7 @@ const AddTransactionForm = ({ onClose }) => {
                                 <CustomSelect
                                     value={field.value}
                                     onChange={field.onChange}
-                                    options={DEFAULT_CATEGORIES}
+                                    options={categories.length > 0 ? categories.map(c => c.name) : DEFAULT_CATEGORIES}
                                     placeholder="Select a category"
                                 />
                             )}

@@ -1,12 +1,15 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { FiEdit2 } from "react-icons/fi";
 import css from "./TransactionsItem.module.css";
-// kalem ikonu eklenecek
+import { toggleModal } from "../../../redux/transactions/slice";
 
 const TransactionsItem = ({ transaction, onDelete, onEdit }) => {
+  const dispatch = useDispatch();
+
   const handleEdit = () => {
+    // Pass transaction details upstream or to redux to populate edit modal
     if (typeof onEdit === 'function') return onEdit(transaction);
-    console.log("Edit clicked:", transaction.id);
-    alert("Düzenleme modalı açılacak (Kutluhan'ın görevi)");
   };
 
   const handleDelete = () => {
@@ -14,18 +17,13 @@ const TransactionsItem = ({ transaction, onDelete, onEdit }) => {
       if (window.confirm('Bu işlemi kalıcı olarak silmek istediğinize emin misiniz?')) {
         return onDelete(transaction.id);
       }
-      return;
-    }
-
-    if (
-      window.confirm(
-        "Bu işlemi kalıcı olarak silmek istediğinize emin misiniz?",
-      )
-    ) {
-      console.log("Delete confirmed:", transaction.id);
-      alert("Silindi (placeholder - gerçek silme Kutluhan'da)");
     }
   };
+
+  const categories = useSelector((state) => state.transactions?.categories || []);
+  const categoryId = transaction.categoryId || transaction.category?.id;
+  const categoryObj = categories.find(c => c.id === categoryId) || categories.find(c => c.name === transaction.category);
+  const categoryName = categoryObj ? categoryObj.name : (transaction.category || "-");
 
   const formattedDate = transaction.transactionDate
     ? new Date(transaction.transactionDate).toLocaleDateString("tr-TR")
@@ -36,9 +34,8 @@ const TransactionsItem = ({ transaction, onDelete, onEdit }) => {
 
   return (
     <tr
-      className={`${css.tr} ${
-        typeLower === "income" ? css.income : css.expense
-      }`}
+      className={`${css.tr} ${typeLower === "income" ? css.income : css.expense
+        }`}
     >
       <td className={`${css.td} ${css.date}`}>
         <span className={css.mobileLabel}>Date:</span>
@@ -46,9 +43,8 @@ const TransactionsItem = ({ transaction, onDelete, onEdit }) => {
       </td>
 
       <td
-        className={`${css.td} ${css.type} ${
-          typeLower === "income" ? css.typeIncome : css.typeExpense
-        }`}
+        className={`${css.td} ${css.type} ${typeLower === "income" ? css.typeIncome : css.typeExpense
+          }`}
       >
         <span className={css.mobileLabel}>Type:</span>
         {typeLower === "income" ? "+" : "-"}
@@ -56,7 +52,7 @@ const TransactionsItem = ({ transaction, onDelete, onEdit }) => {
 
       <td className={css.td}>
         <span className={css.mobileLabel}>Category:</span>
-        {typeLower === "expense" ? transaction.category || "-" : null}
+        {typeLower === "expense" ? categoryName : null}
         {typeLower === "income" && (
           <div className={css.incomeLabel}>Income</div>
         )}
@@ -68,29 +64,30 @@ const TransactionsItem = ({ transaction, onDelete, onEdit }) => {
       </td>
 
       <td
-        className={`${css.td} ${css.sum} ${
-          typeLower === "income" ? css.sumIncome : css.sumExpense
-        }`}
+        className={`${css.td} ${css.sum} ${typeLower === "income" ? css.sumIncome : css.sumExpense
+          }`}
       >
         <span className={css.mobileLabel}>Sum:</span>
-        {Math.abs(amount).toLocaleString("tr-TR", {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}
-      </td>
+        <div className={css.sumContent}>
+          <span>
+            {Math.abs(amount).toLocaleString("tr-TR", {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
+          </span>
+          <div className={css.actions}>
+            <button className={css.iconButton} onClick={handleEdit}>
+              <FiEdit2 size={16} />
+            </button>
 
-      <td className={`${css.td} ${css.actions}`}>
-        <button className={css.iconButton} onClick={handleEdit}>
-          {/* <img src={editIcon} alt="Edit" /> */}
-          <span className={css.editLabel}>Edit</span>
-        </button>
-
-        <button
-          className={`form-button ${css.deleteButton}`}
-          onClick={handleDelete}
-        >
-          Delete
-        </button>
+            <button
+              className={css.deleteButton}
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
+          </div>
+        </div>
       </td>
     </tr>
   );

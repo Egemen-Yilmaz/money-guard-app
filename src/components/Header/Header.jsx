@@ -3,8 +3,10 @@ import { logout } from '../../features/auth/authOperations';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toastError } from '../../utils/toast';
+import { createPortal } from 'react-dom';
+import Icon from '../Icon/Icon';
 import styles from './Header.module.css';
- 
+
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -29,10 +31,9 @@ export default function Header() {
     <header className={styles.header}>
       {/* Logo ve Marka İsmi */}
       <div className={styles.logoContainer}>
-        <div className={styles.logoIcon} style={{ width: '28px', height: '28px', background: '#e0c35c', mask: 'url(#logo-mask)', WebkitMask: 'url(#logo-mask)' }}>
-           {/* SVG logonuzu buraya yerleştirebilirsiniz */}
-           <span style={{ fontSize: '24px' }}>🛡️</span>
-        </div>
+        <div className={styles.logoIcon}>
+  <Icon name="icon-icon-logo" width={28} height={28} />
+</div>
         <h2 className={styles.logoText}>Money Guard</h2>
       </div>
 
@@ -40,32 +41,18 @@ export default function Header() {
       <div className={styles.userSection}>
         <span className={styles.userName}>{username}</span>
         
-        <button 
+<button 
   onClick={() => setOpen(true)}
   className={styles.exitButton}
   aria-label="Exit"
 >
-  <svg 
-    width="18" 
-    height="18" 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
-    strokeLinejoin="round"
-  >
-    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-    <polyline points="16 17 21 12 16 7"></polyline>
-    <line x1="21" y1="12" x2="9" y2="12"></line>
-  </svg>
-
+  <Icon name="icon-icon-exit" width={24} height={24} />
   <span className={styles.exitText}>Exit</span>
 </button>
       </div>
 
       {/* Çıkış Onay Modalı */}
-     {open && (
+     {open && createPortal(
         <div className={styles.modalOverlay}>
           <h2 className={styles.modalTitle}>
             Are you sure you want to log out?
@@ -78,7 +65,8 @@ export default function Header() {
               CANCEL
             </button>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </header>
   );

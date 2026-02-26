@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
 }
 
 .logo {
@@ -76,4 +77,26 @@
   height: 100%;
   width: 40%;
   background: linear-gradient(90deg, orange, yellow);
+}
+
+.logoContainer {
+  display: flex;
+  flex-direction: column;   /* 👈 logo üstte yazı altta */
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.logoIcon {
+  width: 40px;
+  height: 40px;
+  color: #e0c35c; /* altın rengi */
+}
+
+.logoText {
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
 }

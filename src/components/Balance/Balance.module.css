@@ -1,31 +1,37 @@
-.balanceContainer {
-  padding: 16px 20px;
-  width: 300px;
+/* Mobile-first: centered balance card */
+.balanceContainer,
+.balanceCard {
+  background: var(--color-bg-glass);
+  border-radius: 30px;
+  padding: clamp(12px, 3vw, 16px) clamp(24px, 8vw, 40px);
+  width: 100%;
+  max-width: 280px;
   min-height: 100px;
-  background: rgba(82, 59, 126, 0.6);
-  box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 12px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  margin: 0 auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .title {
   margin: 0;
-  font-size: 14px;
+  font-size: clamp(12px, 2vw, 14px);
   font-weight: 500;
   color: rgba(255, 255, 255, 0.85);
   letter-spacing: 0.3px;
+  text-align: center;
 }
 
 .value {
-  font-size: 28px;
+  font-size: clamp(24px, 6vw, 28px);
   font-weight: 600;
   color: #ffffff;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.5px;
+  text-align: center;
 }
 
 .positive {
@@ -36,7 +42,7 @@
   color: #f87171;
 }
 
-.isLoading {
+.loading {
   color: rgba(255, 255, 255, 0.7);
   font-size: 14px;
   font-style: italic;
@@ -44,29 +50,55 @@
   text-align: center;
 }
 
-/* Responsive */
+/* Tablet: sidebar width match */
 @media (min-width: 768px) {
   .balanceContainer {
-    width: 336px;
-    min-height: 100px;
-    padding: 18px 24px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .balanceContainer {
-    width: 480px;
-    background: rgba(82, 59, 126, 0.65);
-    box-shadow: 2px 12px 20px 0 rgba(0, 0, 0, 0.25);
-    border-radius: 16px;
-    padding: 24px 32px;
+    width: 100%;
+    max-width: none;
+    min-height: 120px;
+    padding: clamp(16px, 3vw, 20px) clamp(16px, 4vw, 24px);
+    margin: 16px 0 0 0;
+    border-radius: 12px;
+    background: rgba(82, 59, 126, 0.35);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   }
 
   .title {
-    font-size: 15px;
+    font-size: clamp(12px, 2vw, 13px);
+    font-weight: 500;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
   }
 
   .value {
-    font-size: 36px;
+    font-size: clamp(24px, 5vw, 32px);
+    font-weight: 700;
+    text-align: left;
+    margin-top: 6px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1280px) {
+  .balanceContainer {
+    width: 100%;
+    max-width: none;
+    background: rgba(82, 59, 126, 0.4);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    padding: clamp(20px, 4vw, 24px) clamp(20px, 5vw, 32px);
+    margin: 0;
+  }
+
+  .title {
+    font-size: clamp(13px, 2vw, 15px);
+    text-align: left;
+  }
+
+  .value {
+    font-size: clamp(28px, 5vw, 36px);
+    text-align: left;
   }
 }

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import css from "./Balance.module.css";
 
 const Balance = () => {
-  const totalBalance = useSelector((state) => state.finance?.totalBalance || 0);
+  const totalBalance = useSelector((state) => state.auth?.user?.balance || 0);
   const isLoading = useSelector((state) => state.global?.isLoading || false);
 
   if (isLoading) {

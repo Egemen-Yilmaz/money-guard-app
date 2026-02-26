@@ -1,16 +1,14 @@
-/* RegisterPage.module.css - HEDEF TASARIMA UYGUN GÜNCEL HALİ */
-
-/* 📱 1. MOBİL TASARIM (Varsayılan Düzen) */
 .wrapper {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  
-  /* HEDEF TASARIM: Koyu Mor Gradyan Arka Plan */
-  background: linear-gradient(135deg, #2e1a47 0%, #4a2c6d 100%);
-  /* Eğer arka planda para resimleri olacaksa buraya background-image eklenmeli */
+  background-image: 
+    url('/public/images/mobilebackground.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 .card {
@@ -18,31 +16,40 @@
   max-width: 450px;
   border-radius: 16px; /* Köşeleri biraz daha yuvarlatalım */
   padding: 40px 32px; /* İç boşluğu artıralım */
-  
-  /* HEDEF TASARIM: Koyu ve Şeffaf Kart Arka Planı */
-  background-color: rgba(255, 255, 255, 0.1); /* %10 beyaz şeffaflık */
-  
-  /* Kartın arkasını bulanıklaştırarak "buzlu cam" efekti verelim */
-  backdrop-filter: blur(10px); 
-  -webkit-backdrop-filter: blur(10px); /* Safari desteği için */
-  
-  /* Kartın sınırlarını belirginleştirmek için çok ince bir çerçeve */
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  
-  /* Daha yumuşak bir gölge */
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  
-  /* Kart içindeki tüm metinleri varsayılan olarak beyaz yapalım */
   color: #ffffff; 
 }
 
 /* 💊 2. TABLET VE 💻 3. MASAÜSTÜ TASARIMLARI (Aynı kalabilir) */
 @media screen and (min-width: 768px) {
-  .wrapper { padding: 40px; }
-  .card { max-width: 500px; }
+  .wrapper { padding: 40px;
+      background-image:
+      url('/public/images/dolartablet.png'),
+      linear-gradient(45deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%), /* 2. Sol Alt Gradient */
+      linear-gradient(225deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%),
+      url('/public/images/mobilebackground.png');
+      
+    background-position: center center, center, center, center center;
+    background-size: cover, cover, cover, cover;
+    background-repeat: no-repeat; }
+  .card { max-width: 500px; 
+  padding: 40px 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);}
 }
 
 @media screen and (min-width: 1280px) {
-  .wrapper { padding: 60px; }
+  .wrapper { padding: 60px;
+  background-image: 
+      url('/public/images/dolardesktop1.png'), /* 1. Sol Para */
+      url('/public/images/dolardestop2.png'), /* 2. Sağ Para */
+      linear-gradient(45deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%), /* 3. Sol Alt Gradient */
+      linear-gradient(225deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%), /* 4. Sağ Üst Gradient */
+      url('/public/images/mobilebackground.png'); /* 5. Ana Resim */
+    
+    background-position: left center, right center, center, center, center center;
+    background-size: contain, contain, cover, cover, cover;
+    background-repeat: no-repeat; }
   .card { max-width: 550px; }
 }

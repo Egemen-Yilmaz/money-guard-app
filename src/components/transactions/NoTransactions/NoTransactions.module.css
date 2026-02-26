@@ -46,7 +46,22 @@
 }
 
 .addButton {
-  margin: 0 auto;
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 30px;
+  border: none;
+  color: white;
+  font-weight: 600;
+  background: linear-gradient(90deg, #ffb347, #c471ed);
+  cursor: pointer;
+}
+
+.addButton:hover,
+.addButton:focus {
+  transform: scale(1.05);
+  background-size: 200%;
+  background-position: right center;
+  transition: all 1s ease 0s;
 }
 
 /* --- TABLET (>=768px) --- */

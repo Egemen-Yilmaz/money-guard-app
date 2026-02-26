@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { toastError, toastSuccess } from '../../utils/toast';
 import { login } from './authOperations';
+import Icon from '../../components/Icon/Icon';
 import styles from './LoginForm.module.css';
 
 // 1. Doğrulama Şeması (Yup)
@@ -51,30 +52,34 @@ export default function LoginForm() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <h2 className={styles.logo}>Money Guard</h2>
+      <div className={styles.logoContainer}>
+      {/* Sarı Logo İkonu */}
+      <Icon name="icon-icon-logo" width={32} height={32} /> 
+      <h2 className={styles.logoText}>Money Guard</h2>
+    </div>
 
       {/* Email Alanı */}
       <div className={styles.inputWrapper}>
-        <span className={styles.icon}>✉️</span>
-        <input 
-          className={styles.input} 
-          placeholder="E-mail" 
-          {...register('email')} 
-        />
-      </div>
+      <Icon name="icon-icon-email" width={24} height={24} className={styles.inputIcon} />
+      <input 
+        className={styles.input} 
+        placeholder="E-mail" 
+        {...register('email')} 
+      />
+    </div>
       {/* Yup'tan gelen Email hatası varsa göster (Geçersizse istek atılmaz) */}
       {errors.email && <p className={styles.errorText}>{errors.email.message}</p>}
 
       {/* Şifre Alanı */}
       <div className={styles.inputWrapper}>
-        <span className={styles.icon}>🔒</span>
-        <input 
-          type="password" 
-          className={styles.input} 
-          placeholder="Password" 
-          {...register('password')} 
-        />
-      </div>
+      <Icon name="icon-icon-lock" width={24} height={24} className={styles.inputIcon} />
+      <input 
+        type="password" 
+        className={styles.input} 
+        placeholder="Password" 
+        {...register('password')} 
+      />
+    </div>
       {/* Yup'tan gelen Password hatası varsa göster */}
       {errors.password && <p className={styles.errorText}>{errors.password.message}</p>}
 

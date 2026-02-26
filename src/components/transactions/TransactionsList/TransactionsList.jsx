@@ -1,27 +1,23 @@
-// src/components/transactions/TransactionsList.jsx
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TransactionsItem from "../TransactionsItem/TransactionsItem";
 import NoTransactions from "../NoTransactions/NoTransactions";
-import ButtonAddTransactions from "../ButtonAddTransactions/ButtonAddTransactions";
-import ModalAddTransaction from "../ModalAddTransaction/ModalAddTransaction";
-import { deleteTransaction, fetchTransactions } from "../../../redux/transactions/operations";
-import { refreshCurrentUser } from "../../../features/auth/authOperations";
-import { toastSuccess, toastError } from "../../../utils/toast";
+import ModalEditTransaction from "../ModalEditTransaction/ModalEditTransaction";
+import { deleteTransaction } from "../../../redux/transactions/operations";
 import css from "./TransactionsList.module.css";
 
 const TransactionsList = () => {
   const [sortOrder, setSortOrder] = useState("desc"); // "desc" = newest first
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
 
   const dispatch = useDispatch();
 
-  const items = useSelector((state) => state.transactions?.items);
-  const isLoading = useSelector((state) => state.transactions?.isLoading ?? false);
-  const error = useSelector((state) => state.transactions?.error ?? null);
-
-  const itemsList = items ?? [];
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const transactions = useSelector((state) => state.transactions?.items || []);
+  const isLoading = useSelector(
+    (state) => state.transactions?.loading || false,
+  );
+  const error = useSelector((state) => state.transactions?.error || null);
 
   if (error) {
     return <div className={css.error}>Error loading transactions: {error}</div>;
@@ -37,47 +33,55 @@ const TransactionsList = () => {
     );
   }
 
-  if (itemsList.length === 0) {
-    return <NoTransactions />;
-  }
-
-  // Filter out future transactions (include today)
-  const now = new Date();
-  const filteredTransactions = itemsList.filter((transaction) => {
-    const transDate = new Date(transaction.transactionDate || transaction.date);
-    return transDate.getTime() <= now.getTime();
-  });
-
   // Sort transactions by date
-  const sortedTransactions = [...filteredTransactions].sort((a, b) => {
-    const dateA = new Date(a.transactionDate || a.date);
-    const dateB = new Date(b.transactionDate || b.date);
+  const sortedTransactions = [...transactions].sort((a, b) => {
+    const dateA = new Date(a.transactionDate || a.date || 0);
+    const dateB = new Date(b.transactionDate || b.date || 0);
     return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
   });
 
-  const handleSortClick = () => {
+  const toggleSortOrder = () => {
     setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
   };
 
-  const handleDelete = async (id) => {
-    try {
-      await dispatch(deleteTransaction(id)).unwrap();
-      toastSuccess("Transaction deleted successfully!");
-      // Refresh transactions and user balance
-      dispatch(fetchTransactions());
-      dispatch(refreshCurrentUser());
-    } catch (err) {
-      console.error("Failed to delete transaction:", err);
-      toastError(err?.message || "Error deleting transaction");
+  const handleDelete = (id) => {
+    if (
+      !window.confirm(
+        "Are you sure you want to permanently delete this transaction?",
+      )
+    ) {
+      return;
     }
+    dispatch(deleteTransaction(id));
   };
+
+  const handleEditOpen = (transaction) => {
+    setSelectedTransaction(transaction);
+    setIsEditModalOpen(true);
+  };
+
+  const handleEditClose = () => {
+    setSelectedTransaction(null);
+    setIsEditModalOpen(false);
+  };
+
+  const handleSortClick = () => {
+    toggleSortOrder();
+  };
+
+  if (sortedTransactions.length === 0) {
+    return <NoTransactions />;
+  }
 
   return (
     <div className={css.tableContainer}>
-      <div className={css.controlsRow} style={{ display: 'flex', justifyContent: 'flex-end', padding: '8px' }}>
-        <ButtonAddTransactions onClick={() => setIsModalOpen(true)} />
-      </div>
-
+      {isEditModalOpen && selectedTransaction && (
+        <ModalEditTransaction
+          isOpen={isEditModalOpen}
+          onClose={handleEditClose}
+          transaction={selectedTransaction}
+        />
+      )}
       <div className={css.tableWrapper}>
         <table className={css.table}>
           <thead>
@@ -95,23 +99,24 @@ const TransactionsList = () => {
               <th className={css.th}>Type</th>
               <th className={css.th}>Category</th>
               <th className={css.th}>Comment</th>
-              <th className={css.th}>Sum</th>
-              <th className={`${css.th} ${css.thCenter}`}>Actions</th>
+              <th className={css.th}>Amount</th>
+              <th className={css.th}>Actions</th>
             </tr>
           </thead>
           <tbody>
             {sortedTransactions.map((transaction) => (
               <TransactionsItem
-                key={transaction.id}
+                key={transaction.id || transaction._id}
                 transaction={transaction}
-                onDelete={() => handleDelete(transaction.id)}
-                onEdit={() => alert('Edit not implemented yet')}
+                onDelete={() =>
+                  handleDelete(transaction.id || transaction._id)
+                }
+                onEdit={() => handleEditOpen(transaction)}
               />
             ))}
           </tbody>
         </table>
       </div>
-      <ModalAddTransaction isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 };

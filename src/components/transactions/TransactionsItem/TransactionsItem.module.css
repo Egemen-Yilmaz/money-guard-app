@@ -1,0 +1,228 @@
+/* Mobile-first: key-value card layout */
+.tr {
+  display: block;
+  background: var(--color-bg-glass, rgba(255, 255, 255, 0.05));
+  margin-bottom: 8px;
+  border-radius: 10px;
+  padding: 12px 20px;
+  position: relative;
+  overflow: hidden;
+  border-left: 5px solid var(--color-accent-coral, #FF868D);
+}
+
+.income {
+  border-left-color: var(--color-accent-teal, #FFB627);
+  /* using yellow-teal fallback for income based on generic money guards */
+}
+
+.expense {
+  border-left-color: var(--color-accent-coral, #FF868D);
+}
+
+.td {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* space label and value on mobile */
+  padding: 6px 0;
+  font-size: 14px;
+  color: var(--color-main-text, #FBFBFB);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.td:last-child {
+  border-bottom: none;
+}
+
+.mobileLabel {
+  display: inline-block;
+  font-weight: 600;
+  color: var(--color-main-text, #FBFBFB);
+  font-size: 14px;
+}
+
+.mobileLabel {
+  display: inline-block;
+  min-width: 70px;
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.date {
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+.type {
+  font-weight: 600;
+  display: inline-block;
+}
+
+.comment {
+  font-size: 14px;
+}
+
+.sum {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.typeIncome {
+  color: var(--color-accent-teal, #FFB627);
+}
+
+.sumIncome {
+  color: var(--color-accent-teal, #FFB627);
+}
+
+.typeExpense {
+  color: var(--color-accent-coral, #FF868D);
+}
+
+.sumExpense {
+  color: var(--color-accent-coral, #FF868D);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  /* düzeltme yapılmıştır (kutluhan) mobil kart tasarımında butonlar tutar değerinin yanına alındı */
+}
+
+.sumContent {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.iconButton {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  transition: color 0.2s;
+}
+
+.iconButton:hover {
+  color: white;
+}
+
+.deleteButton {
+  background: linear-gradient(135deg, #FFC727 0%, #9E40BA 61%, #7000FF 91%);
+  color: white;
+  border-radius: 20px;
+  padding: 6px 16px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.deleteButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+/* Tablet & Desktop: table row layout - RESPONSIVE */
+@media (min-width: 768px) {
+  .tr {
+    display: grid;
+    /* düzeltme yapılmıştır (kutluhan) kolon yapısı tasarıma göre sabitlendi (tablet) */
+    grid-template-columns: 100px 60px 140px 180px 1fr;
+    padding: 12px 16px;
+    align-items: center;
+    background: transparent;
+    margin: 0;
+    border-radius: 0;
+    border-left: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .td {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: none;
+    padding: 0;
+    font-size: 14px;
+    color: var(--color-main-text, #FBFBFB);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+
+  .mobileLabel {
+    display: none;
+  }
+
+  .date,
+  .type,
+  .comment {
+    font-weight: 400;
+  }
+
+  /* Desktop sum is bold and strictly right aligned except when next to edit/delete */
+  .sum {
+    font-weight: 700;
+  }
+
+  .comment {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+  }
+
+  .sum {
+    justify-content: flex-end;
+    font-size: 13px;
+    font-weight: 700;
+    width: 100%;
+    overflow: visible;
+  }
+
+  .sumContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .actions {
+    margin-top: 0;
+    justify-content: flex-end;
+    gap: 16px;
+    flex-wrap: nowrap;
+  }
+}
+
+/* Desktop - RESPONSIVE */
+@media (min-width: 1280px) {
+  .tr {
+    /* düzeltme yapılmıştır (kutluhan) kolon yapısı tasarıma göre sabitlendi (masaüstü) */
+    grid-template-columns: 130px 60px 160px 260px 1fr;
+    padding: 16px 20px;
+    min-height: 60px;
+  }
+
+  .td {
+    font-size: 14px;
+  }
+}

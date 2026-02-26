@@ -5,9 +5,13 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
-  
-  /* Kayıt sayfasındaki aynı koyu mor gradyan arka plan */
-  background: linear-gradient(135deg, #2e1a47 0%, #4a2c6d 100%);
+  background-image: 
+    url('/public/images/mobilebackground.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  position: relative;
 }
 
 .card {
@@ -15,23 +19,38 @@
   max-width: 450px;
   border-radius: 16px;
   padding: 40px 32px;
-  
-  /* Şeffaf Kart Arka Planı (Buzlu Cam Efekti) */
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px); 
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   color: #ffffff; 
+  z-index: 2;
+  position: relative;
 }
 
 /* 💊 2. TABLET TASARIM (768px ve üzeri) */
 @media screen and (min-width: 768px) {
   .wrapper {
     padding: 40px;
+    background-image:
+    url('/public/images/coins-tablet1.png'), 
+    linear-gradient(45deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%), /* 2. Sol Alt Gradient */
+      linear-gradient(225deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%),
+      url('/public/images/coins-tablet1.png'),
+      url('/public/images/mobilebackground.png');
+    
+    /* Görsellerin Konumları (Tasarımınıza göre ayarlayın) */
+    background-position: left center, right center, center, center, center center;
+    
+    /* Görsellerin Boyutları (Arka planı kapla, paraları orijinal boyutta bırak) */
+    background-size: contain, cover, cover, cover, cover;
+    
+    /* Tekrar etme */
+    background-repeat: no-repeat;
   }
   .card {
     max-width: 500px;
+    padding: 40px 20px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -39,6 +58,21 @@
 @media screen and (min-width: 1280px) {
   .wrapper {
     padding: 60px;
+    background-image: 
+      url('/public/images/coins-render\ 1.png'),
+      url('/public/images/coins-render\ 2.png'),
+      linear-gradient(45deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%), /* 2. Sol Alt Gradient */
+      linear-gradient(225deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%),
+      url('/public/images/mobilebackground.png');
+
+    
+    /* Görsellerin Konumları (Tasarımınıza göre ayarlayın) */
+    background-position: left center, right center, center, center, center center;
+    /* Görsellerin Boyutları (Arka planı kapla, paraları orijinal boyutta bırak) */
+    background-size: contain, contain, cover, cover, cover;
+    
+    /* Tekrar etme */
+    background-repeat: no-repeat;
   }
   .card {
     max-width: 550px;

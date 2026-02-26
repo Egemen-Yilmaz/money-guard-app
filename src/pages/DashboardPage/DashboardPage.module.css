@@ -2,96 +2,248 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: url("../../assets/gradient-mobile.webp") no-repeat center/cover;
+  background: linear-gradient(90deg, #2e1f5e 0%, #1a1235 100%);
 }
 
 .header {
-  height: 70px;
-  background: var(--color-accent);
-  color: white;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .headerContent {
-  text-align: center;
-  padding-top: 20px;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
 }
 
+/* Mobile: flex column, full width, centered content */
 .container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   flex-grow: 1;
-  padding: 16px;
+  padding: 0 20px;
+  gap: 24px;
+  min-height: calc(100vh - 80px);
 }
 
-.sidebar {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 16px;
-  margin-bottom: 16px;
+/* Hide currency on mobile */
+.currencySection {
+  display: none;
 }
 
-.mainArea {
+/* leftSidebar (Navigation + Balance) centered on mobile */
+.leftSidebar {
+  width: 100%;
+  max-width: 280px;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.navSection {
+  width: 100%;
+}
+
+.balanceSection {
+  width: 100%;
+}
+
+/* main (transactions area) */
+.main {
+  width: 100%;
   flex: 1;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 16px;
-  padding: 20px;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
 }
 
+/* Floating action button - mobile positioning */
 .fabButton {
   position: fixed;
-  bottom: 40px;
-  right: 40px;
-  width: 60px;
-  height: 60px;
+  bottom: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  font-size: 36px;
+  font-size: 24px;
   border: none;
   color: white;
-  background: var(--color-accent); /* veya gradient */
+  background: linear-gradient(
+    97.46deg,
+    #ffc727 -16.42%,
+    #9e40ba 97.04%,
+    #7000ff 150.71%
+  );
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   z-index: 1000;
-  transition: transform 0.2s;
+  transition: transform 0.2s, opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .fabButton:hover {
   transform: scale(1.1);
+  opacity: 0.95;
 }
 
-/* Tablet */
+/* Tablet: 2-column top row (Nav+Balance | Currency), Transactions full-width bottom */
 @media (min-width: 768px) {
-  .dashboardPage {
-    background: url("../../assets/gradient-tablet.webp") no-repeat center/cover;
-  }
   .container {
-    flex-direction: row;
-    padding: 24px;
-    gap: 24px;
+    display: grid;
+    grid-template-columns: minmax(200px, 1fr) minmax(180px, 1fr);
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "leftcol currencySection"
+      "main main";
+    gap: clamp(16px, 4vw, 24px);
+    padding: clamp(16px, 3vw, 32px);
+    align-items: start;
+    max-width: none;
+    min-height: calc(100vh - 80px);
+    overflow-x: hidden;
   }
-  .sidebar {
-    width: 280px;
-    margin-bottom: 0;
-    position: sticky;
-    top: 80px;
-    height: fit-content;
+
+  .leftSidebar {
+    grid-area: leftcol;
+    width: 100%;
+    max-width: none;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    padding: clamp(12px, 3vw, 20px);
+    position: static;
+    height: auto;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, 2vw, 16px);
+    min-width: 0;
   }
-  .mainArea {
-    flex: 1;
+
+  .navSection {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .balanceSection {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .currencySection {
+    grid-area: currencySection;
+    display: block;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    padding: clamp(12px, 3vw, 20px);
+    position: static;
+    height: auto;
+    min-width: 0;
+  }
+
+  .main {
+    grid-area: main;
+    padding: 0;
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+  }
+
+  .fabButton {
+    bottom: 40px;
+    right: 40px;
+    width: 56px;
+    height: 56px;
+    font-size: 28px;
   }
 }
 
-/* Desktop */
+/* Desktop: Left sidebar (Nav / Balance / Currency) | Right main (Transactions) */
 @media (min-width: 1280px) {
-  .dashboardPage {
-    background: url("../../assets/gradient-desktop.webp") no-repeat center/cover;
-  }
   .container {
-    max-width: 1280px;
-    margin: 0 auto;
-    gap: 32px;
+    display: grid;
+    grid-template-columns: minmax(280px, 30%) 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "leftcol main";
+    gap: clamp(40px, 5vw, 64px);
+    padding: clamp(24px, 4vw, 48px);
+    align-items: start;
+    min-height: calc(100vh - 80px);
+    overflow-x: hidden;
   }
-  .sidebar {
-    width: 360px;
+
+  .leftSidebar {
+    grid-area: leftcol;
+    width: 100%;
+    max-width: none;
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, 3vw, 28px);
+    min-width: 0;
+  }
+
+  .navSection {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    padding: clamp(16px, 2vw, 24px);
+    min-width: 0;
+  }
+
+  .balanceSection {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    padding: clamp(16px, 2vw, 24px);
+    min-width: 0;
+  }
+
+  /* On desktop: currency section moves inside sidebar visually */
+  .currencySection {
+    display: block;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    padding: clamp(16px, 2vw, 24px);
+    position: relative;
+    top: -390px;
+    height: auto;
+    min-width: 0;
+    grid-area: unset;
+  }
+
+  .main {
+    grid-area: main;
+    padding: 0;
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .fabButton {
+    bottom: 64px;
+    right: 64px;
+    width: 64px;
+    height: 64px;
+    font-size: 32px;
   }
 }

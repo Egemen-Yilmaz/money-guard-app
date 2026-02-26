@@ -1,45 +1,62 @@
+/* Mobile: horizontal centered icons */
 .navContainer {
-  margin: 24px 0;
+  margin: 0;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .navList {
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  gap: 30px;
+  align-items: center;
+  gap: clamp(20px, 6vw, 30px);
   list-style: none;
   padding: 0;
   margin: 0;
+  flex-wrap: wrap;
 }
 
 .navItem {
   display: flex;
+  align-items: center;
 }
 
 .navButton {
   background: none;
   border: none;
-  padding: 0;
+  padding: clamp(6px, 2vw, 8px) clamp(8px, 2vw, 12px);
   cursor: pointer;
   display: flex;
   align-items: center;
-  color: rgba(255, 255, 255, 0.4);
-  transition: color 0.2s;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.55);
+  transition: color 0.18s, transform 0.12s;
+  border-radius: 12px;
+}
+
+.navButton:hover {
+  color: white;
+  transform: scale(1.05);
 }
 
 .navIcon {
-  .icon {
-    width: 32px;
-    height: 32px;
-    display: block;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navIcon .icon {
+  width: clamp(24px, 6vw, 28px);
+  height: clamp(24px, 6vw, 28px);
+  display: block;
 }
 
 .navText {
   display: none;
 }
 
-.active .navIcon,
-.active .navText {
+.navButton.active {
   color: white;
 }
 
@@ -47,28 +64,63 @@
   display: block;
 }
 
+/* Tablet: vertical with labels */
 @media (min-width: 768px) {
   .navList {
     flex-direction: column;
-    gap: 12px;
+    gap: clamp(8px, 2vw, 12px);
+    align-items: flex-start;
+    justify-content: flex-start;
   }
-  .navIcon {
-    width: 24px;
-    height: 24px;
-    margin-right: 16px;
+
+  .navIcon .icon {
+    width: clamp(20px, 3vw, 24px);
+    height: clamp(20px, 3vw, 24px);
+    margin-right: clamp(8px, 2vw, 12px);
   }
+
   .navText {
     display: inline;
-    font-size: 18px;
-    font-weight: 700;
+    font-size: clamp(14px, 2vw, 16px);
+    font-weight: 600;
     color: white;
   }
+
   .mobileOnly {
     display: none;
   }
+
+  .navButton {
+    justify-content: flex-start;
+    padding: clamp(8px, 1.5vw, 10px) clamp(12px, 2vw, 16px);
+    width: auto;
+  }
+
   .navButton:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 8px 15px;
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+/* Desktop: vertical with full width layout */
+@media (min-width: 1280px) {
+  .navList {
+    align-items: flex-start;
+    padding-left: 0;
+  }
+
+  .navButton {
+    width: 100%;
+    justify-content: flex-start;
+    padding: clamp(10px, 1.5vw, 12px) clamp(12px, 2vw, 16px);
+  }
+
+  .navIcon {
+    margin-right: clamp(10px, 1.5vw, 12px);
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .navText {
+    display: inline-block;
   }
 }

@@ -12,6 +12,11 @@
     color: #fbfbfb;
 }
 
+/* Mobile: make form full width and padding comfortable */
+.container { padding: 20px; box-sizing: border-box; }
+.form { width: 100%; max-width: 480px; }
+.submitButton, .cancelButton { width: 100%; max-width: 480px; }
+
 .toggleContainer {
     display: flex;
     align-items: center;

@@ -1,7 +1,7 @@
 // src/pages/HomeTab/HomeTab.jsx
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTransactions } from "../../redux/transactions/operations";
+import { fetchTransactions, fetchTransactionCategories } from "../../redux/transactions/operations";
 import TransactionsList from "../../components/transactions/TransactionsList/TransactionsList";
 import css from "./HomeTab.module.css";
 
@@ -14,6 +14,7 @@ const HomeTab = () => {
 
   useEffect(() => {
     dispatch(fetchTransactions());
+    dispatch(fetchTransactionCategories());
   }, [dispatch]);
 
   return (

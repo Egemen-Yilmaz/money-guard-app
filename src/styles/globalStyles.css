@@ -1,24 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Seymour+One&display=swap');
+
+:root {
+  /* Color palette */
+  --color-bg-start: #24175a;
+  --color-bg-end: #1e065e;
+  --color-accent-coral: #ff6b81; /* mercan / pink */
+  --color-accent-teal: #2dd4bf; /* turquoise */
+  --color-white: #ffffff;
+  --color-glass-bg: rgba(255,255,255,0.06);
+  --color-card-bg: rgba(255,255,255,0.08);
+  --color-muted: rgba(255,255,255,0.7);
+
+  /* Shadows and glass */
+  --shadow-main: 0 8px 30px rgba(0,0,0,0.45);
+  --blur-glass: blur(6px);
+
+  /* Typography */
+  --font-main: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  --font-logo: 'Seymour One', 'Poppins', sans-serif;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+
+  /* Spacing */
+  --gap-page: 20px;
+
+  /* Breakpoints */
+  --bp-tablet: 768px;
+  --bp-desktop: 1280px;
+}
+
+/* Base styles (mobile-first) */
+html, body, #root {
+  height: 100%;
+}
+
+/* Use border-box everywhere to avoid width calculation surprises */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Ensure root elements occupy full width and prevent horizontal overflow */
+html, body, #root { width: 100%; }
+
 body {
   margin: 0;
   font-family: var(--font-main);
   font-weight: var(--weight-regular);
-  background-color: var(--color-bg-main);
-  background-image: linear-gradient(135deg, #24175a 0%, #1e065e 100%);
+  background: linear-gradient(180deg, var(--color-bg-start) 0%, var(--color-bg-end) 100%);
   color: var(--color-white);
   min-height: 100vh;
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* prevent horizontal scroll globally (fixes many 100vw issues) */
+  overflow-x: hidden;
+}
+
+/* Prevent horizontal page shifting caused by elements using 100vw or overflow */
+body {
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-weight: var(--weight-bold);
 }
 
-/* Glassmorphism Kart Yapısı */
+/* Utility glass card */
 .glass-container {
   background: var(--color-glass-bg);
   backdrop-filter: var(--blur-glass);
-  border-radius: 20px;
+  -webkit-backdrop-filter: var(--blur-glass);
+  border-radius: 14px;
   box-shadow: var(--shadow-main);
+}
+
+/* Page container helpers */
+.container {
+  padding: var(--gap-page);
+}
+
+/* Small helpers for mobile-first width */
+.full-width {
+  width: 100%;
+}
+
+/* Utility button primary */
+.primary-button {
+  background: linear-gradient(90deg, var(--color-accent-coral), #ff5170);
+  color: var(--color-white);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-weight: var(--weight-medium);
+}
+
+/* Links and small text */
+.muted { color: var(--color-muted); }
+
+/* Media queries */
+@media (min-width: 768px) {
+  .container { padding: 32px; }
+}
+
+@media (min-width: 1280px) {
+  .container { max-width: var(--container-width); margin: 0 auto; padding: 40px; }
 }
