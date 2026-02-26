@@ -21,11 +21,10 @@
       "version": "detect"
     }
   },
-  "plugins": ["react", "filenames"],
+  "plugins": ["react"],
   "rules": {
     "no-console": ["error", { "allow": ["warn", "error"] }],
-    "camelcase": ["error", { "properties": "always" }],
-    "filenames/match-regex": ["error", "^[a-z0-9-_.]+$", true]
+    "camelcase": ["error", { "properties": "always" }]
   },
   "overrides": [
     {
