@@ -101,10 +101,6 @@
 @media screen and (min-width: 768px) {
   .wrapper {
     padding: 40px;
-    background-image: url('/images/coins-tablet1.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
   }
   
   .card {
@@ -121,10 +117,6 @@
 @media screen and (min-width: 1200px) {
   .wrapper {
     padding: 60px;
-    background-image: url('/images/coins-render 1.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
   }
   
   .card {
