@@ -34,9 +34,10 @@
   align-items: center;
   gap: 10px;
   padding-bottom: 12px;
-  border-bottom: 1px solid var(--color-input-line);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.40);
   margin-bottom: 24px;
   position: relative;
+  transition: border-bottom-color 0.3s ease;
 }
 
 .icon {
@@ -44,7 +45,7 @@
   height: 24px;
   flex-shrink: 0;
   opacity: 0.70;
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.60);
 }
 
 .input {
@@ -55,17 +56,16 @@
   font-size: 16px;
   font-weight: 400;
   font-family: 'Poppins', sans-serif;
-  color: var(--color-text-primary);
+  color: #FBFBFB;
   padding: 0;
 }
 
 .input::placeholder {
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.60);
 }
 
 .inputWrapper:focus-within {
-  border-bottom-color: rgba(255, 199, 39, 0.80);
-  transition: border-color 0.2s ease;
+  border-bottom-color: rgba(255, 199, 39, 0.85);
 }
 
 /* ── ERROR TEXT ── */
@@ -88,74 +88,88 @@
 /* ── BUTTONS ── */
 .buttonPrimary {
   width: 100%;
-  height: 48px;
+  max-width: 280px;
+  height: 50px;
   border: none;
   border-radius: 20px;
   cursor: pointer;
   
-  /* Gradient */
-  background: var(--color-btn-gradient);
+  /* Gradient - Sarı/Mor/Mavi Gradient */
+  background: linear-gradient(125.4deg, #FFC727 16.42%, #9E40BA 97.04%, #7000FF 150.71%);
   
   /* Shadow */
-  box-shadow: var(--shadow-btn);
+  box-shadow: 1px 9px 15px 0px rgba(0, 0, 0, 0.20);
   
   /* Text */
   font-family: 'Poppins', sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
-  color: var(--color-text-primary);
-  letter-spacing: 1.4px;
+  color: #FBFBFB;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   
+  /* Flexbox center */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
   /* Transitions */
-  transition: opacity 0.2s ease, transform 0.1s ease;
-  margin-top: 10px;
-  margin-bottom: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  margin-top: 16px;
+  margin-bottom: 20px;
 }
 
-.buttonPrimary:hover {
-  opacity: 0.90;
+.buttonPrimary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  opacity: 0.9;
+  box-shadow: 1px 12px 20px 0px rgba(0, 0, 0, 0.30);
 }
 
-.buttonPrimary:active {
-  transform: scale(0.98);
+.buttonPrimary:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .buttonPrimary:disabled {
-  opacity: 0.60;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
 .buttonSecondary {
   width: 100%;
-  height: 48px;
-  border: 1px solid var(--color-btn-register-border);
+  max-width: 280px;
+  height: 50px;
+  border: 1px solid #4A56E2;
   border-radius: 20px;
   cursor: pointer;
-  background: var(--color-btn-register-bg);
-  
-  /* Shadow */
-  box-shadow: var(--shadow-btn);
+  background: #FCFCFC;
   
   /* Text */
   font-family: 'Poppins', sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
-  color: var(--color-btn-register-text);
-  letter-spacing: 1.4px;
+  color: #623F8B;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   text-align: center;
+  text-decoration: none;
+  
+  /* Flexbox center - ÖNEMLI: Link için */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
   /* Transitions */
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .buttonSecondary:hover {
-  background: #F0EBF8;
+  background-color: #4A56E2;
+  color: #FBFBFB;
+  border-color: #4A56E2;
 }
 
 .buttonSecondary:active {
-  transform: scale(0.98);
+  transform: translateY(0);
 }
 
 /* ══════════════════════════════════════ */
@@ -180,14 +194,7 @@
   
   .buttonPrimary,
   .buttonSecondary {
-    width: 280px;
-    font-size: 17px;
-    letter-spacing: 1.6px;
-  }
-  
-  .buttonPrimary {
-    margin-top: 14px;
-    margin-bottom: 18px;
+    max-width: 280px;
   }
 }
 

@@ -106,21 +106,53 @@
   .navList {
     align-items: flex-start;
     padding-left: 0;
+    gap: clamp(12px, 2vw, 16px);
   }
 
   .navButton {
     width: 100%;
     justify-content: flex-start;
-    padding: clamp(10px, 1.5vw, 12px) clamp(12px, 2vw, 16px);
+    padding: clamp(12px, 1.5vw, 16px) clamp(16px, 2vw, 20px);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+  }
+
+  .navButton:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .navButton.active {
+    color: #FFFFFF;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .navButton.active .navIcon {
+    filter: drop-shadow(0 0 8px rgba(255, 199, 39, 0.6));
+    opacity: 1;
   }
 
   .navIcon {
-    margin-right: clamp(10px, 1.5vw, 12px);
+    margin-right: clamp(12px, 1.5vw, 16px);
     display: inline-flex;
     align-items: center;
+    opacity: 0.7;
+    transition: all 0.2s ease;
+  }
+
+  .navIcon .icon {
+    width: clamp(22px, 3vw, 26px);
+    height: clamp(22px, 3vw, 26px);
   }
 
   .navText {
     display: inline-block;
+    font-size: clamp(16px, 2vw, 18px);
+    font-weight: 400;
+    transition: font-weight 0.2s ease;
+  }
+
+  .navButton.active .navText {
+    font-weight: 700;
   }
 }

@@ -11,20 +11,6 @@ export default function LoginPage() {
       <div className={`${styles.bgGlow} ${styles.bgGlow4}`} aria-hidden="true"></div>
       <div className={`${styles.bgGlow} ${styles.bgGlow5}`} aria-hidden="true"></div>
       
-      {/* Coin Decorative Images */}
-      <img 
-        src="/images/coins-tablet1.png" 
-        alt="" 
-        aria-hidden="true"
-        className={`${styles.coinImage} ${styles.coinLeft}`}
-      />
-      <img 
-        src="/images/coins-render 2.png" 
-        alt="" 
-        aria-hidden="true"
-        className={`${styles.coinImage} ${styles.coinRight}`}
-      />
-      
       {/* Glassmorphism Card */}
       <div className={styles.card}>
         <LoginForm />

@@ -11,20 +11,6 @@ export default function RegisterPage() {
       <div className={`${styles.bgGlow} ${styles.bgGlow4}`} aria-hidden="true"></div>
       <div className={`${styles.bgGlow} ${styles.bgGlow5}`} aria-hidden="true"></div>
       
-      {/* Dollar Decorative Images */}
-      <img 
-        src="/images/dolartablet.png" 
-        alt="" 
-        aria-hidden="true"
-        className={`${styles.dollarImage} ${styles.dollarLeft}`}
-      />
-      <img 
-        src="/images/dolardestop2.png" 
-        alt="" 
-        aria-hidden="true"
-        className={`${styles.dollarImage} ${styles.dollarRight}`}
-      />
-      
       {/* Glassmorphism Card */}
       <div className={styles.card}>
         <RegisterForm />

@@ -151,7 +151,6 @@ export default function RegisterForm() {
       <Link 
         to="/login" 
         className={styles.buttonSecondary}
-        style={{ textAlign: 'center', textDecoration: 'none', display: 'block', boxSizing: 'border-box' }}
       >
         LOG IN
       </Link>

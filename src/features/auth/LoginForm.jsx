@@ -97,8 +97,7 @@ export default function LoginForm() {
       {/* Kayıt Ol Sayfasına Yönlendirme */}
       <Link 
         to="/register" 
-        className={styles.buttonSecondary} 
-        style={{ textAlign: 'center', textDecoration: 'none', display: 'block', boxSizing: 'border-box' }}
+        className={styles.buttonSecondary}
       >
         REGISTER
       </Link>

@@ -97,10 +97,236 @@
   }
 }
 
+/* ═══════════════════════════════════════ */
+/* CARD INNER COMPONENTS                   */
+/* ═══════════════════════════════════════ */
+
+/* ── LOGO ── */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.logo__icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+.logo__text {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.2;
+  color: #FBFBFB;
+  letter-spacing: -0.02em;
+}
+
+/* ── FORM ── */
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+/* ── INPUT GROUP ── */
+.input-group {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  transition: border-color 0.3s ease;
+}
+
+.input-group:focus-within {
+  border-bottom-color: rgba(255, 199, 39, 0.85);
+}
+
+.input-group__icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.3s ease;
+}
+
+.input-group:focus-within .input-group__icon {
+  color: rgba(255, 199, 39, 0.85);
+}
+
+.input-group__field {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #FBFBFB;
+  padding: 0;
+}
+
+.input-group__field::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Autofill stillerini sıfırla */
+.input-group__field:-webkit-autofill,
+.input-group__field:-webkit-autofill:hover,
+.input-group__field:-webkit-autofill:focus {
+  -webkit-text-fill-color: #FBFBFB;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ── VALIDATION STATES ── */
+.input-group--error {
+  border-bottom-color: rgba(255, 96, 96, 0.85);
+}
+
+.input-group--error .input-group__icon {
+  color: rgba(255, 96, 96, 0.85);
+}
+
+.input-group--success {
+  border-bottom-color: rgba(96, 255, 150, 0.85);
+}
+
+.input-group--success .input-group__icon {
+  color: rgba(96, 255, 150, 0.85);
+}
+
+/* ── BUTTONS ── */
+.btn {
+  width: 100%;
+  max-width: 280px;
+  height: 50px;
+  border: none;
+  border-radius: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Login Primary Button (Pembe/Mercan Gradient) */
+.btn--login {
+  background: linear-gradient(180deg, #FF6596 0%, #FF3176 100%);
+  box-shadow: 0px 6px 15px rgba(255, 49, 118, 0.5);
+  color: #FFFFFF;
+}
+
+.btn--login:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0px 8px 20px rgba(255, 49, 118, 0.6);
+}
+
+.btn--login:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Register Link Button (Secondary - Beyaz Outline) */
+.btn--register {
+  background: #FFFFFF;
+  border: 1px solid #4A56E2;
+  color: #4A56E2;
+}
+
+.btn--register:hover:not(:disabled) {
+  background-color: #4A56E2;
+  color: #FFFFFF;
+}
+
+/* Register Page Submit Button (Primary - Pembe/Mercan Gradient) */
+.btn--register-submit {
+  background: linear-gradient(180deg, #FF6596 0%, #FF3176 100%);
+  box-shadow: 0px 6px 15px rgba(255, 49, 118, 0.5);
+  color: #FFFFFF;
+}
+
+.btn--register-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0px 8px 20px rgba(255, 49, 118, 0.6);
+}
+
+.btn--register-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Login Link (for register page - Secondary - Beyaz Outline) */
+.btn--login-link {
+  background: #FFFFFF;
+  border: 1px solid #4A56E2;
+  color: #4A56E2;
+}
+
+.btn--login-link:hover:not(:disabled) {
+  background-color: #4A56E2;
+  color: #FFFFFF;
+}
+
+/* ── PASSWORD STRENGTH BAR ── */
+.password-strength {
+  width: 100%;
+  margin-top: -16px;
+}
+
+/* ── ERROR MESSAGE ── */
+.error-message {
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  color: rgba(255, 96, 96, 0.85);
+  margin-top: -24px;
+  text-align: left;
+}
+
+/* ── CARD ANIMATION ── */
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: cardFadeIn 0.6s ease-out;
+}
+
 /* 💊 2. TABLET TASARIM (768px ve üzeri) */
 @media screen and (min-width: 768px) {
   .wrapper {
     padding: 40px;
+    background-image: url('/images/dolartablet.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
   
   .card {
@@ -117,6 +343,10 @@
 @media screen and (min-width: 1200px) {
   .wrapper {
     padding: 60px;
+    background-image: url('/images/dolardesktop1.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
   
   .card {

@@ -3,9 +3,10 @@
   gap: 24px;
   padding-top: 12px;
   padding-bottom: 12px;
-  width: 280px;
+  width: 100%;
+  max-width: 280px;
   border-bottom: 1px solid #ffffff69;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .topBox {
@@ -27,21 +28,24 @@
 }
 
 .right {
-  width: 207px;
-  height: 21px;
+  flex: 1;
+  min-width: 0;
   font-family: sans-serif;
   color: #fbfbfb;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .area {
   display: flex;
   flex-direction: column;
-  width: 280px;
+  width: 100%;
+  max-width: 280px;
   border-width: 1px;
   gap: 24px;
-  margin: 0 auto; /* Mobilede ortalama */
+  margin: 0 auto;
+  padding: 0;
 }
 
 .list {
@@ -77,31 +81,50 @@
 
 @media (min-width: 768px) {
   .right {
-    width: 263px;
+    flex: 1;
+    min-width: 0;
   }
 
   .category {
-    width: 336px;
+    width: 100%;
+    max-width: 336px;
   }
 
   .area {
     display: flex;
-    flex-direction: row;
-    width: 336px;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    gap: 32px;
+  }
+
+  .container {
+    width: 100%;
   }
 }
 
 @media (min-width: 1270px) {
   .right {
-    width: 298px;
+    flex: 1;
+    min-width: 0;
   }
 
   .category {
-    width: 395px;
+    width: 100%;
+    max-width: 395px;
   }
 
   .area {
-    width: 395px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 100%;
+    gap: 32px;
+    margin: 0;
+  }
+
+  .container {
+    width: 100%;
   }
 
   .totalValue {

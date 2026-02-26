@@ -25,7 +25,7 @@ const DashboardPage = () => {
       <Header />
 
       <div className={css.container}>
-        {/* Top Row: Navigation + Balance (Left) | Currency (Right on tablet only) */}
+        {/* Left Sidebar: Navigation + Balance + Currency (vertical on desktop) */}
         <aside className={css.leftSidebar}>
           <div className={css.navSection}>
             <Navigation />
@@ -33,12 +33,11 @@ const DashboardPage = () => {
           <div className={css.balanceSection}>
             <Balance />
           </div>
+          {/* Currency Panel - inside sidebar on desktop, separate on tablet */}
+          <div className={css.currencySection}>
+            <CurrencyTab />
+          </div>
         </aside>
-
-        {/* Currency Panel - shows on right (tablet) or inside sidebar (desktop) */}
-        <div className={css.currencySection}>
-          <CurrencyTab />
-        </div>
 
         {/* Transactions / main content */}
         <main className={css.main}>

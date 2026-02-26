@@ -7,13 +7,31 @@
   margin-bottom: 12px;
   border-radius: 8px;
   color: #fbfbfb;
-  padding: 12px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+}
+
+.box:focus {
+  border-color: rgba(255, 199, 39, 0.8);
+}
+
+.box option {
+  background-color: #533dba;
+  color: #fbfbfb;
+  padding: 8px;
 }
 
 .container {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  padding-top: clamp(12px, 2vw, 16px);
 }
 
 .date {
@@ -24,6 +42,8 @@
 .option {
   background-color: #533dba;
   color: #fbfbfb;
+  padding: 8px;
+  font-size: 16px;
 }
 
 .currency {
@@ -73,5 +93,6 @@
 
   .container {
     width: 715px;
+    margin-top: 32px;
   }
 }
