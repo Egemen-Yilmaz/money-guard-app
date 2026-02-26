@@ -6,19 +6,23 @@
   margin-bottom: 16px;
 }
 
+/* Make the chart box fluid so it can expand to the sidebar width on desktop */
 .box {
-  width: 280px;
+  width: 100%;
+  max-width: 520px; /* reasonable max so chart doesn't get huge */
   height: 333px;
   position: relative;
+  box-sizing: border-box;
 }
 
 .centerText {
   font-size: 30px;
   color: white;
   position: absolute;
-  top: 156px;
-  left: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   height: 32px;
-  width: 180px;
+  width: auto;
   text-align: center;
 }

@@ -212,34 +212,40 @@
 
 /* Desktop: Left sidebar (Nav / Balance / Currency/Chart) | Right main (Transactions) */
 @media (min-width: 1280px) {
+  /* Make the top-level container a two-column flex layout on desktop
+     so the left sidebar has fixed width and the right section grows. */
   .container {
-    display: grid;
-    grid-template-columns: minmax(480px, 520px) 1fr;
-    grid-template-rows: 1fr;
-    grid-template-areas: "leftcol main";
-    gap: clamp(32px, 4vw, 48px);
-    padding: clamp(32px, 4vw, 48px);
-    align-items: start;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: clamp(24px, 3vw, 32px);
+    /* constrain overall width to avoid horizontal overflow on narrow desktops */
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 16px;
+    width: 100%;
     min-height: calc(100vh - 80px);
     overflow-x: hidden;
   }
 
+  /* Left column: fluid-but-constrained sidebar to prevent overflow */
   .leftSidebar {
-    grid-area: leftcol;
-    width: 100%;
-    max-width: none;
+    width: 380px; /* nominal width */
+    min-width: 320px; /* prevent collapsing on narrow desktops */
+    max-width: 380px; /* keep consistent */
+    flex: 0 0 380px;
+    flex-shrink: 0;
     background: transparent;
     border-radius: 0;
-    padding: 0;
-    padding-right: clamp(24px, 3vw, 36px);
-    border-right: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 24px 32px 0 0; /* inner right padding to separate from divider */
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
     position: sticky;
     top: 100px;
-    height: fit-content;
+    height: calc(100vh - 140px);
     display: flex;
     flex-direction: column;
-    gap: clamp(24px, 3vw, 32px);
-    min-width: 0;
+    gap: clamp(20px, 2.5vw, 28px);
+    box-sizing: border-box;
   }
 
   .navSection {
@@ -258,12 +264,10 @@
     min-width: 0;
   }
 
-  /* Hide tablet currency section on desktop */
+  /* Hide tablet-only currency variant, show desktop variant inside sidebar */
   .currencySectionTablet {
     display: none;
   }
-
-  /* Show desktop currency/chart section inside sidebar */
   .currencySectionDesktop {
     display: block;
     width: 100%;
@@ -275,14 +279,39 @@
     min-width: 0;
   }
 
+  /* Right section: main content (home or statistics) */
   .main {
-    grid-area: main;
-    padding: 0;
-    width: 100%;
+    flex: 1 1 auto; /* grow to take remaining space */
+    padding-left: 32px;
     min-width: 0;
-    overflow-x: hidden;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
+  }
+
+  /* On desktop hide the tablet-specific chart instance (we render chart in the
+     statistics area instead so it sits on the right). */
+  .chartSectionTablet {
+    display: none;
+  }
+
+  /* Ensure statistics mode also allocates the left sidebar width and
+     lets the statsArea take the remaining space on desktop. This overrides
+     any tablet-specific rules when .statisticsMode is present. */
+  .container.statisticsMode .leftSidebar {
+    width: 380px;
+    min-width: 320px;
+    flex: 0 0 380px;
+  }
+
+  .statsArea {
+    flex: 1 1 auto;
+    padding-left: 32px;
+    min-width: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* prevent accidental overflow */
   }
 
   .fabButton {

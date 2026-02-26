@@ -56,7 +56,7 @@
   margin-top: 1rem;
 }
 
-@media screen and ((max-width: 768px)) {
+@media screen and (max-width: 768px) {
   .currency {
     display: none;
   }
@@ -91,8 +91,15 @@
     gap: 24px;
   }
 
+  /* When placed inside the right column, let the dashboard size to the
+     column width instead of forcing a large fixed width. Use margins so it
+     keeps vertical spacing above the table. */
   .container {
-    width: 715px;
-    margin-top: 32px;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    justify-content: flex-start;
+    padding-left: 0;
   }
 }

@@ -1,145 +1,70 @@
-.container {
+/* Base layout: stack vertically on mobile */
+.statisticsContainer {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
   margin-bottom: 32px;
 }
 
-/* Chart visible on mobile */
-.chartMobile {
-  display: block;
-}
-
-.category {
-  display: flex;
-  gap: 24px;
-  padding-top: 12px;
-  padding-bottom: 12px;
+.navAndBalance,
+.currency,
+.chart,
+.table {
   width: 100%;
-  max-width: 280px;
-  border-bottom: 1px solid #ffffff69;
-  justify-content: space-between;
 }
 
-.topBox {
-  display: flex;
-  justify-content: space-between;
-  padding: 12px;
-  border-radius: 8px;
-  font-family: sans-serif;
-  color: #fbfbfb;
-  font-weight: 600;
-  font-size: 16px;
-  background-color: #523b7e99;
-}
-
-.box {
-  width: 24px;
-  height: 24px;
-  border-radius: 2px;
-}
-
-.right {
-  flex: 1;
-  min-width: 0;
-  font-family: sans-serif;
-  color: #fbfbfb;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.area {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  max-width: 280px;
-  border-width: 1px;
-  gap: 24px;
-  margin: 0 auto;
-  padding: 0;
-}
-
-.list {
-  margin: 0;
-  padding: 0;
-}
-
-.total {
-  padding-left: 12px;
-  color: #fbfbfb;
-  font-family: sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.totalValue {
-  display: flex;
-  justify-content: space-between;
-  margin-right: 24px;
-}
-
-.evalue {
-  color: #ff868d;
-}
-
-.ivalue {
-  color: #ffb627;
-}
-
-.totalValue {
-  margin: 12px;
-}
-
-@media (min-width: 768px) {
-  /* Hide chart on tablet/desktop - shown in sidebar */
-  .chartMobile {
-    display: none;
-  }
-
-  .right {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .category {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .area {
+/* TABLET: stack currency and table vertically inside the stats area; chart lives in left sidebar */
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .statisticsContainer {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: 100%;
+    gap: 20px;
+  }
+
+  .currency {
+    display: block;
+  }
+
+  .chart {
+    display: none; /* hide stats-area chart on tablet; left-sidebar chart will be shown instead */
+  }
+
+  .table {
+    display: block;
   }
 }
 
-@media (min-width: 1270px) {
-  .right {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .category {
+/* DESKTOP: place chart and table side-by-side inside the stats area */
+@media screen and (min-width: 1280px) {
+  .statisticsContainer {
+    display: grid;
+    /* left column is the sidebar width reference (kept in DashboardPage),
+       right side uses two flexible columns with minimum widths to avoid overflow */
+    grid-template-columns: minmax(300px, 1fr) minmax(300px, 1fr);
+    grid-template-areas: "chart table";
+    gap: 24px;
+    align-items: start;
     width: 100%;
-    max-width: 395px;
+    overflow: hidden;
   }
 
-  .area {
-    display: flex;
-    flex-direction: row;
+  .currency {
+    display: none; /* currency is in the left sidebar on desktop */
+  }
+
+  .chart {
+    grid-area: chart;
+    display: block; /* show stats-area chart on desktop */
+  }
+
+  .table {
+    grid-area: table;
+    display: block;
+  }
+
+  /* Ensure chart inner sizing is reasonable */
+  .chart > div {
     width: 100%;
-    max-width: 100%;
-    gap: 32px;
-    margin: 0;
-  }
-
-  .container {
-    width: 100%;
-  }
-
-  .totalValue {
-    margin-right: 24px;
+    max-width: none;
   }
 }

@@ -3,7 +3,8 @@
   gap: 24px;
   padding-top: 12px;
   padding-bottom: 12px;
-  width: 280px;
+  width: 100%;
+  max-width: 100%;
   border-bottom: 1px solid #ffffff69;
   justify-content: center;
 }
@@ -36,7 +37,8 @@
 }
 
 .area {
-  width: 280px;
+  width: 100%;
+  max-width: 100%;
   border-width: 1px;
 }
 
@@ -71,31 +73,35 @@
   margin: 12px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 1279px) {
   .right {
     width: 263px;
   }
 
   .category {
-    width: 336px;
+    width: 100%;
+    max-width: 100%;
   }
 
   .area {
-    width: 336px;
+    width: 100%;
+    max-width: 100%;
   }
 }
 
-@media (min-width: 1270px) {
+@media (min-width: 1280px) {
   .right {
     width: 298px;
   }
 
   .category {
-    width: 395px;
+    width: 100%;
+    max-width: 395px;
   }
 
   .area {
-    width: 395px;
+    width: 100%;
+    max-width: 395px;
   }
 
   .totalValue {

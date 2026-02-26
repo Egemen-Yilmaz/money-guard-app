@@ -38,22 +38,24 @@ const DashboardPage = () => {
           <div className={css.balanceSection}>
             <Balance />
           </div>
-          {/* Tablet Statistics: Chart in sidebar */}
+          {/* Tablet-only Chart: render inside the left sidebar so on tablet the chart sits under Balance */}
           {isStatisticsPage && (
             <div className={css.chartSectionTablet}>
               <Chart />
             </div>
           )}
-          {/* Desktop: Currency/Chart inside sidebar */}
+          {/* Desktop: Currency inside sidebar (keep sidebar focused on navigation/balance/currency) */}
           <div className={css.currencySectionDesktop}>
-            {isStatisticsPage ? <Chart /> : <CurrencyTab />}
+            <CurrencyTab />
           </div>
         </aside>
 
-        {/* Tablet: Currency (always) on right side */}
-        <div className={css.currencySectionTablet}>
-          <CurrencyTab />
-        </div>
+        {/* Tablet: Currency (show on non-statistics pages) */}
+        {!isStatisticsPage && (
+          <div className={css.currencySectionTablet}>
+            <CurrencyTab />
+          </div>
+        )}
 
         {/* Transactions / main content */}
         {isStatisticsPage ? (
