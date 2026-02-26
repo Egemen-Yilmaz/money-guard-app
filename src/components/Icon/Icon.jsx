@@ -3,7 +3,8 @@ import styles from './Icon.module.css';
 // Icon komponenti — public dizinindeki sprite kullanılır.
 // Gereken: public/icons/symbol-defs.svg
 // Symbol id'leri `icon-<name>` formatında olmalıdır (ör. icon-delete).
-const SPRITE_PATH = '/icons/symbol-defs.svg';
+// Use Vite base so assets resolve correctly when deployed under a subpath
+const SPRITE_PATH = `${import.meta.env.BASE_URL}icons/symbol-defs.svg`;
 
 const Icon = ({ name, width = 24, height = 24, className = '', title = '', ariaHidden = false, ...props }) => {
   if (!name) return null;
