@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { toastError, toastSuccess } from '../../utils/toast'; 
 import { register as registerAction } from './authOperations';
-import PasswordStrengthBar from 'react-password-strength-bar-with-style-item'; 
+import ProgressBar from '../../components/ProgressBar/ProgressBar';
 import Icon from '../../components/Icon/Icon';
 import styles from './RegisterForm.module.css';
 
@@ -35,9 +35,10 @@ export default function RegisterForm() {
     formState: { errors, isSubmitting },
   } = useForm({ resolver: yupResolver(schema) });
 
-  // Şifre alanını izliyoruz (Kütüphaneye prop olarak geçmek için)
+  // Şifre alanlarını izliyoruz (ProgressBar için)
   // eslint-disable-next-line react-hooks/incompatible-library
   const passwordValue = watch('password', '');
+  const confirmPasswordValue = watch('confirmPassword', '');
 
   const onSubmit = async (data) => {
     try {
@@ -123,15 +124,8 @@ export default function RegisterForm() {
 </div>
       {errors.confirmPassword && <p className={styles.errorText}>{errors.confirmPassword.message}</p>}
 
-      {/* 2. Kütüphane ile Dinamik Şifre Gücü Çubuğu */}
-      <div style={{ marginBottom: '20px' }}>
-        <PasswordStrengthBar 
-          password={passwordValue} 
-          minLength={6} 
-          scoreWords={['Zayıf', 'İdare Eder', 'İyi', 'Güçlü', 'Çok Güçlü']} // Opsiyonel: Metinleri Türkçeleştirebilirsiniz
-          shortScoreWord="Çok Kısa"
-        />
-      </div>
+      {/* ProgressBar: Şifre eşleşme göstergesi */}
+      <ProgressBar password={passwordValue} confirmPassword={confirmPasswordValue} />
 
       {/* Register Butonu */}
       <button 
