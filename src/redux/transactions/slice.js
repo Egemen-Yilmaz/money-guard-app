@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-    fetchTransactions,
-    addTransaction,
-    updateTransaction,
-    fetchTransactionCategories,
-    deleteTransaction,
+  fetchTransactions,
+  addTransaction,
+  updateTransaction,
+  fetchTransactionCategories,
+  deleteTransaction,
 } from './operations';
 
 const initialState = {
@@ -12,6 +12,7 @@ const initialState = {
   categories: [],
   isLoading: false,
   error: null,
+  isModalOpen: false,
   date: {},
   transactionsSummary: {
     categoriesSummary: [],
@@ -39,6 +40,9 @@ const transactionsSlice = createSlice({
   reducers: {
     changeDate(state, action) {
       state.date = action.payload;
+    },
+    toggleModal(state) {
+      state.isModalOpen = !state.isModalOpen;
     },
   },
   extraReducers: (builder) => {
@@ -89,6 +93,6 @@ const transactionsSlice = createSlice({
   },
 });
 
+export const { toggleModal, changeDate } = transactionsSlice.actions;
 export const transactionsReducer = transactionsSlice.reducer;
-export const { changeDate } = transactionsSlice.actions;
 export default transactionsSlice.reducer;

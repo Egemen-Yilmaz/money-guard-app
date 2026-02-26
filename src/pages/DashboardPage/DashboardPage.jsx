@@ -1,12 +1,13 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleModal } from "../../features/transactions/transactionsSlice";
+import { toggleModal } from "../../redux/transactions/slice";
 import Header from "../../components/Header/Header";
 import Navigation from "../../components/Navigation/Navigation";
 import Balance from "../../components/Balance/Balance";
 import CurrencyTab from "../CurrencyTab/CurrencyTab";
 import ModalAddTransaction from "../../components/transactions/ModalAddTransaction/ModalAddTransaction";
+import ButtonAddTransactions from "../../components/transactions/ButtonAddTransactions/ButtonAddTransactions";
 import css from "./DashboardPage.module.css";
 
 const DashboardPage = () => {
@@ -45,17 +46,14 @@ const DashboardPage = () => {
         </main>
       </div>
 
-      {/* Sağ alt + butonu */}
-      <button
-        onClick={handleOpenModal}
-        className={css.fabButton}
-        aria-label="Add new transaction"
-      >
-        +
-      </button>
+      {/* düzeltme yapılmıştır (kutluhan) redux state çakışmasından dolayı tek bir global artı butonu yapısına geçildi */}
+      <ButtonAddTransactions onClick={handleOpenModal} />
 
-      {/* Modal koşullu render */}
-      {isModalOpen && <ModalAddTransaction />}
+      {/* düzeltme yapılmıştır (kutluhan) modal açma/kapama global transactions state üzerinden sağlanıyor */}
+      <ModalAddTransaction
+        isOpen={isModalOpen}
+        onClose={() => dispatch(toggleModal())}
+      />
     </div>
   );
 };

@@ -8,15 +8,31 @@
 }
 
 /* Ensure table columns don't force horizontal overflow; make comments wrap */
-.table { table-layout: fixed; }
-.th, .td { overflow-wrap: anywhere; word-break: break-word; }
-.td .comment { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.table {
+  table-layout: fixed;
+}
+
+.th,
+.td {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.td .comment {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 /* header style when table layout active */
 .theadRow {
-  display: none; /* hide header on small screens */
-  background-color: rgba(82,59,126,0.6);
-  color: white;
+  display: none;
+  /* hide header on small screens */
+}
+
+/* Ensure no default borders */
+.th {
+  color: var(--color-main-text, #FBFBFB);
 }
 
 .th {
@@ -27,7 +43,8 @@
 
 .td {
   display: block;
-  padding: 0; /* inner cell padding handled by TransactionsItem styles */
+  padding: 0;
+  /* inner cell padding handled by TransactionsItem styles */
   border: none;
 }
 
@@ -37,98 +54,91 @@
 }
 
 /* On mobile, ensure the transactions area stacks and cards take full width */
-.transactions-table { width: 100%; }
+.transactions-table {
+  width: 100%;
+}
 
 /* Controls row */
-.controlsRow { padding: 8px; }
+.controlsRow {
+  padding: 8px;
+}
 
 @media (min-width: 768px) {
-  .theadRow { 
-    display: table-row; 
+  .theadRow {
+    display: grid;
+    /* düzeltme yapılmıştır (kutluhan) kolon yapısı tasarıma göre sabitlendi (tablet) */
+    grid-template-columns: 100px 60px 140px 180px 1fr;
+    background: rgba(82, 59, 126, 0.6);
+    /* Brand header purple */
+    border-radius: 30px;
+    /* Highly rounded as per Figma */
+    color: white;
+    padding: 16px 16px;
+    margin-bottom: 15px;
   }
 
-  .th { 
-    display: table-cell;
-    padding: 12px 8px;
-    font-size: 13px;
-    font-weight: 600;
-    color: rgba(255,255,255,0.85);
-    background: rgba(255,255,255,0.03);
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  .td { 
-    display: table-cell;
-    border: none;
+  .th {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     padding: 0;
-    vertical-align: middle;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    background: transparent;
+    text-align: left;
+    user-select: none;
   }
 
-  .table { 
+  .th:nth-child(5) {
+    justify-content: flex-end;
+  }
+
+  .table {
     background: transparent;
-    table-layout: fixed;
+    display: block;
     width: 100%;
-    border-collapse: collapse;
+  }
+
+  .table thead,
+  .table tbody,
+  .table th,
+  .table td {
+    display: block;
+    /* strip native table behaviors to match grid */
   }
 
   .tableWrapper {
     width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    max-height: 550px;
+    /* Introduce vertical scrolling */
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+    /* Room for scrollbar */
   }
-}
 
-@media (min-width: 1280px) {
-  .table { background: rgba(255,255,255,0.04); }
+  /* Scrollbar styling for a premium look */
+  .tableWrapper::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .tableWrapper::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .tableWrapper::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+  }
 }
 
 /* Desktop-specific - RESPONSIVE */
 @media (min-width: 1280px) {
-  .table { 
-    background: transparent; 
-    width: 100%;
-    table-layout: fixed;
-  }
-
   .theadRow {
-    background: rgba(255,255,255,0.04);
-    height: 60px;
-  }
-
-  .th {
-    padding: 12px 16px;
-    font-size: 14px;
-    font-weight: 600;
-    text-align: left;
-    color: rgba(255,255,255,0.85);
-    border-right: 1px solid rgba(255,255,255,0.02);
-  }
-
-  .th:last-child {
-    border-right: none;
-  }
-
-  .td {
-    display: table-cell;
-    vertical-align: middle;
-    padding: 0;
-  }
-
-  .table-row {
-    height: auto;
-    min-height: 56px;
-  }
-
-  .amount-income { 
-    color: var(--color-accent-teal); 
-    font-weight: 600; 
-  }
-
-  .amount-expense { 
-    color: var(--color-accent-coral); 
-    font-weight: 600; 
+    /* düzeltme yapılmıştır (kutluhan) kolon yapısı tasarıma göre sabitlendi (masaüstü) */
+    grid-template-columns: 130px 60px 160px 260px 1fr;
+    padding: 18px 20px;
+    margin-bottom: 20px;
   }
 }

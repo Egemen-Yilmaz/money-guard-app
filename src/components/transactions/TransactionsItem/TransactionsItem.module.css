@@ -1,30 +1,44 @@
 /* Mobile-first: key-value card layout */
 .tr {
   display: block;
-  background: var(--color-bg-glass);
-  margin: 12px 0;
-  border-radius: 12px;
-  padding: 14px;
+  background: var(--color-bg-glass, rgba(255, 255, 255, 0.05));
+  margin-bottom: 8px;
+  border-radius: 10px;
+  padding: 12px 20px;
   position: relative;
   overflow: hidden;
-  border-left: 5px solid var(--color-accent-coral);
+  border-left: 5px solid var(--color-accent-coral, #FF868D);
 }
 
 .income {
-  border-left-color: var(--color-accent-teal);
+  border-left-color: var(--color-accent-teal, #FFB627);
+  /* using yellow-teal fallback for income based on generic money guards */
 }
 
 .expense {
-  border-left-color: var(--color-accent-coral);
+  border-left-color: var(--color-accent-coral, #FF868D);
 }
 
 .td {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: space-between;
+  /* space label and value on mobile */
   padding: 6px 0;
   font-size: 14px;
-  color: var(--color-main-text);
+  color: var(--color-main-text, #FBFBFB);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.td:last-child {
+  border-bottom: none;
+}
+
+.mobileLabel {
+  display: inline-block;
+  font-weight: 600;
+  color: var(--color-main-text, #FBFBFB);
+  font-size: 14px;
 }
 
 .mobileLabel {
@@ -35,114 +49,141 @@
   font-weight: 400;
 }
 
-.date { 
-  font-size: 14px; 
+.date {
+  font-size: 14px;
   color: var(--color-muted);
 }
 
-.type { 
-  font-weight: 600; 
+.type {
+  font-weight: 600;
   display: inline-block;
 }
 
-.comment { 
-  color: var(--color-muted); 
-  font-size: 13px; 
+.comment {
+  font-size: 14px;
 }
 
-.sum { 
-  font-weight: 700; 
-  font-variant-numeric: tabular-nums;
-  text-align: right;
+.sum {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.typeIncome {
+  color: var(--color-accent-teal, #FFB627);
+}
+
+.sumIncome {
+  color: var(--color-accent-teal, #FFB627);
+}
+
+.typeExpense {
+  color: var(--color-accent-coral, #FF868D);
+}
+
+.sumExpense {
+  color: var(--color-accent-coral, #FF868D);
+}
+
+.actions {
   display: flex;
+  gap: 8px;
   justify-content: flex-end;
-  flex: 1;
+  /* düzeltme yapılmıştır (kutluhan) mobil kart tasarımında butonlar tutar değerinin yanına alındı */
 }
 
-.typeIncome { 
-  color: var(--color-accent-teal); 
+.sumContent {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-.typeExpense { 
-  color: var(--color-accent-coral); 
-}
-
-.actions { 
-  display: flex; 
-  gap: 8px; 
-  margin-top: 10px; 
-  justify-content: flex-end;
-}
-
-.iconButton { 
-  background: transparent; 
-  border: none; 
-  color: var(--color-muted); 
-  cursor: pointer;
-}
-
-.deleteButton { 
-  background: rgba(255,255,255,0.06); 
-  border-radius: 8px; 
-  padding: 6px 10px; 
+.iconButton {
+  background: transparent;
   border: none;
+  color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  transition: color 0.2s;
 }
 
-.editLabel {
-  color: var(--color-muted);
-  font-size: 13px;
+.iconButton:hover {
+  color: white;
+}
+
+.deleteButton {
+  background: linear-gradient(135deg, #FFC727 0%, #9E40BA 61%, #7000FF 91%);
+  color: white;
+  border-radius: 20px;
+  padding: 6px 16px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.deleteButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.3);
 }
 
 /* Tablet & Desktop: table row layout - RESPONSIVE */
 @media (min-width: 768px) {
   .tr {
     display: grid;
-    grid-template-columns: minmax(80px, 0.8fr) minmax(60px, 0.6fr) minmax(120px, 1.2fr) minmax(100px, 2fr) minmax(80px, 0.8fr) minmax(60px, 0.6fr);
-    gap: 8px;
-    padding: 12px 8px;
+    /* düzeltme yapılmıştır (kutluhan) kolon yapısı tasarıma göre sabitlendi (tablet) */
+    grid-template-columns: 100px 60px 140px 180px 1fr;
+    padding: 12px 16px;
     align-items: center;
     background: transparent;
     margin: 0;
     border-radius: 0;
     border-left: none;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     position: relative;
-    overflow-x: auto;
+    overflow-x: hidden;
     overflow-y: hidden;
   }
 
   .tr:hover {
-    background: rgba(255,255,255,0.02);
+    background: rgba(255, 255, 255, 0.02);
   }
 
-  .td { 
-    display: block; 
-    padding: 0 4px;
-    font-size: 13px;
-    color: rgba(255,255,255,0.9);
+  .td {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-bottom: none;
+    padding: 0;
+    font-size: 14px;
+    color: var(--color-main-text, #FBFBFB);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     min-width: 0;
   }
 
-  .mobileLabel { 
-    display: none; 
+  .mobileLabel {
+    display: none;
   }
 
-  .date {
-    font-size: 13px;
+  .date,
+  .type,
+  .comment {
+    font-weight: 400;
   }
 
-  .type {
-    font-weight: 600;
-    text-transform: capitalize;
+  /* Desktop sum is bold and strictly right aligned except when next to edit/delete */
+  .sum {
+    font-weight: 700;
   }
 
   .comment {
     font-size: 12px;
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.7);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -150,69 +191,38 @@
   }
 
   .sum {
-    text-align: right;
     justify-content: flex-end;
-    flex: 0;
     font-size: 13px;
     font-weight: 700;
+    width: 100%;
+    overflow: visible;
   }
 
-  .actions { 
+  .sumContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .actions {
     margin-top: 0;
-    justify-content: center;
-    gap: 4px;
-    flex-wrap: wrap;
-  }
-
-  .iconButton {
-    padding: 2px 4px;
-    cursor: pointer;
-    transition: color 0.2s;
-    font-size: 12px;
-  }
-
-  .iconButton:hover {
-    color: white;
+    justify-content: flex-end;
+    gap: 16px;
+    flex-wrap: nowrap;
   }
 }
 
 /* Desktop - RESPONSIVE */
 @media (min-width: 1280px) {
   .tr {
-    display: grid;
-    grid-template-columns: minmax(100px, 0.8fr) minmax(70px, 0.6fr) minmax(140px, 1.2fr) minmax(150px, 2fr) minmax(100px, 0.8fr) minmax(80px, 0.6fr);
-    gap: 16px;
-    padding: 16px 24px;
-    align-items: center;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    background: transparent;
-    height: auto;
+    /* düzeltme yapılmıştır (kutluhan) kolon yapısı tasarıma göre sabitlendi (masaüstü) */
+    grid-template-columns: 130px 60px 160px 260px 1fr;
+    padding: 16px 20px;
     min-height: 60px;
   }
 
-  .td { 
-    padding: 0;
+  .td {
     font-size: 14px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    min-width: 0;
-  }
-
-  .comment { 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-    white-space: nowrap;
-    min-width: 0;
-  }
-
-  .actions { 
-    justify-content: center;
-    gap: 8px;
-  }
-
-  .iconButton {
-    padding: 4px 8px;
-    font-size: 13px;
   }
 }
