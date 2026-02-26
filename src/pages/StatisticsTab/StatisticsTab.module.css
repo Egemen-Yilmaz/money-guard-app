@@ -1,3 +1,9 @@
+.container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
 .category {
   display: flex;
   gap: 24px;
@@ -37,10 +43,12 @@
 
 .area {
   display: flex;
+  justify-content: center;
   flex-direction: column;
+  width: 100%;
   width: 280px;
   border-width: 1px;
-  gap: 24px;
+  gap: 36px;
 }
 
 .list {
@@ -86,7 +94,7 @@
   .area {
     display: flex;
     flex-direction: row;
-    width: 336px;
+    width: 100%;
   }
 }
 

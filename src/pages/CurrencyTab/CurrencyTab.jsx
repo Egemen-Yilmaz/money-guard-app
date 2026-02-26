@@ -1,122 +1,172 @@
-import React, { useState, useEffect } from 'react';
-import styles from './CurrencyTab.module.css';
+import React, { useState, useEffect, useRef } from "react";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Tooltip,
+  Filler,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import styles from "./CurrencyTab.module.css";
 
-const CACHE_KEY = 'currencyRates';
-const CACHE_TIME_KEY = 'currencyRatesTime';
-const CACHE_DURATION = 60 * 60 * 1000; // 1 hour in milliseconds
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Tooltip,
+  Filler,
+);
+
+const CACHE_KEY = "currencyRates";
+const CACHE_TIME_KEY = "currencyRatesTime";
+const CACHE_DURATION = 60 * 60 * 1000;
 
 const CurrencyTab = () => {
-	const [rates, setRates] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
-	const [error, setError] = useState(null);
+  const [rates, setRates] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const chartRef = useRef();
 
-	useEffect(() => {
-		fetchCurrencyRates();
-	}, []);
+  useEffect(() => {
+    fetchCurrencyRates();
+  }, []);
 
-	const fetchCurrencyRates = async () => {
-		try {
-			// Check if we have cached data
-			const cachedRates = localStorage.getItem(CACHE_KEY);
-			const cachedTime = localStorage.getItem(CACHE_TIME_KEY);
-			const now = Date.now();
+  const fetchCurrencyRates = async () => {
+    try {
+      const cachedRates = localStorage.getItem(CACHE_KEY);
+      const cachedTime = localStorage.getItem(CACHE_TIME_KEY);
+      const now = Date.now();
 
-			// If cache exists and is less than 1 hour old, use it
-			if (cachedRates && cachedTime && (now - parseInt(cachedTime)) < CACHE_DURATION) {
-				setRates(JSON.parse(cachedRates));
-				setIsLoading(false);
-				return;
-			}
+      if (
+        cachedRates &&
+        cachedTime &&
+        now - Number(cachedTime) < CACHE_DURATION
+      ) {
+        setRates(JSON.parse(cachedRates));
+        setIsLoading(false);
+        return;
+      }
 
-			// Otherwise, fetch fresh data from Monobank API
-			const response = await fetch('https://api.monobank.ua/bank/currency');
-			
-			if (!response.ok) {
-				throw new Error('Failed to fetch currency rates');
-			}
+      const response = await fetch("https://api.monobank.ua/bank/currency");
 
-			const data = await response.json();
+      if (!response.ok) {
+        throw new Error("Failed to fetch currency rates");
+      }
 
-			// Filter for USD (840) and EUR (978) against UAH (980)
-			const usdRate = data.find(item => item.currencyCodeA === 840 && item.currencyCodeB === 980);
-			const eurRate = data.find(item => item.currencyCodeA === 978 && item.currencyCodeB === 980);
+      const data = await response.json();
 
-			const formattedRates = [];
+      const usd = data.find(
+        (item) => item.currencyCodeA === 840 && item.currencyCodeB === 980,
+      );
+      const eur = data.find(
+        (item) => item.currencyCodeA === 978 && item.currencyCodeB === 980,
+      );
 
-			if (usdRate) {
-				formattedRates.push({
-					code: 'USD',
-					buy: usdRate.rateBuy?.toFixed(2) || 'N/A',
-					sell: usdRate.rateSell?.toFixed(2) || 'N/A',
-				});
-			}
+      const formatted = [];
 
-			if (eurRate) {
-				formattedRates.push({
-					code: 'EUR',
-					buy: eurRate.rateBuy?.toFixed(2) || 'N/A',
-					sell: eurRate.rateSell?.toFixed(2) || 'N/A',
-				});
-			}
+      if (usd) {
+        formatted.push({
+          code: "USD",
+          buy: usd.rateBuy,
+          sell: usd.rateSell,
+        });
+      }
 
-			// Cache the rates and timestamp
-			localStorage.setItem(CACHE_KEY, JSON.stringify(formattedRates));
-			localStorage.setItem(CACHE_TIME_KEY, now.toString());
+      if (eur) {
+        formatted.push({
+          code: "EUR",
+          buy: eur.rateBuy,
+          sell: eur.rateSell,
+        });
+      }
 
-			setRates(formattedRates);
-			setError(null);
-		} catch (err) {
-			console.error('Error fetching currency rates:', err);
-			setError('Unable to load currency rates');
-			
-			// Fallback to cached data if available, even if expired
-			const cachedRates = localStorage.getItem(CACHE_KEY);
-			if (cachedRates) {
-				setRates(JSON.parse(cachedRates));
-			}
-		} finally {
-			setIsLoading(false);
-		}
-	};
+      localStorage.setItem(CACHE_KEY, JSON.stringify(formatted));
+      localStorage.setItem(CACHE_TIME_KEY, now.toString());
 
-	if (isLoading) {
-		return (
-			<div className={styles.currencyWrapper}>
-				<div className={styles.loadingText}>Loading currency rates...</div>
-			</div>
-		);
-	}
+      setRates(formatted);
+    } catch (error) {
+      console.error("Currency fetch error:", error);
+      setError("Unable to load currency rates");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-	if (error && rates.length === 0) {
-		return (
-			<div className={styles.currencyWrapper}>
-				<div className={styles.errorText}>{error}</div>
-			</div>
-		);
-	}
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
-	return (
-		<div className={styles.currencyWrapper}>
-			<div className={styles.currencyTable}>
-				<div className={styles.currencyHeader}>
-					<div>Currency</div>
-					<div>Purchase</div>
-					<div>Sale</div>
-				</div>
+  // 📈 Chart Data
+  const chartData = {
+    labels: ["USD Buy", "EUR Buy", "USD Sell", "EUR Sell"],
+    datasets: [
+      {
+        data: [rates[0]?.buy, rates[1]?.buy, rates[0]?.sell, rates[1]?.sell],
+        borderColor: "#FF868D",
+        borderWidth: 2,
+        fill: true,
+        tension: 0.4,
+        pointRadius: 6,
+        pointBackgroundColor: "#FF868D",
+        backgroundColor: (context) => {
+          const chart = context.chart;
+          const { ctx, chartArea } = chart;
+          if (!chartArea) return null;
 
-				{rates.map((r) => (
-					<div className={styles.currencyRow} key={r.code}>
-						<div>{r.code}</div>
-						<div>{r.buy}</div>
-						<div>{r.sell}</div>
-					</div>
-				))}
-			</div>
-			{error && (
-				<div className={styles.cacheNotice}>Using cached data</div>
-			)}
-		</div>
-	);
+          const gradient = ctx.createLinearGradient(
+            0,
+            chartArea.top,
+            0,
+            chartArea.bottom,
+          );
+
+          gradient.addColorStop(0, "rgba(255, 134, 141, 0.4)");
+          gradient.addColorStop(1, "rgba(255, 134, 141, 0)");
+
+          return gradient;
+        },
+      },
+    ],
+  };
+
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+    },
+    scales: {
+      x: { display: false },
+      y: { display: false },
+    },
+  };
+
+  return (
+    <div className={styles.currencyWrapper}>
+      <div className={styles.currencyTable}>
+        <div className={styles.currencyHeader}>
+          <div>Currency</div>
+          <div>Purchase</div>
+          <div>Sale</div>
+        </div>
+
+        {rates.map((r) => (
+          <div className={styles.currencyRow} key={r.code}>
+            <div>{r.code}</div>
+            <div>{Number(r.buy).toFixed(2)}</div>
+            <div>{Number(r.sell).toFixed(2)}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* 📊 Chart Alanı */}
+      <div className={styles.chartContainer}>
+        <Line ref={chartRef} data={chartData} options={chartOptions} />
+      </div>
+    </div>
+  );
 };
 
 export default CurrencyTab;
