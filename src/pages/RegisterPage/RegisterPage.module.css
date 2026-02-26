@@ -5,7 +5,7 @@
   align-items: center;
   padding: 20px;
   background-image: 
-    url('/public/images/mobilebackground.png');
+    url('/public/images/mobilebackground.jpg');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -23,10 +23,10 @@
 @media screen and (min-width: 768px) {
   .wrapper { padding: 40px;
       background-image:
-      url('/public/images/dolartablet.png'),
+      url('/public/images/dolartablet.webp'),
       linear-gradient(45deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%), /* 2. Sol Alt Gradient */
       linear-gradient(225deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%),
-      url('/public/images/mobilebackground.png');
+      url('/public/images/mobilebackground.webp');
       
     background-position: center center, center, center, center center;
     background-size: cover, cover, cover, cover;
@@ -42,11 +42,11 @@
 @media screen and (min-width: 1280px) {
   .wrapper { padding: 60px;
   background-image: 
-      url('/public/images/dolardesktop1.png'), /* 1. Sol Para */
-      url('/public/images/dolardestop2.png'), /* 2. Sağ Para */
+      url('/public/images/dolardesktop1.webp'), /* 1. Sol Para */
+      url('/public/images/dolardestop2.webp'), /* 2. Sağ Para */
       linear-gradient(45deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%), /* 3. Sol Alt Gradient */
       linear-gradient(225deg, rgba(20, 0, 40, 0.9) 0%, transparent 60%), /* 4. Sağ Üst Gradient */
-      url('/public/images/mobilebackground.png'); /* 5. Ana Resim */
+      url('/public/images/mobilebackground.jpg'); /* 5. Ana Resim */
     
     background-position: left center, right center, center, center, center center;
     background-size: contain, contain, cover, cover, cover;
