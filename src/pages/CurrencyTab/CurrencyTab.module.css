@@ -31,6 +31,29 @@
   border-top: 1px dashed rgba(255,255,255,0.03);
 }
 
+/* Loading and Error states */
+.loadingText {
+  text-align: center;
+  padding: clamp(16px, 3vw, 24px);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: clamp(12px, 2vw, 14px);
+}
+
+.errorText {
+  text-align: center;
+  padding: clamp(16px, 3vw, 24px);
+  color: #ff6b81;
+  font-size: clamp(12px, 2vw, 14px);
+}
+
+.cacheNotice {
+  text-align: center;
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: clamp(10px, 1.5vw, 12px);
+  font-style: italic;
+}
+
 /* Tablet: show currency as separate card in top-right */
 @media (min-width: 768px) {
   .currencyWrapper {
