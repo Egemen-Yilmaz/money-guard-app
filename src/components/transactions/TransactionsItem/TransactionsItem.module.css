@@ -166,14 +166,12 @@
 
   .actionsCell {
     text-align: center;
-    padding-right: 40px;
   }
 
   .actions {
     display: flex;
     flex-direction: row; /* ALT ALTA */
     align-items: flex-end;
-    gap: 6px;
   }
 
   .sum {
