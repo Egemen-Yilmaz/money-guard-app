@@ -36,6 +36,15 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Ensure 404 fallback for SPA
+        run: |
+          if [ -d "dist" ] && [ -f "dist/index.html" ]; then
+            cp -f dist/index.html dist/404.html
+            echo "Created dist/404.html from dist/index.html"
+          else
+            echo "dist or dist/index.html missing - skipping 404 fallback"
+          fi
+
       - name: Upload Pages artifact
         # Use v3 to avoid deprecated actions/upload-artifact v3 dependency
         uses: actions/upload-pages-artifact@v3
