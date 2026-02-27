@@ -20,9 +20,11 @@ const Balance = () => {
   return (
     <div className={css.balanceCard}>
       <h3 className={css.title}>Balance</h3>
+
       <div className={`${css.value} ${isNegative ? css.negative : ""}`}>
         {isNegative ? "-" : ""}
-        {formattedBalance} €
+        <span className={css.currency}>€</span>
+        <span className={css.amount}>{formattedBalance}</span>
       </div>
     </div>
   );

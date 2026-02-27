@@ -11,8 +11,7 @@
 
 .topBox {
   display: flex;
-  justify-content: space-between;
-  padding: 12px;
+  justify-content: space-around;
   border-radius: 8px;
   font-family: sans-serif;
   color: #fbfbfb;

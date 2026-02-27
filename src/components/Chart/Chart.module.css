@@ -3,6 +3,7 @@
   font-weight: 400;
   font-size: 30px;
   color: white;
+  margin: 0;
   margin-bottom: 16px;
 }
 
@@ -19,10 +20,18 @@
   font-size: 30px;
   color: white;
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 32px;
   width: auto;
   text-align: center;
+}
+
+@media (min-width: 768px) {
+  .centerText {
+    top: 180px;
+    left: 170px;
+    height: 32px;
+    width: 180px;
+  }
 }

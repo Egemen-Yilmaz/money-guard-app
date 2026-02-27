@@ -1,6 +1,6 @@
 .box {
   background-color: #4a56e21a;
-  width: 280px;
+  min-width: 280px;
   height: 50px;
   border: 1px solid #ffffff99;
   margin-top: 12px;
@@ -9,7 +9,7 @@
   color: #fbfbfb;
   padding: 12px 20px;
   font-size: 16px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
@@ -72,7 +72,8 @@
 
 @media (min-width: 768px) and (max-width: 1279px) {
   .box {
-    width: 160px;
+    min-width: 160px;
+    width: 100%;
   }
 
   .date {
@@ -83,7 +84,8 @@
 
 @media (min-width: 1280px) {
   .box {
-    width: 182px;
+    min-width: 182px;
+    width: 100%;
   }
 
   .date {

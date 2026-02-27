@@ -56,6 +56,8 @@
 
 .balanceSection {
   width: 100%;
+  justify-content: center;
+  display: flex;
 }
 
 /* main (transactions area) */
@@ -123,6 +125,10 @@
       "leftcol statsArea";
   }
 
+  .main {
+    display: none;
+  }
+
   .leftSidebar {
     grid-area: leftcol;
     width: 100%;
@@ -157,6 +163,7 @@
   .balanceSection {
     width: 100%;
     min-width: 0;
+    justify-content: flex-start;
   }
 
   /* Show chart on tablet for Statistics page */
@@ -240,7 +247,6 @@
     padding: 24px 32px 0 0; /* inner right padding to separate from divider */
     border-right: 1px solid rgba(255, 255, 255, 0.12);
     position: sticky;
-    top: 100px;
     height: calc(100vh - 140px);
     display: flex;
     flex-direction: column;
