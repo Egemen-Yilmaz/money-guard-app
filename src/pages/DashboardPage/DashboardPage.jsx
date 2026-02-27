@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleModal } from "../../redux/transactions/slice";
@@ -6,7 +6,7 @@ import Header from "../../components/Header/Header";
 import Navigation from "../../components/Navigation/Navigation";
 import Balance from "../../components/Balance/Balance";
 import CurrencyTab from "../CurrencyTab/CurrencyTab";
-import Chart from "../../components/Chart/Chart";
+const Chart = lazy(() => import("../../components/Chart/Chart"));
 import ModalAddTransaction from "../../components/transactions/ModalAddTransaction/ModalAddTransaction";
 import ButtonAddTransactions from "../../components/transactions/ButtonAddTransactions/ButtonAddTransactions";
 import css from "./DashboardPage.module.css";
@@ -41,7 +41,13 @@ const DashboardPage = () => {
           {/* Tablet-only Chart: render inside the left sidebar so on tablet the chart sits under Balance */}
           {isStatisticsPage && (
             <div className={css.chartSectionTablet}>
-              <Chart />
+              <Suspense
+                fallback={
+                  <div style={{ width: '100%', maxWidth: 520, height: 333, background: '#f3f4f6', borderRadius: 8 }} />
+                }
+              >
+                <Chart />
+              </Suspense>
             </div>
           )}
           {/* Desktop: Currency inside sidebar (keep sidebar focused on navigation/balance/currency) */}

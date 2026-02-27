@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+// Dynamically import react-datepicker only when this form mounts
 import { FiCalendar } from 'react-icons/fi';
 import CustomSelect from '../CustomSelect/CustomSelect';
 import { addTransaction, fetchTransactions } from '../../../redux/transactions/operations';
@@ -57,6 +56,22 @@ const AddTransactionForm = ({ onClose }) => {
             comment: '',
         },
     });
+
+    // Lazy-load DatePicker and its CSS on mount to avoid adding it to the initial bundle
+    const [DatePickerComp, setDatePickerComp] = useState(null);
+    useEffect(() => {
+        let mounted = true;
+        (async () => {
+            try {
+                await import('react-datepicker/dist/react-datepicker.css');
+                const mod = await import('react-datepicker');
+                if (mounted) setDatePickerComp(() => (mod.default ? mod.default : mod));
+            } catch {
+                // ignore
+            }
+        })();
+        return () => { mounted = false };
+    }, []);
 
     const handleToggle = () => {
         const newType = isExpense ? 'income' : 'expense';
@@ -146,12 +161,21 @@ const AddTransactionForm = ({ onClose }) => {
                             name="date"
                             render={({ field }) => (
                                 <div className={styles.dateWrapper}>
-                                    <DatePicker
-                                        selected={field.value}
-                                        onChange={(date) => field.onChange(date)}
-                                        dateFormat="dd.MM.yyyy"
-                                        className={`${styles.input} ${styles.dateInput}`}
-                                    />
+                                    {DatePickerComp ? (
+                                        <DatePickerComp
+                                            selected={field.value}
+                                            onChange={(date) => field.onChange(date)}
+                                            dateFormat="dd.MM.yyyy"
+                                            className={`${styles.input} ${styles.dateInput}`}
+                                        />
+                                    ) : (
+                                        <input
+                                            type="text"
+                                            readOnly
+                                            value={field.value ? new Date(field.value).toLocaleDateString() : ''}
+                                            className={`${styles.input} ${styles.dateInput}`}
+                                        />
+                                    )}
                                     <FiCalendar className={styles.calendarIcon} />
                                 </div>
                             )}

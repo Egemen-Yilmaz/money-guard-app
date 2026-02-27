@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { toastError, toastSuccess } from '../../utils/toast'; 
 import { register as registerAction } from './authOperations';
-import PasswordStrengthBar from 'react-password-strength-bar';
+import { useMemo } from 'react';
 import Icon from '../../components/Icon/Icon';
 import styles from './RegisterForm.module.css';
 
@@ -36,8 +36,43 @@ export default function RegisterForm() {
   } = useForm({ resolver: yupResolver(schema) });
 
   // Şifre alanını izliyoruz (PasswordStrengthBar için)
-  // eslint-disable-next-line react-hooks/incompatible-library
   const passwordValue = watch('password', '');
+
+  // Small inline password strength estimator to avoid a heavy dependency.
+  // Score: 0..4 based on length and character categories.
+  function PasswordStrength({ password, minLength = 6, scoreWords = ['Weak', 'Okay', 'Good', 'Strong', 'Very Strong'], shortScoreWord = 'Too short' }) {
+    const score = useMemo(() => {
+      if (!password) return 0;
+      let points = 0;
+      if (password.length >= minLength) points += 1;
+      if (/[a-z]/.test(password)) points += 1;
+      if (/[A-Z]/.test(password)) points += 1;
+      if (/[0-9]/.test(password)) points += 1;
+      if (/[^A-Za-z0-9]/.test(password)) points += 1;
+      // normalize to 0..4
+      const normalized = Math.min(4, Math.max(0, points - 1));
+      return normalized;
+    }, [password, minLength]);
+
+    const label = password.length < minLength ? shortScoreWord : scoreWords[Math.max(0, Math.min(score, scoreWords.length - 1))];
+    const pct = ((score / 4) * 100) || 0;
+    const getColor = () => {
+      if (!password) return '#e0e0e0';
+      if (score <= 1) return '#ef4444'; // red
+      if (score === 2) return '#f59e0b'; // amber
+      if (score === 3) return '#84cc16'; // yellow-green
+      return '#16a34a'; // green
+    };
+
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+        <div style={{ height: 8, background: '#f3f4f6', borderRadius: 4, overflow: 'hidden' }}>
+          <div style={{ width: `${pct}%`, height: '100%', background: getColor(), transition: 'width 160ms ease' }} />
+        </div>
+        <div style={{ fontSize: 12, color: '#374151' }}>{label}</div>
+      </div>
+    );
+  }
 
   const onSubmit = async (data) => {
     try {
@@ -105,12 +140,12 @@ export default function RegisterForm() {
       {/* Şifre Alanı */}
       <div className={styles.inputWrapper}>
         <Icon name="icon-icon-lock" width={24} height={24} className={styles.icon} />
-        <input 
+          <input 
           type="password" 
           className={styles.input} 
           placeholder="Password"
           autoComplete="new-password"
-          {...register('password')} 
+            {...register('password')}
         />
       </div>
       {errors.password && <p className={styles.errorText}>{errors.password.message}</p>}
@@ -130,10 +165,10 @@ export default function RegisterForm() {
 
       {/* Password Strength Bar */}
       <div className={styles.passwordStrengthWrapper}>
-        <PasswordStrengthBar 
+        <PasswordStrength
           password={passwordValue}
           minLength={6}
-          scoreWords={['Weak', 'Okay', 'Good', 'Strong', 'Very Strong']}
+          scoreWords={["Weak", "Okay", "Good", "Strong", "Very Strong"]}
           shortScoreWord="Too short"
         />
       </div>

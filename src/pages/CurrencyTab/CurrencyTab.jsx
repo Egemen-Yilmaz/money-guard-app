@@ -1,24 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Tooltip,
-  Filler,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
 import styles from "./CurrencyTab.module.css";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Tooltip,
-  Filler,
-);
 
 const CACHE_KEY = "currencyRates";
 const CACHE_TIME_KEY = "currencyRatesTime";
@@ -32,6 +13,34 @@ const CurrencyTab = () => {
 
   useEffect(() => {
     fetchCurrencyRates();
+  }, []);
+
+  // Dynamically import Chart.js and react-chartjs-2 Line component to avoid
+  // pulling chart.js into the main bundle when the CurrencyTab is not shown.
+  const [LineComp, setLineComp] = useState(null);
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const ChartJS = await import('chart.js');
+        // register only when loaded
+        ChartJS.register(
+          ChartJS.CategoryScale,
+          ChartJS.LinearScale,
+          ChartJS.PointElement,
+          ChartJS.LineElement,
+          ChartJS.Tooltip,
+          ChartJS.Filler,
+        );
+        const rc = await import('react-chartjs-2');
+        if (mounted && rc && rc.Line) setLineComp(() => rc.Line);
+      } catch {
+        // swallow — we'll render nothing if charts fail to load
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   const fetchCurrencyRates = async () => {
@@ -163,7 +172,11 @@ const CurrencyTab = () => {
 
       {/* 📊 Chart Alanı */}
       <div className={styles.chartContainer}>
-        <Line ref={chartRef} data={chartData} options={chartOptions} />
+        {LineComp ? (
+          <LineComp ref={chartRef} data={chartData} options={chartOptions} />
+        ) : (
+          <div style={{ height: 120 }} />
+        )}
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
-import Chart from "../../components/Chart/Chart";
+import React, { lazy, Suspense } from 'react';
+const Chart = lazy(() => import('../../components/Chart/Chart'));
 import StatisticsDashboard from "../../components/StatisticsDashboard/StatisticsDashboard";
 import StatisticsTable from "../../components/StatisticsTable/StatisticsTable";
 import CurrencyTab from "../CurrencyTab/CurrencyTab";
@@ -13,7 +14,13 @@ const StatisticsTab = () => {
         </div>
 
         <div className={css.chart}>
-          <Chart />
+          <Suspense
+            fallback={
+              <div style={{ width: '100%', maxWidth: 520, height: 333, background: '#f3f4f6', borderRadius: 8 }} />
+            }
+          >
+            <Chart />
+          </Suspense>
         </div>
 
         <div className={css.table}>
