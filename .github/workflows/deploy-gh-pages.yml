@@ -36,13 +36,12 @@ jobs:
         run: npm run build
 
       - name: Ensure 404 fallback for SPA
+        # Create a small one-line redirecting 404 that forwards pretty paths to the hash router.
         run: |
-          if [ -d "dist" ] && [ -f "dist/index.html" ]; then
-            cp -f dist/index.html dist/404.html
-            echo "Created dist/404.html from dist/index.html"
-          else
-            echo "dist or dist/index.html missing - skipping 404 fallback"
-          fi
+          set -e
+          mkdir -p dist
+          echo '<!doctype html><meta charset="utf-8"><script>try{var base="/money-guard-app",p=location.pathname;if(p.indexOf(base)===0)p=p.slice(base.length)||"/";var dest=(p==="/"||p==="")?base+"/":base+"/#"+p+location.search+location.hash;location.replace(dest);}catch(e){console.error(e);}</script>' > dist/404.html
+          echo "Created dist/404.html (redirect to hash-based routes)"
 
       - name: Debug - list dist contents
         run: |
