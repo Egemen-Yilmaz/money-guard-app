@@ -17,9 +17,9 @@ export default defineConfig(() => {
   }
 
   return {
-    // When deploying to GitHub Pages under a repository (e.g. https://egemen-yilmaz.github.io/money-guard-app/)
-    // set the base path so built assets reference the correct subpath.
-    base: '/money-guard-app/',
+  // Base path for built assets. Default to root for platforms like Vercel.
+  // Set the VITE_BASE_PATH environment variable to a subpath (e.g. '/money-guard-app/') when deploying to GitHub Pages.
+  base: (typeof globalThis !== 'undefined' && globalThis.process && globalThis.process.env && globalThis.process.env.VITE_BASE_PATH) ? globalThis.process.env.VITE_BASE_PATH : '/',
     plugins,
     build: {
       // warn earlier while we iterate on chunking
